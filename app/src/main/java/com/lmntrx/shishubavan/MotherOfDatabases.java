@@ -49,7 +49,11 @@ public class MotherOfDatabases {
     }
 
     public void addRow(String table_name){
-        
+
+    }
+
+    public void closeDB(){
+        sqLiteDatabase.close();
     }
 
 }

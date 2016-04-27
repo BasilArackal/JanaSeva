@@ -5,7 +5,7 @@
         jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="58e301dab8c0dc55f8422459136b878ec4b92614">
+        sha1="3715caac319a042362174d6e2e8f72a4987dc169">
         <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5cd78c0633736439ef7d71f6ef6aed1e0ec771a0/classes.dex" />
     </item>
     <item
@@ -26,7 +26,7 @@
         jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="ab4b8c36742e717301df91203699003c8f5fbbc2">
+        sha1="3af5ed0f52d63c104879440c61c5796cfbd0f29a">
         <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_15c4c46de3a59605e961b72bb4985b40f98c2e99/classes.dex" />
     </item>
     <item

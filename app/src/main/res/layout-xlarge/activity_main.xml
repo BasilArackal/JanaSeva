@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="#fff"
+        tools:context="com.lmntrx.shishubavan.MainActivity">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/gridLayout"
+            android:columnCount="3"
+            android:rowCount="4">
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/policeButton"
+                android:src="@drawable/police"
+                android:layout_row="0"
+                android:tag="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ambulanceButton"
+                android:src="@drawable/newambulance"
+                android:tag="2"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/fireTruckButton"
+                android:src="@drawable/firetruck"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/childAbuseButton"
+                android:src="@drawable/child"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/animalAbuse"
+                android:src="@drawable/animal"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/plus"
+                android:id="@+id/plusButton"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:layout_columnWeight="1"
+                android:onClick="addButton"
+                />
+
+        </GridLayout>
+
+    </LinearLayout>
+</ScrollView>
