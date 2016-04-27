@@ -25,7 +25,8 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/gridLayout"
             android:columnCount="3"
-            android:rowCount="4">
+            android:rowCount="4"
+            >
 
 
             <ImageView
@@ -34,7 +35,6 @@
                 android:id="@+id/policeButton"
                 android:src="@drawable/police"
                 android:layout_row="0"
-                android:tag="1"
                 android:layout_column="0"
                 android:layout_columnWeight="1"
                 />
@@ -44,7 +44,6 @@
                 android:layout_height="100dp"
                 android:id="@+id/ambulanceButton"
                 android:src="@drawable/newambulance"
-                android:tag="2"
                 android:layout_row="0"
                 android:layout_column="1"
                 android:layout_columnWeight="1"
@@ -91,7 +90,7 @@
                 android:layout_row="1"
                 android:layout_column="2"
                 android:layout_columnWeight="1"
-                android:onClick="addButton"
+                android:onClick="makeCall"
                 />
 
         </GridLayout>

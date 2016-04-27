@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
+<<<<<<< HEAD
     <item
         jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
@@ -59,3 +60,5 @@
     </item>
 
 </items>
+=======
+>>>>>>> 86bb916985a2654e5ae81b7abc9f68624a407b72
