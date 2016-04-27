@@ -2,7 +2,9 @@ package com.lmntrx.shishubavan;
 
 import android.content.Context;
 import android.content.Loader;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -37,13 +39,14 @@ public class MotherOfDatabases {
 
     }
 
+    //Create table on initial launch
     public void createTable(String table_name){
 
         try {
 
             sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+ table_name+
                     " (ID integer primary key, PHONE_NUMBER integer, LOCATION varchar, " +
-                    "COORDINATES varchar);");
+                    "LAT varchar, LNG varchar);");
 
             File database = ctx.getDatabasePath(NAME_DB);
 
@@ -59,6 +62,7 @@ public class MotherOfDatabases {
 
     }
 
+    //Add rows on initial launch
     public void addRowsTo(String table_name){
 
         BufferedReader reader = null;
@@ -84,9 +88,11 @@ public class MotherOfDatabases {
                 while ((line = reader.readLine()) != null ){
                     String phno = line.substring(0,line.indexOf(";"));
                     String place = line.substring(line.indexOf(";")+1,line.indexOf(":"));
-                    String latlng = line.substring(line.indexOf(":")+1,line.indexOf("&"));
+                    String lat = line.substring(line.indexOf(":")+1,line.indexOf(","));
+                    String lng = line.substring(line.indexOf(",")+1,line.indexOf("&"));
                     sqLiteDatabase.execSQL("INSERT INTO "+table_name+
-                            " (PHONE_NUMBER,LOCATION,COORDINATES) VALUES ('"+phno+"','"+place+"','"+latlng+"');");
+                            " (PHONE_NUMBER,LOCATION,LAT,LNG) VALUES ('"+phno+"','"+
+                            place+"','"+lat+"','"+lng+"');");
                 }
             } catch (IOException e) {
                 Log.e(TAG, "addRowsTo(): "+e);
@@ -102,6 +108,56 @@ public class MotherOfDatabases {
         }
 
     }
+
+    //Search for phone number
+    public String getPhone(String table_name, Location l){
+
+        String lat = l.getLatitude()+"";
+        String lng = l.getLongitude()+"";
+
+        Cursor cursor = sqLiteDatabase.rawQuery("Select PHONE_NUMBER from "+table_name+" where (LAT between "+
+                floor(lat) +" and "+ ceal(lat) + ") && (LNG between "+floor(lng) +" and "+ ceal(lng) + ");",null);
+
+        cursor.moveToFirst();
+
+        String phonenos = "";
+
+        if ((cursor.getCount() > 0)){
+
+            do{
+
+                phonenos += cursor.getString(cursor.getColumnIndex("PHONE_NUMBER")) + "\n";
+
+
+            }while (cursor.moveToNext());
+
+            cursor.close();
+            return phonenos;
+
+        }else{
+            cursor.close();
+            return "-1";  // no results found
+        }
+    }
+
+    private String ceal(String lat) {
+
+        /*
+        * Function to lower the lat/lng
+        * */
+
+        return null;
+    }
+
+    private String floor(String lat) {
+
+        /*
+        * Function to round up the lat/lng
+        * */
+
+        return null;
+    }
+
 
     public void closeDB(){
         sqLiteDatabase.close();
