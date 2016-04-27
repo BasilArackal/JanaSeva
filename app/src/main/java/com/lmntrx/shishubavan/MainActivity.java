@@ -28,7 +28,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DB_HANDLER = new MotherOfDatabases(this);
-        DB_HANDLER.createDatabase(MotherOfDatabases.NAME_POLICE_TABLE);
+        if (UserPreferences.isThisFirstOpen(this)){
+            DB_HANDLER.createTable(MotherOfDatabases.NAME_POLICE_TABLE);
+            DB_HANDLER.createTable(MotherOfDatabases.NAME_AMBULANCE_TABLE);
+            DB_HANDLER.createTable(MotherOfDatabases.NAME_FIRE_FORCE_TABLE);
+            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_FIRE_FORCE_TABLE);
+            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_POLICE_TABLE);
+            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_AMBULANCE_TABLE);
+        }
     }
 
 

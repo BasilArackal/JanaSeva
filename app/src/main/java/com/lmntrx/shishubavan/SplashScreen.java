@@ -26,7 +26,7 @@ public class SplashScreen extends Activity {
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(mainIntent);
                     editor.putBoolean("visited", true);
-                    editor.commit();
+                    editor.apply();
                     finish();
                 }
             }, 5000);
