@@ -45,15 +45,8 @@ public class MotherOfDatabases {
         try {
 
             sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+ table_name+
-                    " (ID integer primary key, PHONE_NUMBER integer, LOCATION varchar, " +
-                    "LAT varchar, LNG varchar);");
+                    " (ID integer primary key, PHONE_NUMBER integer, LOCATION varchar);");
 
-            File database = ctx.getDatabasePath(NAME_DB);
-
-            if (database.exists()){
-                Toast.makeText(ctx,"DATABASE "+NAME_DB+" EXISTS :)",Toast.LENGTH_LONG).show();
-            }else
-                Toast.makeText(ctx,"DATABASE "+NAME_DB+" MISSING :(",Toast.LENGTH_LONG).show();
         }catch (Exception e ){
 
             Log.e(MotherOfDatabases.class.getSimpleName(),"Database couldn't be created!");
@@ -87,12 +80,10 @@ public class MotherOfDatabases {
                 assert reader != null;
                 while ((line = reader.readLine()) != null ){
                     String phno = line.substring(0,line.indexOf(";"));
-                    String place = line.substring(line.indexOf(";")+1,line.indexOf(":"));
-                    String lat = line.substring(line.indexOf(":")+1,line.indexOf(","));
-                    String lng = line.substring(line.indexOf(",")+1,line.indexOf("&"));
+                    String place = line.substring(line.indexOf(";")+1,line.indexOf("&"));
                     sqLiteDatabase.execSQL("INSERT INTO "+table_name+
-                            " (PHONE_NUMBER,LOCATION,LAT,LNG) VALUES ('"+phno+"','"+
-                            place+"','"+lat+"','"+lng+"');");
+                            " (PHONE_NUMBER,LOCATION) VALUES ('"+phno+"','"+
+                            place+"');");
                 }
             } catch (IOException e) {
                 Log.e(TAG, "addRowsTo(): "+e);
@@ -110,54 +101,31 @@ public class MotherOfDatabases {
     }
 
     //Search for phone number
-    public String getPhone(String table_name, Location l){
+    public int[] getPhoneNumbers(String table_name){
 
-        String lat = l.getLatitude()+"";
-        String lng = l.getLongitude()+"";
 
-        Cursor cursor = sqLiteDatabase.rawQuery("Select PHONE_NUMBER from "+table_name+" where (LAT between "+
-                floor(lat) +" and "+ ceal(lat) + ") && (LNG between "+floor(lng) +" and "+ ceal(lng) + ");",null);
+        Cursor cursor = sqLiteDatabase.rawQuery("Select PHONE_NUMBER from "+table_name+";",null);
 
         cursor.moveToFirst();
 
-        String phonenos = "";
+        int phonenos[] = new int[cursor.getCount()], i=0;
 
         if ((cursor.getCount() > 0)){
 
             do{
 
-                phonenos += cursor.getString(cursor.getColumnIndex("PHONE_NUMBER")) + "\n";
+                phonenos[i] = cursor.getInt(cursor.getColumnIndex("PHONE_NUMBER"));
+                i++;
 
 
             }while (cursor.moveToNext());
 
             cursor.close();
-            return phonenos;
 
-        }else{
-            cursor.close();
-            return "-1";  // no results found
         }
+
+        return phonenos;
     }
-
-    private String ceal(String lat) {
-
-        /*
-        * Function to lower the lat/lng
-        * */
-
-        return null;
-    }
-
-    private String floor(String lat) {
-
-        /*
-        * Function to round up the lat/lng
-        * */
-
-        return null;
-    }
-
 
     public void closeDB(){
         sqLiteDatabase.close();

@@ -56,20 +56,7 @@ public class MainActivity extends Activity {
     }
 
     public void makeCall(View view) {
-        Log.i("Status", "call made");
-        Uri number = Uri.parse("tel:123456789");
-        Intent callIntent = new Intent(Intent.ACTION_CALL, number);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        startActivity(callIntent);
+        Boss.call(view.getId(),MainActivity.this);
     }
 
     @Override
