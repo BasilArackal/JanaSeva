@@ -57,13 +57,13 @@
                 />
 
             <TextView
-                android:text="Call Police"
+                android:text="Police\nപോലീസ് "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/police_text"
                 android:layout_toRightOf="@+id/police_image"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -115,13 +115,13 @@
                 />
 
             <TextView
-                android:text="Call An Ambulance"
+                android:text="Ambulance\nആംബുലൻസ് "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ambulance_text"
                 android:layout_toRightOf="@+id/ambulance_image"
                 android:layout_alignParentTop="true"
-                android:textSize="27sp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -170,13 +170,13 @@
                 />
 
             <TextView
-                android:text="Call Firetruck"
+                android:text="Firetruck\nഫയർ ട്രക്"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/firetruck_text"
                 android:layout_toRightOf="@+id/firetruck_image"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -225,13 +225,13 @@
                 />
 
             <TextView
-                android:text="Report Child Abuse"
+                android:text="Child Abuse\nബാല പീഡനം "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/childAbuse_text"
                 android:layout_toRightOf="@+id/childAbuse_image"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -281,13 +281,13 @@
                 />
 
             <TextView
-                android:text="Report Animal Abuse"
+                android:text="Animal Abuse\nമൃഗ പീഡനം "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/animalAbuse_text"
                 android:layout_toRightOf="@+id/animalAbuse_image"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -317,6 +317,7 @@
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="#fff"
         card_view:cardCornerRadius="7dp"
+        android:visibility="gone"
         android:onClick="addButton">
 
         <RelativeLayout
@@ -342,7 +343,7 @@
                 android:id="@+id/addNew_text"
                 android:layout_toRightOf="@+id/addNew_image"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 />
 
             <TextView

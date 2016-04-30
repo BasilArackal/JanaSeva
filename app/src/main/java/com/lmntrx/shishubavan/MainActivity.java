@@ -1,14 +1,11 @@
 package com.lmntrx.shishubavan;
 
 import android.app.Activity;
-<<<<<<< Updated upstream
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-=======
-<<<<<<< HEAD
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,22 +22,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
-=======
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
->>>>>>> origin/master
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-<<<<<<< HEAD
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
-
 public class MainActivity extends Activity {
 
     MotherOfDatabases DB_HANDLER = null;
