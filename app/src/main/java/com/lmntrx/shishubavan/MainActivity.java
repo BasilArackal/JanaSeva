@@ -1,45 +1,41 @@
 package com.lmntrx.shishubavan;
 
+import android.Manifest;
 import android.app.Activity;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.view.View;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.nfc.Tag;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.MarginLayoutParamsCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 public class MainActivity extends Activity {
 
-    MotherOfDatabases DB_HANDLER = null;
+    Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DB_HANDLER = new MotherOfDatabases(this);
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }else location = null;
+
+        if (location == null){
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        if (location == null){
+            location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        }
+        /*DB_HANDLER = new MotherOfDatabases(this);
         if (UserPreferences.isThisFirstOpen(this)){
             DB_HANDLER.createTable(MotherOfDatabases.NAME_POLICE_TABLE);
             DB_HANDLER.createTable(MotherOfDatabases.NAME_AMBULANCE_TABLE);
@@ -47,9 +43,7 @@ public class MainActivity extends Activity {
             DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_FIRE_FORCE_TABLE);
             DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_POLICE_TABLE);
             DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_AMBULANCE_TABLE);
-
-
-        }
+        }*/
     }
 
 
@@ -160,12 +154,6 @@ public class MainActivity extends Activity {
     }
 
     public void makeCall(View view) {
-        Boss.call(view.getId(),MainActivity.this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        DB_HANDLER.closeDB();
-        super.onDestroy();
+        Boss.call(view.getId(),MainActivity.this,location);
     }
 }

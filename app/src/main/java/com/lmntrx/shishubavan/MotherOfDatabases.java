@@ -30,7 +30,6 @@ public class MotherOfDatabases {
     public final static String NAME_FIRE_FORCE_TABLE = "FIRE_FORCE_TABLE";
     public final static String NAME_AMBULANCE_TABLE = "AMBULANCE_TABLE";
 
-
     MotherOfDatabases(Context ctx){
 
         this.ctx = ctx;
@@ -38,7 +37,7 @@ public class MotherOfDatabases {
         sqLiteDatabase = ctx.openOrCreateDatabase(NAME_DB,Context.MODE_PRIVATE,null);
 
     }
-
+/*
     //Create table on initial launch
     public void createTable(String table_name){
 
@@ -53,22 +52,22 @@ public class MotherOfDatabases {
 
         }
 
-    }
+    }*/
 
-    //Add rows on initial launch
+    /*//Add rows on initial launch
     public void addRowsTo(String table_name){
 
         BufferedReader reader = null;
 
         switch (table_name){
             case NAME_AMBULANCE_TABLE:
-                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.a)));
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.ambulance)));
                 break;
             case NAME_FIRE_FORCE_TABLE:
-                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.fs)));
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.fireforce)));
                 break;
             case NAME_POLICE_TABLE:
-                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.ps)));
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.police)));
                 break;
         }
 
@@ -98,9 +97,9 @@ public class MotherOfDatabases {
             }
         }
 
-    }
+    }*/
 
-    //Search for phone number
+    /*//Search for phone number
     public int[] getPhoneNumbers(String table_name){
 
 
@@ -124,14 +123,109 @@ public class MotherOfDatabases {
 
         }
         return phonenos;
+    }*/
+
+    public static String[] getPhoneNumbersOf(String alertType,Context ctx){
+        String phoneNo[] = new String[10];
+        BufferedReader reader = null;
+        int i = 0;
+
+        switch (alertType){
+            case Boss.TYPE_AMBULANCE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.ambulance)));
+                break;
+            case Boss.TYPE_FIRETRUCK:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.fireforce)));
+                break;
+            case Boss.TYPE_POLICE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.police)));
+                break;
+            case Boss.TYPE_SEXUAL_ASSAULT:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.sexualassault)));
+                break;
+            case Boss.TYPE_CHILD_ABUSE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.childabuse)));
+                break;
+            case Boss.TYPE_STRAY_DOGS:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.straydogs)));
+                break;
+            case Boss.TYPE_SHISHUBAVAN:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
+                break;
+        }
+            String line;
+            try {
+                assert reader != null;
+                while ((line = reader.readLine()) != null ){
+                    phoneNo[i] = line.substring(0,line.indexOf(";"));
+                    i++;
+                    //String place = line.substring(line.indexOf(";")+1,line.indexOf("&"));
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "readPhoneNos(): "+e);
+            } catch (NullPointerException e1){
+                Log.e(TAG, "readPhoneNos(): "+e1.getMessage()+"");
+            }finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        Log.e(TAG, "readPhoneNos->finally: "+e);
+                    }
+                }
+            }
+
+        return phoneNo;
     }
 
+    public static String[] placeNamesOf(String alertType,Context ctx){
+        String places[] = new String[10];
+        BufferedReader reader = null;
+        int i = 0;
 
-    private boolean proximity(double plat,double plng,double clat,double clng){
+        switch (alertType){
+            case Boss.TYPE_AMBULANCE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.ambulance)));
+                break;
+            case Boss.TYPE_FIRETRUCK:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.fireforce)));
+                break;
+            case Boss.TYPE_POLICE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.police)));
+                break;
+            case Boss.TYPE_SEXUAL_ASSAULT:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.sexualassault)));
+                break;
+            case Boss.TYPE_CHILD_ABUSE:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.childabuse)));
+                break;
+            case Boss.TYPE_STRAY_DOGS:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.straydogs)));
+                break;
+            case Boss.TYPE_SHISHUBAVAN:
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
+                break;
+        }
+        String line;
+        try {
+            assert reader != null;
+            while ((line = reader.readLine()) != null ){
+                places[i] = line.substring(line.indexOf(";")+1,line.indexOf("&"));
+                i++;
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "readPlaces(): "+e);
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    Log.e(TAG, "readPlaces->finally: "+e);
+                }
+            }
+        }
 
-        final int PROXIMITY_RADIUS = 50;
-
-        return (Math.pow(plat - clat, 2) + Math.pow(plng - clng, 2)) < Math.pow(PROXIMITY_RADIUS, 2);
+        return places;
     }
 
 
