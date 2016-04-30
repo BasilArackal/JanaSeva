@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
@@ -16,25 +17,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     Location location;
+    LocationManager locationManager;
+
+    View v = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        }else location = null;
-
-        if (location == null){
-            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
-        if (location == null){
-            location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            if (location == null) {
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            if (location == null) {
+                location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            }
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Boss.PERMISSIONS_REQUEST_LOCATION_ACCESS);
         }
         /*DB_HANDLER = new MotherOfDatabases(this);
         if (UserPreferences.isThisFirstOpen(this)){
@@ -45,6 +52,50 @@ public class MainActivity extends Activity {
             DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_POLICE_TABLE);
             DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_AMBULANCE_TABLE);
         }*/
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case Boss.PERMISSIONS_REQUEST_CALL_PHONE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    makeCall(v);
+
+                } else {
+
+                    Toast.makeText(MainActivity.this, "Permission to make a phone call was denied", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            case Boss.PERMISSIONS_REQUEST_LOCATION_ACCESS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        if (location == null) {
+                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        }
+                        if (location == null) {
+                            location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                        }
+
+                    }
+
+                } else {
+
+                    Toast.makeText(MainActivity.this, "Permission to locate you was denied", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
 
@@ -155,6 +206,7 @@ public class MainActivity extends Activity {
     }
 
     public void makeCall(View view) {
+        v=view;
         Boss.call(view.getId(),MainActivity.this,location);
     }
 

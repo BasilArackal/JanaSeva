@@ -30,6 +30,9 @@ public class Boss {
     public final static String TYPE_STRAY_DOGS = "TYPE_STRAY_DOGS";
     public final static String TYPE_SEXUAL_ASSAULT = "TYPE_SEXUAL_ASSAULT";
     public static final String TYPE_SHISHUBAVAN = "TYPE_SHISHUBAVAN";
+    public static final int PERMISSIONS_REQUEST_CALL_PHONE = 51;
+    public static final int PERMISSIONS_REQUEST_LOCATION_ACCESS = 52;
+    public static final int PERMISSIONS_REQUEST_SEND_SMS = 53;
 
 
     public static void call_phone(String phoneNo[], Context ctx, Activity activity){
@@ -41,7 +44,8 @@ public class Boss {
                 activity.startActivity(callIntent);
             }else {
                 Log.e(LogTag,"No Permission");
-                //TODO Handle No Permission Here
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.CALL_PHONE},PERMISSIONS_REQUEST_CALL_PHONE);
             }
         }
 
@@ -52,42 +56,33 @@ public class Boss {
         if (UserPreferences.isWarningOn(activity))
             warnUser(id,activity,location);
         else {
-            new AlertDialog.Builder(activity)
-                    .setTitle("Warning")
-                    .setMessage("Your action sends your number and location to authorities. Prank calls are punishable!\nDo you still want to make an alert?\nNB: This warning can be turned off in settings")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
+            switch (id){
 
-                            switch (id){
+                case R.id.card_ambulance: call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),location,Boss.TYPE_AMBULANCE,activity);
+                    break;
+                case R.id.card_animalAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),location,Boss.TYPE_STRAY_DOGS,activity);
+                    break;
+                case R.id.card_childAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),location,Boss.TYPE_CHILD_ABUSE,activity);
+                    break;
+                case R.id.card_police:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),location,Boss.TYPE_POLICE,activity);
+                    break;
+                case R.id.card_firetruck:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
+                    break;
+                case R.id.card_sexualAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
+                    break;
+                case R.id.card_shishubavan:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,Application.getContext()),Application.getContext(),activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
+                    break;
 
-                                case R.id.card_ambulance: call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),Application.getContext(),activity);
-                                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),location,Boss.TYPE_AMBULANCE);
-                                    break;
-                                case R.id.card_animalAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),Application.getContext(),activity);
-                                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),location,Boss.TYPE_STRAY_DOGS);
-                                    break;
-                                case R.id.card_childAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),Application.getContext(),activity);
-                                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),location,Boss.TYPE_CHILD_ABUSE);
-                                    break;
-                                case R.id.card_police:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),Application.getContext(),activity);
-                                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),location,Boss.TYPE_POLICE);
-                                    break;
-                                case R.id.card_firetruck:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),Application.getContext(),activity);
-                                    sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),location,Boss.TYPE_FIRETRUCK);
-                                    break;
-
-                                default: callCustom(id);
-                                    break;
-                            }
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                default: callCustom(id);
+                    break;
+            }
         }
 
     }
@@ -106,19 +101,19 @@ public class Boss {
                         switch (id){
 
                             case R.id.card_ambulance: call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),Application.getContext(),activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),location,Boss.TYPE_AMBULANCE);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE,Application.getContext()),location,Boss.TYPE_AMBULANCE,activity);
                                 break;
                             case R.id.card_animalAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),Application.getContext(),activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),location,Boss.TYPE_STRAY_DOGS);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,Application.getContext()),location,Boss.TYPE_STRAY_DOGS,activity);
                                 break;
                             case R.id.card_childAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),Application.getContext(),activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),location,Boss.TYPE_CHILD_ABUSE);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,Application.getContext()),location,Boss.TYPE_CHILD_ABUSE,activity);
                                 break;
                             case R.id.card_police:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),Application.getContext(),activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),location,Boss.TYPE_POLICE);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE,Application.getContext()),location,Boss.TYPE_POLICE,activity);
                                 break;
                             case R.id.card_firetruck:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),Application.getContext(),activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),location,Boss.TYPE_FIRETRUCK);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
                                 break;
 
                             default: callCustom(id);
@@ -135,36 +130,100 @@ public class Boss {
                 .show();
     }
 
-    public static void sendTextMessageIfPossible(String[] telNumbers, Location location, String msgType) {
+    public static void sendTextMessageIfPossible(String[] telNumbers, Location location, String msgType, Activity activity) {
 
-        if (UserPreferences.readUserChoice(Application.getContext()) == R.id.callAndSmsRB || UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB){
-            String messageBody = "";
-            SmsManager smsMgr = SmsManager.getDefault();
+        if (location != null){
 
-            for (String telNumber : telNumbers){
+            if (UserPreferences.readUserChoice(Application.getContext()) == R.id.callAndSmsRB || UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB){
+                String messageBody = "";
+                SmsManager smsMgr = SmsManager.getDefault();
 
-                switch (msgType){
-                    case Boss.TYPE_AMBULANCE:
-                        messageBody = "Urgent Ambulance requirement for "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
-                    case Boss.TYPE_CHILD_ABUSE:
-                        messageBody = "Urgent!! \nChild Abuse reported by "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
-                    case Boss.TYPE_FIRETRUCK:
-                        messageBody = "Urgent FireForce requirement for "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
-                    case Boss.TYPE_POLICE:
-                        messageBody = "Urgent Police requirement for "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
-                    case Boss.TYPE_SEXUAL_ASSAULT:
-                        messageBody = "Urgent!! \nSexual Assault reported by  "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
-                    case Boss.TYPE_STRAY_DOGS:
-                        messageBody = "Urgent!! \nStray Dogs Attack reported by "+telNumber+"\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
-                        break;
+                for (String telNumber : telNumbers){
+
+                    switch (msgType){
+                        case Boss.TYPE_AMBULANCE:
+                            messageBody = "Urgent Ambulance requirement\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_CHILD_ABUSE:
+                            messageBody = "Urgent!! \nChild Abuse reported\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_FIRETRUCK:
+                            messageBody = "Urgent FireForce requirement\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_POLICE:
+                            messageBody = "Urgent Police requirement\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_SEXUAL_ASSAULT:
+                            messageBody = "Urgent!! \nSexual Assault reported\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_STRAY_DOGS:
+                            messageBody = "Urgent!! \nStray Dogs Attack reported\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                        case Boss.TYPE_SHISHUBAVAN:
+                            messageBody = "Urgent!! \nHelp Me call\nLocation:http://maps.google.com/?q="+location.getLatitude()+","+location.getLongitude();
+                            break;
+                    }
+                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                        try {
+                            if (!telNumber.startsWith("0"))
+                                smsMgr.sendTextMessage(telNumber, null, messageBody, null, null);
+                        }catch (NullPointerException e){
+                            Log.e("JanaSeva->Boss",e.getLocalizedMessage()+"");
+                        }
+                    }else {
+                        Log.e(LogTag,"No Permission");
+                        ActivityCompat.requestPermissions(activity,
+                                new String[]{Manifest.permission.SEND_SMS},PERMISSIONS_REQUEST_SEND_SMS);
+                    }
                 }
-                if (!telNumber.startsWith("0"))
-                    smsMgr.sendTextMessage(telNumber, null, messageBody, null, null);
+            }
+
+        }else {
+
+
+            if (UserPreferences.readUserChoice(Application.getContext()) == R.id.callAndSmsRB || UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB){
+                String messageBody = "";
+                SmsManager smsMgr = SmsManager.getDefault();
+
+                for (String telNumber : telNumbers){
+
+                    switch (msgType){
+                        case Boss.TYPE_AMBULANCE:
+                            messageBody = "Urgent Ambulance requirement";
+                            break;
+                        case Boss.TYPE_CHILD_ABUSE:
+                            messageBody = "Urgent!! \nChild Abuse reported";
+                            break;
+                        case Boss.TYPE_FIRETRUCK:
+                            messageBody = "Urgent FireForce requirement";
+                            break;
+                        case Boss.TYPE_POLICE:
+                            messageBody = "Urgent Police requirement";
+                            break;
+                        case Boss.TYPE_SEXUAL_ASSAULT:
+                            messageBody = "Urgent!! \nSexual Assault reported";
+                            break;
+                        case Boss.TYPE_STRAY_DOGS:
+                            messageBody = "Urgent!! \nStray Dogs Attack reported";
+                            break;
+                        case Boss.TYPE_SHISHUBAVAN:
+                            messageBody = "Urgent!! \nHelp Me Call";
+                            break;
+                    }
+                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                        try {
+                            if (!telNumber.startsWith("0"))
+                                smsMgr.sendTextMessage(telNumber, null, messageBody, null, null);
+                        }catch (NullPointerException e){
+                            Log.e("JanaSeva->Boss",e.getLocalizedMessage()+"");
+                        }
+                    }else {
+                        Log.e(LogTag,"No Permission");
+                        ActivityCompat.requestPermissions(activity,
+                                new String[]{Manifest.permission.SEND_SMS},PERMISSIONS_REQUEST_SEND_SMS);
+                        return;
+                    }
+                }
             }
         }
     }

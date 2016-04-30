@@ -45,7 +45,7 @@ public class UserPreferences {
     }
 
 
-    public static void toggleWarningStatus(Context ctx,Boolean status){
+    public static void toggleWarningStatus(Context ctx, Boolean status){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(IS_WARNING_ON,status);

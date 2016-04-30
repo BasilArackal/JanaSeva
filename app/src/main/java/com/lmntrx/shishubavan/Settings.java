@@ -37,10 +37,10 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        int seletedID = UserPreferences.readUserChoice(Settings.this);
+        int selectedID = UserPreferences.readUserChoice(Settings.this);
 
-        if (seletedID!=-1){
-            RadioButton selectedRB = (RadioButton) findViewById(seletedID);
+        if (selectedID!=-1){
+            RadioButton selectedRB = (RadioButton) findViewById(selectedID);
             if (selectedRB != null) {
                 selectedRB.setChecked(true);
             }
