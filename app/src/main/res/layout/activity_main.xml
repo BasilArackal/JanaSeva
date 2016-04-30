@@ -90,6 +90,7 @@
             android:layout_height="100dp"
             android:src="@drawable/plus"
             android:id="@+id/plusButton"
+            android:visibility="gone"
             android:layout_row="1"
             android:layout_column="2"
             android:layout_columnWeight="1"
