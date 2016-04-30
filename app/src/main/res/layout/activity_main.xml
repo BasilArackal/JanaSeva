@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:scrollbars="none" >
+    android:scrollbars="vertical">
+
 
 <LinearLayout
+    android:id="@+id/LinearLayoutForAllCards"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,24 +20,423 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#fff"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.lmntrx.shishubavan.MainActivity">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_police"
+        card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/gridLayout"
-        android:columnCount="3"
-        android:rowCount="4">
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/police_image"
+                android:src="@drawable/police"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Police\nപോലീസ് "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/police_text"
+                android:layout_toRightOf="@+id/police_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="One Click To Call Center!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/police_subtext"
+                android:layout_toRightOf="@+id/police_image"
+                android:layout_below="@+id/police_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_ambulance"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="makeCall"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ambulance_image"
+                android:src="@drawable/ambulance"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Ambulance\nആംബുലൻസ് "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ambulance_text"
+                android:layout_toRightOf="@+id/ambulance_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="One Click To Call Center!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ambulance_subtext"
+                android:layout_toRightOf="@+id/ambulance_image"
+                android:layout_below="@+id/ambulance_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_firetruck"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/firetruck_image"
+                android:src="@drawable/firetruck"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Firetruck\nഫയർ ട്രക്"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/firetruck_text"
+                android:layout_toRightOf="@+id/firetruck_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="One Click To Call Center!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/firetruck_subtext"
+                android:layout_toRightOf="@+id/firetruck_image"
+                android:layout_below="@+id/firetruck_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_childAbuse"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/childAbuse_image"
+                android:src="@drawable/child"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Child Abuse\nബാല പീഡനം "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/childAbuse_text"
+                android:layout_toRightOf="@+id/childAbuse_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="One Click To Call Center!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/childAbuse_subtext"
+                android:layout_toRightOf="@+id/childAbuse_image"
+                android:layout_below="@+id/childAbuse_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_animalAbuse"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/animalAbuse_image"
+                android:src="@drawable/animal"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Animal Abuse\nമൃഗ പീഡനം "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/animalAbuse_text"
+                android:layout_toRightOf="@+id/animalAbuse_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="One Click To Call Center!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/animalAbuse_subtext"
+                android:layout_toRightOf="@+id/animalAbuse_image"
+                android:layout_below="@+id/animalAbuse_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_Settings"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:visibility="gone"
+        android:onClick="addButton"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/addNew_image"
+                android:src="@drawable/plus"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Add New Action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addNew_text"
+                android:layout_toRightOf="@+id/addNew_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="Create a custom emergency call!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addNew_subtext"
+                android:layout_toRightOf="@+id/addNew_image"
+                android:layout_below="@+id/addNew_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_settings"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/settingsImage"
+                android:src="@drawable/settings"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="Settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingsText"
+                android:layout_toRightOf="@+id/settingsImage"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="Click here to edit settings!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingsSubText"
+                android:layout_toRightOf="@+id/settingsImage"
+                android:layout_below="@+id/settingsText"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <!--  ******************************   OLD GRIDVIEW ITEMS   ********************************************************************** -->
+
+    <!---
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view1"
+            card_view:cardElevation="10dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
 
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/policeButton"
-            android:src="@drawable/police"
+            android:src="@drawable/ambulance"
             android:layout_row="0"
             android:tag="1"
             android:layout_column="0"
@@ -40,6 +444,24 @@
             android:onClick="makeCall"
             />
 
+            <TextView
+                android:text="Call Police"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view2"
+            card_view:cardElevation="10dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -52,6 +474,21 @@
             android:onClick="makeCall"
             />
 
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view3"
+            card_view:cardElevation="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -62,7 +499,21 @@
             android:layout_columnWeight="1"
             android:onClick="makeCall"
             />
+        </android.support.v7.widget.CardView>
 
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view4"
+            card_view:cardElevation="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -73,6 +524,20 @@
             android:layout_columnWeight="1"
             android:onClick="makeCall"
             />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view5"
+            card_view:cardElevation="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
 
         <ImageView
             android:layout_width="100dp"
@@ -85,18 +550,44 @@
             android:onClick="makeCall"
             />
 
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view6"
+            card_view:cardElevation="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="7dp">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/plus"
             android:id="@+id/plusButton"
+            android:visibility="gone"
             android:layout_row="1"
             android:layout_column="2"
             android:layout_columnWeight="1"
             android:onClick="addButton"
             />
+        </android.support.v7.widget.CardView>
 
-    </GridLayout>
+
+
+
+
+
+-->
+
+
+
 
 </LinearLayout>
+
 </ScrollView>

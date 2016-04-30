@@ -33,6 +33,7 @@ public class Boss {
     public static void call(int id, Activity activity) {
         MotherOfDatabases db = new MotherOfDatabases(Application.getContext());
         switch (id){
+            /*
             case R.id.ambulanceButton: call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_AMBULANCE_TABLE),Application.getContext(),activity);
                 break;
             case R.id.animalAbuse:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_AMBULANCE_TABLE),Application.getContext(),activity);
@@ -43,6 +44,21 @@ public class Boss {
                 break;
             case R.id.fireTruckButton:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_FIRE_FORCE_TABLE),Application.getContext(),activity);
                 break;
+
+                */
+
+            case R.id.card_ambulance: call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_AMBULANCE_TABLE),Application.getContext(),activity);
+                break;
+            case R.id.card_animalAbuse:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_AMBULANCE_TABLE),Application.getContext(),activity);
+                break;
+            case R.id.card_childAbuse:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_POLICE_TABLE),Application.getContext(),activity);
+                break;
+            case R.id.card_police:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_POLICE_TABLE),Application.getContext(),activity);
+                break;
+            case R.id.card_firetruck:call_phone(db.getPhoneNumbers(MotherOfDatabases.NAME_FIRE_FORCE_TABLE),Application.getContext(),activity);
+                break;
+
+
             default: callCustom(id);
                 break;
         }
