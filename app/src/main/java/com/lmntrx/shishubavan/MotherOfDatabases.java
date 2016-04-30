@@ -140,10 +140,17 @@ public class MotherOfDatabases {
         }
     }
 
+    private boolean proximity(double plat,double plng,double clat,double clng){
+
+        final int PROXIMITY_RADIUS = 50;
+
+        return (Math.pow(plat - clat, 2) + Math.pow(plng - clng, 2)) < Math.pow(PROXIMITY_RADIUS, 2);
+    }
+
     private String ceal(String lat) {
 
         /*
-        * Function to lower the lat/lng
+        * Function to round up the lat/lng
         * */
 
         return null;
@@ -152,7 +159,7 @@ public class MotherOfDatabases {
     private String floor(String lat) {
 
         /*
-        * Function to round up the lat/lng
+        * Function to lower the lat/lng
         * */
 
         return null;

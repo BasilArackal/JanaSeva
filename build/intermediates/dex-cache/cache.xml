@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
-
-    <item
-        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="c0d2b7f63cf3d4674a5c7591e2a30225d990ed7e">
-        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5cd78c0633736439ef7d71f6ef6aed1e0ec771a0/classes.dex" />
-    </item>
-
-</items>
+<items version="2" />
