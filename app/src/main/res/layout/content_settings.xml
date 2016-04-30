@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
     tools:context="com.lmntrx.shishubavan.Settings"
     tools:showIn="@layout/activity_settings">
 
@@ -21,17 +22,34 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make call and SMS"
+            android:text="@string/make_call_and_sms"
             android:textSize="20sp"
             android:checked="true"
-            android:id="@+id/radioButton" />
+            android:id="@+id/callAndSmsRB" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make call only"
-            android:id="@+id/radioButton2"
+            android:text="@string/make_call_only"
+            android:id="@+id/callOnlyRB"
+            android:textSize="20sp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_sms_only"
+            android:id="@+id/smsOnlyRB"
             android:textSize="20sp"
             />
     </RadioGroup>
+
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/warn_before_sending_alert"
+        android:id="@+id/warningCB" />
+
 </LinearLayout>
