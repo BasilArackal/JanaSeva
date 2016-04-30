@@ -168,4 +168,16 @@ public class MainActivity extends Activity {
         DB_HANDLER.closeDB();
         super.onDestroy();
     }
+
+    public void launchSettings(View view)
+    {
+        Intent i=new Intent(getApplicationContext(),Settings.class);
+        startActivity(i);
+    }
+
+    public void launchAbout(View view)
+    {
+        Intent i=new Intent(getApplicationContext(),About.class);
+        startActivity(i);
+    }
 }

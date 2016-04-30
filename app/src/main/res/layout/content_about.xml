@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.lmntrx.shishubavan.About"
+    tools:showIn="@layout/activity_about"
+    android:orientation="vertical"
+    >
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="70dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/jmaveli"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Commenced in the year 1999, we, Janaseva Sisubhavan has initiated in this arena to eradicate the problem pertaining to child exploitation. Our sole vision is to eradicate child exploitation from the society and there by CREATE AN INDIA WITHOUT STREET CHILDREN.
+Mr. José Maveli, the Founder and the Chairman of Janaseva Sisubhavan, sole vision is to offer a stable home or shelter for the street children. Children of the street lack emotional and psychological support of a family, and it’s our responsibility to give them a house. Janaseva Sisubhavan raises street children’s voices, promotes their rights and improves their lives. We are living adequate for the child's physical, mental, spiritual, moral and social development. The hidden and isolated nature of street children makes it difficult to gather the exact figure. Our team is working hard to make their life better."
+        android:id="@+id/textView" />
+</LinearLayout>

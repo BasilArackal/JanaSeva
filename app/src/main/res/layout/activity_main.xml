@@ -274,14 +274,14 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/animalAbuse_image"
-                android:src="@drawable/animal"
+                android:src="@drawable/dogg"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
 
             <TextView
-                android:text="Animal Abuse\nമൃഗ പീഡനം "
+                android:text="Stray dogs\nതെരുവ്  നായ "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/animalAbuse_text"
@@ -373,6 +373,7 @@
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="#fff"
         card_view:cardCornerRadius="7dp"
+        android:onClick="launchSettings"
         >
 
         <RelativeLayout
@@ -413,6 +414,63 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_about"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="7dp"
+        android:onClick="launchAbout"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/aboutImage"
+                android:src="@drawable/about"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="About"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aboutText"
+                android:layout_toRightOf="@+id/aboutImage"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="Click here to view about page!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aboutSubText"
+                android:layout_toRightOf="@+id/aboutImage"
+                android:layout_below="@+id/aboutText"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
 
 
     <!--  ******************************   OLD GRIDVIEW ITEMS   ********************************************************************** -->
