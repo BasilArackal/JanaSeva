@@ -156,7 +156,7 @@ public class MotherOfDatabases {
             String line;
             try {
                 assert reader != null;
-                while ((line = reader.readLine()) != null ){
+                while ((line = reader.readLine()) != null && i<=5){
                     phoneNo[i] = line.substring(0,line.indexOf(";"));
                     i++;
                     //String place = line.substring(line.indexOf(";")+1,line.indexOf("&"));

@@ -2,6 +2,7 @@ package com.lmntrx.shishubavan;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -155,5 +156,17 @@ public class MainActivity extends Activity {
 
     public void makeCall(View view) {
         Boss.call(view.getId(),MainActivity.this,location);
+    }
+
+    public void launchSettings(View view)
+    {
+        Intent i=new Intent(getApplicationContext(),Settings.class);
+        startActivity(i);
+    }
+
+    public void launchAbout(View view)
+    {
+        Intent i=new Intent(getApplicationContext(),About.class);
+        startActivity(i);
     }
 }
