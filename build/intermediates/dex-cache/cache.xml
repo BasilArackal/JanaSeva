@@ -1,2 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="81e8e650f2eed40dc39173dfd5e8466992dc279e">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5cd78c0633736439ef7d71f6ef6aed1e0ec771a0/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.3.0_323715a3ae39bca9235c89b2b0be371045cb0e84/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.3.0_63744cb2f68560153ed7bf0bfe0252e9d3c53894/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3ebd12e653725b1c4ea5d851ee97cf9083f68790">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_15c4c46de3a59605e961b72bb4985b40f98c2e99/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.3.0_e477daa99f947891efcf9e8585200b6ce4419854/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.3.0_ff73cdb6730dcbaab1e740bc790312d3c9170086/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_a62825682f52f77a762c162abb3f5e7927f80ad1/classes.dex" />
+    </item>
+    <item
+        jar="/home/livin/Desktop/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/home/livin/Desktop/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.3.0_055ddac89f501bbe06a421a53c8a5e4f0a594eed/classes.dex" />
+    </item>
+
+</items>
