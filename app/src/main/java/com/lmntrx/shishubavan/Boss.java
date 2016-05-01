@@ -134,7 +134,7 @@ public class Boss {
 
         if (location != null){
 
-            if (UserPreferences.readUserChoice(Application.getContext()) == R.id.callAndSmsRB || UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB){
+            if (!(UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB)){
                 String messageBody = "";
                 SmsManager smsMgr = SmsManager.getDefault();
 
@@ -165,10 +165,11 @@ public class Boss {
                     }
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                         try {
-                            if (!telNumber.startsWith("0"))
+                            if (!telNumber.startsWith("0") && telNumber.length()>=10)
                                 smsMgr.sendTextMessage(telNumber, null, messageBody, null, null);
+                            else Log.i("Janaseva->Boss->sendSMS","Not a mobile number");
                         }catch (NullPointerException e){
-                            Log.e("JanaSeva->Boss",e.getLocalizedMessage()+"");
+                            Log.e("Janaseva->Boss->sendSMS",e.getLocalizedMessage()+"");
                         }
                     }else {
                         Log.e(LogTag,"No Permission");
@@ -181,7 +182,7 @@ public class Boss {
         }else {
 
 
-            if (UserPreferences.readUserChoice(Application.getContext()) == R.id.callAndSmsRB || UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB){
+            if (!(UserPreferences.readUserChoice(Application.getContext()) == R.id.callOnlyRB)){
                 String messageBody = "";
                 SmsManager smsMgr = SmsManager.getDefault();
 
