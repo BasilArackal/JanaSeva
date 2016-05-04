@@ -115,6 +115,12 @@ public class Boss {
                             case R.id.card_firetruck:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),Application.getContext(),activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
                                 break;
+                            case R.id.card_sexualAbuse:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,Application.getContext()),Application.getContext(),activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
+                                break;
+                            case R.id.card_shishubavan:call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,Application.getContext()),Application.getContext(),activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,Application.getContext()),location,Boss.TYPE_FIRETRUCK,activity);
+                                break;
 
                             default: callCustom(id);
                                 break;
@@ -213,10 +219,10 @@ public class Boss {
                     }
                     if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                         try {
-                            if (!telNumber.startsWith("0"))
+                            if (!telNumber.startsWith("0") && telNumber.length()>=10)
                                 smsMgr.sendTextMessage(telNumber, null, messageBody, null, null);
                         }catch (NullPointerException e){
-                            Log.e("JanaSeva->Boss",e.getLocalizedMessage()+"");
+                            Log.e("JanaSeva->Boss",e.getLocalizedMessage());
                         }
                     }else {
                         Log.e(LogTag,"No Permission");
