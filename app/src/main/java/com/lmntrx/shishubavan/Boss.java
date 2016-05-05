@@ -235,4 +235,13 @@ public class Boss {
         }
     }
 
+    public static void updateNumbers(Context ctx) {
+        String placesPS[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //Police
+        String placesFS[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //FireTruck
+        String placesA[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);   //Ambulance
+        String placesSX[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //Sexual Assault
+        String placesCA[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //Child Abuse
+        String placesSD[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //Stray Dogs
+        String placesJS[]=MotherOfDatabases.placeNamesOf(TYPE_POLICE,ctx);  //Janaseva
+    }
 }

@@ -8,6 +8,15 @@ import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
+import com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable;
+import com.lmntrx.shishubavan.DatabaseModels.ChildAbuseTable;
+import com.lmntrx.shishubavan.DatabaseModels.FireForceTable;
+import com.lmntrx.shishubavan.DatabaseModels.JanasevaTable;
+import com.lmntrx.shishubavan.DatabaseModels.PoliceTable;
+import com.lmntrx.shishubavan.DatabaseModels.SexualAssaultTable;
+import com.lmntrx.shishubavan.DatabaseModels.StrayDogsTable;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -179,7 +188,7 @@ public class MotherOfDatabases {
     }
 
     public static String[] placeNamesOf(String alertType,Context ctx){
-        String places[] = new String[10];
+        String places[] = new String[20];
         BufferedReader reader = null;
         int i = 0;
 
@@ -210,12 +219,17 @@ public class MotherOfDatabases {
         try {
             assert reader != null;
             while ((line = reader.readLine()) != null ){
-                places[i] = line.substring(line.indexOf(";")+1,line.indexOf("&"));
+                try {
+                    places[i] = line.substring(line.indexOf(";")+1,line.indexOf("&"));
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    Log.e(TAG, "readPlaces(): "+e2);
+                }
                 i++;
             }
         } catch (IOException e) {
             Log.e(TAG, "readPlaces(): "+e);
-        } finally {
+        }
+        finally {
             if (reader != null) {
                 try {
                     reader.close();
@@ -226,6 +240,128 @@ public class MotherOfDatabases {
         }
 
         return places;
+    }
+
+    public static void populateDB(Context ctx){
+        //Polices
+        String nos[]=getPhoneNumbersOf(Boss.TYPE_POLICE,ctx);
+        String places[]=placeNamesOf(Boss.TYPE_POLICE,ctx);
+        Boolean enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                PoliceTable item = new PoliceTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //Ambulances
+        nos=getPhoneNumbersOf(Boss.TYPE_AMBULANCE,ctx);
+        places=placeNamesOf(Boss.TYPE_AMBULANCE,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                AmbulanceTable item = new AmbulanceTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //CHILD_ABUSE
+        nos=getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,ctx);
+        places=placeNamesOf(Boss.TYPE_CHILD_ABUSE,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                ChildAbuseTable item = new ChildAbuseTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //Firetruck
+        nos=getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,ctx);
+        places=placeNamesOf(Boss.TYPE_FIRETRUCK,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                FireForceTable item = new FireForceTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //SexualAssault
+        nos=getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,ctx);
+        places=placeNamesOf(Boss.TYPE_SEXUAL_ASSAULT,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                SexualAssaultTable item = new SexualAssaultTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //StrayDogs
+        nos=getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,ctx);
+        places=placeNamesOf(Boss.TYPE_STRAY_DOGS,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                StrayDogsTable item = new StrayDogsTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //SHISHUBAVAN
+        nos=getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,ctx);
+        places=placeNamesOf(Boss.TYPE_SHISHUBAVAN,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                JanasevaTable item = new JanasevaTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
     }
 
 

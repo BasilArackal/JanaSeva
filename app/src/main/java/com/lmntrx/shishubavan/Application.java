@@ -5,7 +5,7 @@ import android.content.Context;
 /***
  * Created by livin on 28-Apr-16.
  */
-public class Application extends android.app.Application{
+public class Application extends com.activeandroid.app.Application{
     private static Context mContext;
 
     @Override

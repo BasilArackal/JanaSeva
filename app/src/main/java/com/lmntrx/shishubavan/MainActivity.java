@@ -19,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.query.Select;
+import com.lmntrx.shishubavan.DatabaseModels.PoliceTable;
+
 public class MainActivity extends Activity {
 
     Location location;
@@ -26,10 +29,22 @@ public class MainActivity extends Activity {
 
     View v = null;
 
+    View cardJanaseva, cardStrayDogs, cardPolice, cardAmbulance, cardFireForce, cardSexualAssault, cardCildAbuse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Updating Numbers
+        Boss.updateNumbers(MainActivity.this);
+
+        if (UserPreferences.isThisFirstOpen(MainActivity.this)){
+            MotherOfDatabases.populateDB(this);
+            UserPreferences.writeUserChoice(R.id.callAndSmsRB,this);
+        }
+
+        //Getting User Location
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -43,6 +58,28 @@ public class MainActivity extends Activity {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Boss.PERMISSIONS_REQUEST_LOCATION_ACCESS);
         }
+
+        PoliceTable t = getRandom();
+        Toast.makeText(MainActivity.this, t.placeName+"->"+t.number, Toast.LENGTH_SHORT).show();
+
+        //Initializing card variables
+        cardAmbulance = findViewById(R.id.card_ambulance);
+        cardCildAbuse = findViewById(R.id.card_childAbuse);
+        cardFireForce = findViewById(R.id.card_firetruck);
+        cardJanaseva = findViewById(R.id.card_shishubavan);
+        cardPolice = findViewById(R.id.card_police);
+        cardSexualAssault = findViewById(R.id.card_sexualAbuse);
+        cardStrayDogs = findViewById(R.id.card_animalAbuse);
+
+        //Assigning onLongPress event listeners to eac of the cards
+        cardStrayDogs.setOnLongClickListener(new onLongPress());
+        cardSexualAssault.setOnLongClickListener(new onLongPress());
+        cardPolice.setOnLongClickListener(new onLongPress());
+        cardAmbulance.setOnLongClickListener(new onLongPress());
+        cardFireForce.setOnLongClickListener(new onLongPress());
+        cardCildAbuse.setOnLongClickListener(new onLongPress());
+        cardJanaseva.setOnLongClickListener(new onLongPress());
+
         /*DB_HANDLER = new MotherOfDatabases(this);
         if (UserPreferences.isThisFirstOpen(this)){
             DB_HANDLER.createTable(MotherOfDatabases.NAME_POLICE_TABLE);
@@ -199,6 +236,14 @@ public class MainActivity extends Activity {
         // new cards created by x=10 (say). Initially create 10 new ids on menu/ids.xml. Pass that id to makeCall();
     }
 
+    public static PoliceTable getRandom() {
+        return new Select()
+                .from(PoliceTable.class)
+                .where("Enabled = ?", true)
+                .orderBy("RANDOM()")
+                .executeSingle();
+    }
+
     public int dpToPx(int dp,View view) {
         DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
@@ -221,4 +266,16 @@ public class MainActivity extends Activity {
         Intent i=new Intent(getApplicationContext(),About.class);
         startActivity(i);
     }
+
+    private class onLongPress implements View.OnLongClickListener {
+
+        @Override
+        public boolean onLongClick(View v) {
+            Intent intent = new Intent(MainActivity.this,SelectNumbersActivity.class);
+            intent.putExtra("LONG_PRESSED_VIEW_ID",v.getId());
+            MainActivity.this.startActivity(intent);
+            return false;
+        }
+    }
+
 }
