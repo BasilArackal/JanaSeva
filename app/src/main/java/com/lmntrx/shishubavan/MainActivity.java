@@ -37,8 +37,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
-            MotherOfDatabases.populateDB(this);
             UserPreferences.writeUserChoice(R.id.callAndSmsRB,this);
+        }
+
+        if (UserPreferences.getCurrentDBVersion(this)!=this.getResources().getInteger(R.integer.DATABASE_VERSION)){
+            MotherOfDatabases.deleteOldDB();
+            MotherOfDatabases.populateDB(this);
+            UserPreferences.updateDBVersion(this,getResources().getInteger(R.integer.DATABASE_VERSION));
         }
 
         //Getting User Location

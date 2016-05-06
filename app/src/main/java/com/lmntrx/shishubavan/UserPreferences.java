@@ -51,4 +51,18 @@ public class UserPreferences {
         editor.putBoolean(IS_WARNING_ON,status);
         editor.apply();
     }
+
+
+    public static void updateDBVersion(Context ctx, int version){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("DATABASE_VERSION",version);
+        editor.apply();
+    }
+
+    public static int getCurrentDBVersion(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("DATABASE_VERSION",-1);
+    }
+
 }

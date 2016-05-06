@@ -8,4 +8,5 @@
     <integer name="ca_array_size">11</integer>
     <integer name="js_array_size">4</integer>
     <integer name="st_array_size">4</integer>
+    <integer name="DATABASE_VERSION">2</integer>
 </resources>

@@ -19,7 +19,7 @@ public class AmbulanceTable extends Model {
     public String number;
 
     @Column(name = "Enabled")
-    public Boolean enabled;
+    public boolean enabled;
 
     public AmbulanceTable(){super();}
 

@@ -15,16 +15,16 @@ import java.util.ArrayList;
 /***
  * Created by livin on 4/5/16.
  */
-public class NumbersListAdaptor extends ArrayAdapter<String> implements CheckBox.OnCheckedChangeListener {
+public class NumbersListAdaptor extends ArrayAdapter<NumbersListModel> implements CheckBox.OnCheckedChangeListener {
 
     Activity activity;
-    ArrayList list;
+    ArrayList<NumbersListModel> list;
     String TYPE;
 
-    public NumbersListAdaptor(Activity activity, ArrayList<String> stringArrayList, String TYPE){
-        super(activity,0,stringArrayList);
+    public NumbersListAdaptor(Activity activity, ArrayList<NumbersListModel> list, String TYPE){
+        super(activity,0,list);
         this.activity = activity;
-        this.list = stringArrayList;
+        this.list = list;
         this.TYPE = TYPE;
     }
 
@@ -35,15 +35,13 @@ public class NumbersListAdaptor extends ArrayAdapter<String> implements CheckBox
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbers_list_item, parent, false);
         }
 
-            String item = list.get(position).toString();
-            String placeName = item.substring(0,item.indexOf("|"));
-            Boolean enabled = (item.substring(item.indexOf("|") + 1)).equals("true");
+            NumbersListModel item = list.get(position);
+            String placeName = item.getPlace();
+            Boolean enabled = item.isEnabled();
             CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.list_item_checkbox);
-        if (!placeName.equalsIgnoreCase("null")){
             checkBox.setText(placeName);
             checkBox.setChecked(enabled);
             return convertView;
-        }else return convertView;
 
     }
 

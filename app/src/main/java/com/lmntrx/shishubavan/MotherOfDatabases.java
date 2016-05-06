@@ -536,15 +536,15 @@ public class MotherOfDatabases {
         return nos;
     }
 
-    public static ArrayList<String> getAllPlaces(String TYPE){
+    public static ArrayList<NumbersListModel> getAllPlaces(String TYPE){
         List list = getAllControlRooms(TYPE);
-        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<NumbersListModel> arrayList = new ArrayList<>();
         switch (TYPE){
             case Boss.TYPE_AMBULANCE:
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     AmbulanceTable policeTable = (AmbulanceTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -552,7 +552,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     StrayDogsTable policeTable = (StrayDogsTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -560,7 +560,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     JanasevaTable policeTable = (JanasevaTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -568,7 +568,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     ChildAbuseTable policeTable = (ChildAbuseTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -576,7 +576,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     SexualAssaultTable policeTable = (SexualAssaultTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -584,7 +584,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     PoliceTable policeTable = (PoliceTable)list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -592,7 +592,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,policeTable.placeName+"|"+policeTable.enabled);
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -647,4 +647,24 @@ public class MotherOfDatabases {
         }
     }
 
+    public static void deleteOldDB() {
+
+        SQLiteDatabase db = ActiveAndroid.getDatabase();
+        List<String> tables = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT * FROM sqlite_master WHERE type='table';", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String tableName = cursor.getString(1);
+            if (!tableName.equals("android_metadata") &&
+                    !tableName.equals("sqlite_sequence")) {
+                tables.add(tableName);
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        for (String tableName : tables) {
+            db.execSQL("DELETE FROM " + tableName);
+        }
+
+    }
 }

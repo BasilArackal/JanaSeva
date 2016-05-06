@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SelectNumbersActivity extends AppCompatActivity {
 
-    ArrayList<String> arrayList;
+    ArrayList<NumbersListModel> arrayList;
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
