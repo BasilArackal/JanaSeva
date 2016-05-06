@@ -36,9 +36,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Updating Numbers
-        Boss.updateNumbers(MainActivity.this);
-
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
             MotherOfDatabases.populateDB(this);
             UserPreferences.writeUserChoice(R.id.callAndSmsRB,this);
@@ -59,9 +56,6 @@ public class MainActivity extends Activity {
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Boss.PERMISSIONS_REQUEST_LOCATION_ACCESS);
         }
 
-        PoliceTable t = getRandom();
-        Toast.makeText(MainActivity.this, t.placeName+"->"+t.number, Toast.LENGTH_SHORT).show();
-
         //Initializing card variables
         cardAmbulance = findViewById(R.id.card_ambulance);
         cardCildAbuse = findViewById(R.id.card_childAbuse);
@@ -79,16 +73,6 @@ public class MainActivity extends Activity {
         cardFireForce.setOnLongClickListener(new onLongPress());
         cardCildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
-
-        /*DB_HANDLER = new MotherOfDatabases(this);
-        if (UserPreferences.isThisFirstOpen(this)){
-            DB_HANDLER.createTable(MotherOfDatabases.NAME_POLICE_TABLE);
-            DB_HANDLER.createTable(MotherOfDatabases.NAME_AMBULANCE_TABLE);
-            DB_HANDLER.createTable(MotherOfDatabases.NAME_FIRE_FORCE_TABLE);
-            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_FIRE_FORCE_TABLE);
-            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_POLICE_TABLE);
-            DB_HANDLER.addRowsTo(MotherOfDatabases.NAME_AMBULANCE_TABLE);
-        }*/
     }
 
     @Override
@@ -98,11 +82,8 @@ public class MainActivity extends Activity {
             case Boss.PERMISSIONS_REQUEST_CALL_PHONE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     makeCall(v);
-
                 } else {
-
                     Toast.makeText(MainActivity.this, "Permission to make a phone call was denied", Toast.LENGTH_LONG).show();
                 }
                 return;
@@ -234,14 +215,6 @@ public class MainActivity extends Activity {
 
         // onClick on new cards not implemented. Use Global ID arrays and assign new ids to each cardView . Limit number of
         // new cards created by x=10 (say). Initially create 10 new ids on menu/ids.xml. Pass that id to makeCall();
-    }
-
-    public static PoliceTable getRandom() {
-        return new Select()
-                .from(PoliceTable.class)
-                .where("Enabled = ?", true)
-                .orderBy("RANDOM()")
-                .executeSingle();
     }
 
     public int dpToPx(int dp,View view) {

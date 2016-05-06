@@ -22,6 +22,9 @@ public class SexualAssaultTable extends Model {
     @Column(name = "Enabled")
     public Boolean enabled;
 
+
+    public SexualAssaultTable(){super();}
+
     public SexualAssaultTable(String placeName,String number,Boolean enabled){
         this.placeName = placeName;
         this.number = number;

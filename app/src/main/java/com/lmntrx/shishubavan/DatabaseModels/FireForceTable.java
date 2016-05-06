@@ -21,6 +21,9 @@ public class FireForceTable extends Model {
     @Column(name = "Enabled")
     public Boolean enabled;
 
+
+    public FireForceTable(){super();}
+
     public FireForceTable(String placeName,String number,Boolean enabled){
         this.placeName = placeName;
         this.number = number;

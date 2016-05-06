@@ -21,6 +21,8 @@ public class AmbulanceTable extends Model {
     @Column(name = "Enabled")
     public Boolean enabled;
 
+    public AmbulanceTable(){super();}
+
     public AmbulanceTable(String placeName,String number,Boolean enabled){
         this.placeName = placeName;
         this.number = number;

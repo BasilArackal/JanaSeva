@@ -1,71 +1,55 @@
 package com.lmntrx.shishubavan;
 
-import android.database.DataSetObserver;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
-/**
+import java.util.ArrayList;
+
+/***
  * Created by livin on 4/5/16.
  */
-public class NumbersListAdaptor implements ListAdapter {
-    @Override
-    public boolean areAllItemsEnabled() {
-        return false;
-    }
+public class NumbersListAdaptor extends ArrayAdapter<String> implements CheckBox.OnCheckedChangeListener {
 
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
-    }
+    Activity activity;
+    ArrayList list;
+    String TYPE;
 
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-
-    }
-
-    @Override
-    public int getCount() {
-        return 0;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
+    public NumbersListAdaptor(Activity activity, ArrayList<String> stringArrayList, String TYPE){
+        super(activity,0,stringArrayList);
+        this.activity = activity;
+        this.list = stringArrayList;
+        this.TYPE = TYPE;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbers_list_item, parent, false);
+        }
+
+            String item = list.get(position).toString();
+            String placeName = item.substring(0,item.indexOf("|"));
+            Boolean enabled = (item.substring(item.indexOf("|") + 1)).equals("true");
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.list_item_checkbox);
+        if (!placeName.equalsIgnoreCase("null")){
+            checkBox.setText(placeName);
+            checkBox.setChecked(enabled);
+            return convertView;
+        }else return convertView;
+
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        CheckBox checkBox = (CheckBox)buttonView;
+        MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),isChecked);
     }
 }
