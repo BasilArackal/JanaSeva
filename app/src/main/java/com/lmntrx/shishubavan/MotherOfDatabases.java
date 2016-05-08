@@ -1,16 +1,13 @@
 package com.lmntrx.shishubavan;
 
 import android.content.Context;
-import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.util.Log;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.Model;
+import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
 import com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable;
@@ -22,9 +19,7 @@ import com.lmntrx.shishubavan.DatabaseModels.SexualAssaultTable;
 import com.lmntrx.shishubavan.DatabaseModels.StrayDogsTable;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -291,60 +286,53 @@ public class MotherOfDatabases {
         List list = null;
         switch(TYPE){
             case Boss.TYPE_AMBULANCE:
-                List<AmbulanceTable> aList = new Select()
+                list = new Select()
                         .from(AmbulanceTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = aList;
                 break;
             case Boss.TYPE_CHILD_ABUSE:
-                List<ChildAbuseTable> cList = new Select()
+                list = new Select()
                         .from(ChildAbuseTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = cList;
                 break;
             case Boss.TYPE_FIRETRUCK:
-                List<FireForceTable> fList = new Select()
+                list = new Select()
                         .from(FireForceTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = fList;
                 break;
             case Boss.TYPE_POLICE:
-                List<PoliceTable> pList = new Select()
+                list = new Select()
                         .from(PoliceTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = pList;
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                List<SexualAssaultTable> sxList = new Select()
+                list = new Select()
                         .from(SexualAssaultTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = sxList;
                 break;
             case Boss.TYPE_STRAY_DOGS:
-                List<SexualAssaultTable> stList = new Select()
-                        .from(SexualAssaultTable.class)
+                list = new Select()
+                        .from(StrayDogsTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = stList;
                 break;
             case Boss.TYPE_SHISHUBAVAN:
-                List<JanasevaTable> jsList = new Select()
+                list = new Select()
                         .from(JanasevaTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = jsList;
                 break;
         }
 
@@ -355,53 +343,46 @@ public class MotherOfDatabases {
         List list = null;
         switch(TYPE){
             case Boss.TYPE_AMBULANCE:
-                List<AmbulanceTable> aList = new Select()
+                list = new Select()
                         .from(AmbulanceTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = aList;
                 break;
             case Boss.TYPE_CHILD_ABUSE:
-                List<ChildAbuseTable> cList = new Select()
+                list = new Select()
                         .from(ChildAbuseTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = cList;
                 break;
             case Boss.TYPE_FIRETRUCK:
-                List<FireForceTable> fList = new Select()
+                list = new Select()
                         .from(FireForceTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = fList;
                 break;
             case Boss.TYPE_POLICE:
-                List<PoliceTable> pList = new Select()
+                list = new Select()
                         .from(PoliceTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = pList;
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                List<SexualAssaultTable> sxList = new Select()
+                list = new Select()
                         .from(SexualAssaultTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = sxList;
                 break;
             case Boss.TYPE_STRAY_DOGS:
-                List<StrayDogsTable> stList = new Select()
+                list = new Select()
                         .from(StrayDogsTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = stList;
                 break;
             case Boss.TYPE_SHISHUBAVAN:
-                List<JanasevaTable> jsList = new Select()
+                list = new Select()
                         .from(JanasevaTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
-                list = jsList;
                 break;
         }
 
@@ -410,10 +391,10 @@ public class MotherOfDatabases {
 
     public static String[] getEnabledNumbers(String TYPE){
         List list = getEnabledControlRooms(TYPE);
-        String nos[] = new String[5];
+        String nos[] = new String[list.size()];
         switch (TYPE){
             case Boss.TYPE_AMBULANCE:
-                for (int i = 0, j=0; i < 5 ; i++,j++) {
+                for (int i = 0, j=0; i < list.size() ; i++,j++) {
                     AmbulanceTable policeTable = (AmbulanceTable) list.get(i);
                     if (list.get(i)!=null)
                     nos[j] = policeTable.number;
@@ -421,7 +402,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_STRAY_DOGS:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     StrayDogsTable policeTable = (StrayDogsTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -429,7 +410,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_SHISHUBAVAN:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     JanasevaTable policeTable = (JanasevaTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -437,7 +418,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_CHILD_ABUSE:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     ChildAbuseTable policeTable = (ChildAbuseTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -445,7 +426,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     SexualAssaultTable policeTable = (SexualAssaultTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -453,7 +434,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_POLICE:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     PoliceTable policeTable = (PoliceTable)list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -461,7 +442,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_FIRETRUCK:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -474,10 +455,10 @@ public class MotherOfDatabases {
 
     public static String[] getEnabledPlaces(String TYPE){
         List list = getEnabledControlRooms(TYPE);
-        String nos[] = new String[5];
+        String nos[] = new String[list.size()];
         switch (TYPE){
             case Boss.TYPE_AMBULANCE:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     AmbulanceTable policeTable = (AmbulanceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -485,7 +466,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_STRAY_DOGS:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     StrayDogsTable policeTable = (StrayDogsTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -501,7 +482,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_CHILD_ABUSE:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     ChildAbuseTable policeTable = (ChildAbuseTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -509,7 +490,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     SexualAssaultTable policeTable = (SexualAssaultTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -517,7 +498,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_POLICE:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     PoliceTable policeTable = (PoliceTable)list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -525,7 +506,7 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_FIRETRUCK:
-                for (int i = 0,j=0; i < 5 ; i++,j++) {
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
@@ -544,7 +525,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     AmbulanceTable policeTable = (AmbulanceTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -552,7 +533,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     StrayDogsTable policeTable = (StrayDogsTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -560,7 +541,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     JanasevaTable policeTable = (JanasevaTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -568,7 +549,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     ChildAbuseTable policeTable = (ChildAbuseTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -576,7 +557,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     SexualAssaultTable policeTable = (SexualAssaultTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -584,7 +565,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     PoliceTable policeTable = (PoliceTable)list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -592,7 +573,7 @@ public class MotherOfDatabases {
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
                     if (list.get(i)!=null)
-                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.enabled));
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
                 }
                 break;
@@ -600,49 +581,93 @@ public class MotherOfDatabases {
         return arrayList;
     }
 
-    public static void UpdateItem(String TYPE,String PlaceName,Boolean enabled){
+    public static void UpdateItem(String TYPE,String text,Boolean enabled){
+        String PlaceName = text.substring(0,text.indexOf(":"));
+        String no = text.substring(text.indexOf(":")+2);
+        From select;
         switch (TYPE){
             case Boss.TYPE_AMBULANCE:
+                select = new Select().from(AmbulanceTable.class).where("Number = ?", no);
+                AmbulanceTable ambulanceTable = AmbulanceTable.load(AmbulanceTable.class,select.executeSingle().getId());
+                ambulanceTable.enabled = enabled;
+                ambulanceTable.save();/*
+
                 new Update(AmbulanceTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
-                        .execute();
+                        .where("Number = ?",no)
+                        .execute();*/
+                Log.d(TAG,PlaceName + TYPE+enabled);
                 break;
             case Boss.TYPE_STRAY_DOGS:
+                select = new Select().from(StrayDogsTable.class).where("Number = ?", no);
+                StrayDogsTable s = StrayDogsTable.load(StrayDogsTable.class,select.executeSingle().getId());
+                s.enabled = enabled;
+                s.save();
+                /*
                 new Update(StrayDogsTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
-                        .execute();
+                        .where("Number = ?",no)
+                        .execute();*/
+                Log.d(TAG,PlaceName + TYPE);
                 break;
             case Boss.TYPE_SHISHUBAVAN:
+                select = new Select().from(JanasevaTable.class).where("Number = ?", no);
+                JanasevaTable j = JanasevaTable.load(JanasevaTable.class,select.executeSingle().getId());
+                j.enabled = enabled;
+                j.save();
+                /*
                 new Update(JanasevaTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
+                        .where("Number = ?",no)
                         .execute();
+                        */
+                Log.d(TAG,PlaceName + TYPE+enabled);
                 break;
             case Boss.TYPE_CHILD_ABUSE:
+                select = new Select().from(ChildAbuseTable.class).where("Number = ?", no);
+                ChildAbuseTable c = ChildAbuseTable.load(ChildAbuseTable.class,select.executeSingle().getId());
+                c.enabled = enabled;
+                c.save();
+                /*
                 new Update(ChildAbuseTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
-                        .execute();
+                        .where("Number = ?",no)
+                        .execute();*/
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
+                /*
                 new Update(SexualAssaultTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
                         .execute();
-                break;
+                */break;
             case Boss.TYPE_POLICE:
-                new Update(PoliceTable.class)
+                select = new Select().from(PoliceTable.class).where("Number = ?", no);
+                PoliceTable p = PoliceTable.load(PoliceTable.class,select.executeSingle().getId());
+                p.enabled = enabled;
+                p.save();
+                /*new Update(PoliceTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
-                        .execute();
+                        .where("Number = ?",no)
+                        .execute();*/
+                Log.d(TAG,PlaceName + TYPE);
                 break;
             case Boss.TYPE_FIRETRUCK:
+                select = new Select().from(FireForceTable.class).where("Number = ?", no);
+                FireForceTable f = FireForceTable.load(FireForceTable.class,select.executeSingle().getId());
+                f.enabled = enabled;
+                f.save();
+                /*
                 new Update(FireForceTable.class)
                         .set("Enabled = ?",enabled)
                         .where("PlaceName = ?", PlaceName)
-                        .execute();
+                        .where("Number = ?",no)
+                        .execute();*/
                 break;
         }
     }

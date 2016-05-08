@@ -1,21 +1,18 @@
 package com.lmntrx.shishubavan;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 /***
  * Created by livin on 4/5/16.
  */
-public class NumbersListAdaptor extends ArrayAdapter<NumbersListModel> implements CheckBox.OnCheckedChangeListener {
+public class NumbersListAdaptor extends ArrayAdapter<NumbersListModel> {
 
     Activity activity;
     ArrayList<NumbersListModel> list;
@@ -37,17 +34,12 @@ public class NumbersListAdaptor extends ArrayAdapter<NumbersListModel> implement
 
             NumbersListModel item = list.get(position);
             String placeName = item.getPlace();
+            String number = item.getNumber();
             Boolean enabled = item.isEnabled();
             CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.list_item_checkbox);
-            checkBox.setText(placeName);
+            checkBox.setText(String.format("%s: %s", placeName, number));
             checkBox.setChecked(enabled);
             return convertView;
 
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        CheckBox checkBox = (CheckBox)buttonView;
-        MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),isChecked);
     }
 }

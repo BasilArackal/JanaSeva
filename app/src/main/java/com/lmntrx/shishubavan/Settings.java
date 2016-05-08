@@ -1,9 +1,9 @@
 package com.lmntrx.shishubavan;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -21,7 +21,9 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar!=null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
         radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
         callAndSms=(RadioButton)findViewById(R.id.callAndSmsRB);
         callonly=(RadioButton)findViewById(R.id.callOnlyRB);

@@ -224,8 +224,7 @@ public class MainActivity extends Activity {
 
     public int dpToPx(int dp,View view) {
         DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     public void makeCall(View view) {
