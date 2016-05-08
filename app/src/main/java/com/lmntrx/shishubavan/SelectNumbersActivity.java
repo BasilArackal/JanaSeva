@@ -49,7 +49,7 @@ public class SelectNumbersActivity extends AppCompatActivity {
                 break;
             case R.id.card_shishubavan:
                 TYPE = Boss.TYPE_SHISHUBAVAN;
-                actionBar.setTitle("Janaseva Sisubavan");
+                actionBar.setTitle("Janaseva Sisubhavan");
                 break;
         }
         if (TYPE!=null)

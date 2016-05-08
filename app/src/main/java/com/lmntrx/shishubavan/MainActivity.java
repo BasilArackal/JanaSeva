@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
 
-        //Assigning onLongPress event listeners to eac of the cards
+        //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());
         cardSexualAssault.setOnLongClickListener(new onLongPress());
         cardPolice.setOnLongClickListener(new onLongPress());

@@ -55,7 +55,7 @@ public class About extends AppCompatActivity {
 
 
         Element address = new Element();
-        address.setTitle("Address:\nV Janaseva Sisubhavan\n" +
+        address.setTitle("Address:\nJanaseva Sisubhavan\n" +
                 "U.C. College P.O, Aluva\n" +
                 "Kerala");
 
