@@ -49,7 +49,7 @@ public class SelectNumbersActivity extends AppCompatActivity {
                 break;
             case R.id.card_shishubavan:
                 TYPE = Boss.TYPE_SHISHUBAVAN;
-                actionBar.setTitle("Janaseva Sisubavan");
+                actionBar.setTitle("Janaseva Sisubhavan");
                 break;
         }
         if (TYPE!=null)
@@ -67,10 +67,11 @@ public class SelectNumbersActivity extends AppCompatActivity {
         }else {
             if (checkBox.isChecked()) {
                 checkBox.toggle();
-                Toast.makeText(SelectNumbersActivity.this, "Only 5 Numbers can be selected" + list.length, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(SelectNumbersActivity.this, "Only 5 Numbers can be selected" + list.length, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectNumbersActivity.this, "Please Choose Any 5 Numbers!", Toast.LENGTH_SHORT).show();
             }else{
                 MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),checkBox.isChecked());
-                Toast.makeText(SelectNumbersActivity.this, "ere" + list.length, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(SelectNumbersActivity.this, "ere" + list.length, Toast.LENGTH_SHORT).show();
 
             }
         }

@@ -65,4 +65,18 @@ public class UserPreferences {
         return sharedPreferences.getInt("DATABASE_VERSION",-1);
     }
 
+    public static Boolean shouldShowSplash(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("SHOW_SPLASH",true);
+    }
+
+    public static void setShouldShowSplash(Context ctx, Boolean status){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("SHOW_SPLASH",status);
+        editor.apply();
+    }
+
+
+
 }
