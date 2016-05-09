@@ -8,12 +8,12 @@ android {
         applicationId "com.lmntrx.shishubavan"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 3
+        versionCode 5
         versionName "1.5"
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
