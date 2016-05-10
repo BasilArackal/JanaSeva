@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Model;
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 import com.activeandroid.query.Update;
@@ -582,7 +583,6 @@ public class MotherOfDatabases {
     }
 
     public static void UpdateItem(String TYPE,String text,Boolean enabled){
-        String PlaceName = text.substring(0,text.indexOf(":"));
         String no = text.substring(text.indexOf(":")+2);
         From select;
         switch (TYPE){
@@ -590,84 +590,43 @@ public class MotherOfDatabases {
                 select = new Select().from(AmbulanceTable.class).where("Number = ?", no);
                 AmbulanceTable ambulanceTable = AmbulanceTable.load(AmbulanceTable.class,select.executeSingle().getId());
                 ambulanceTable.enabled = enabled;
-                ambulanceTable.save();/*
-
-                new Update(AmbulanceTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();*/
-                Log.d(TAG,PlaceName + TYPE+enabled);
+                ambulanceTable.save();
                 break;
             case Boss.TYPE_STRAY_DOGS:
                 select = new Select().from(StrayDogsTable.class).where("Number = ?", no);
                 StrayDogsTable s = StrayDogsTable.load(StrayDogsTable.class,select.executeSingle().getId());
                 s.enabled = enabled;
                 s.save();
-                /*
-                new Update(StrayDogsTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();*/
-                Log.d(TAG,PlaceName + TYPE);
                 break;
             case Boss.TYPE_SHISHUBAVAN:
                 select = new Select().from(JanasevaTable.class).where("Number = ?", no);
                 JanasevaTable j = JanasevaTable.load(JanasevaTable.class,select.executeSingle().getId());
                 j.enabled = enabled;
                 j.save();
-                /*
-                new Update(JanasevaTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();
-                        */
-                Log.d(TAG,PlaceName + TYPE+enabled);
                 break;
             case Boss.TYPE_CHILD_ABUSE:
                 select = new Select().from(ChildAbuseTable.class).where("Number = ?", no);
                 ChildAbuseTable c = ChildAbuseTable.load(ChildAbuseTable.class,select.executeSingle().getId());
                 c.enabled = enabled;
                 c.save();
-                /*
-                new Update(ChildAbuseTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();*/
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                /*
-                new Update(SexualAssaultTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .execute();
-                */break;
+                select = new Select().from(SexualAssaultTable.class).where("Number = ?", no);
+                SexualAssaultTable sx = SexualAssaultTable.load(SexualAssaultTable.class,select.executeSingle().getId());
+                sx.enabled = enabled;
+                sx.save();
+                break;
             case Boss.TYPE_POLICE:
                 select = new Select().from(PoliceTable.class).where("Number = ?", no);
                 PoliceTable p = PoliceTable.load(PoliceTable.class,select.executeSingle().getId());
                 p.enabled = enabled;
                 p.save();
-                /*new Update(PoliceTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();*/
-                Log.d(TAG,PlaceName + TYPE);
                 break;
             case Boss.TYPE_FIRETRUCK:
                 select = new Select().from(FireForceTable.class).where("Number = ?", no);
                 FireForceTable f = FireForceTable.load(FireForceTable.class,select.executeSingle().getId());
                 f.enabled = enabled;
                 f.save();
-                /*
-                new Update(FireForceTable.class)
-                        .set("Enabled = ?",enabled)
-                        .where("PlaceName = ?", PlaceName)
-                        .where("Number = ?",no)
-                        .execute();*/
                 break;
         }
     }

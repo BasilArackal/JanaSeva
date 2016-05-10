@@ -67,11 +67,14 @@ public class SelectNumbersActivity extends AppCompatActivity {
         }else {
             if (checkBox.isChecked()) {
                 checkBox.toggle();
-               //Toast.makeText(SelectNumbersActivity.this, "Only 5 Numbers can be selected" + list.length, Toast.LENGTH_SHORT).show();
-                Toast.makeText(SelectNumbersActivity.this, "Please Choose Any 5 Numbers!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectNumbersActivity.this, "Only 5 numbers can be chosen!", Toast.LENGTH_SHORT).show();
             }else{
-                MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),checkBox.isChecked());
-              //  Toast.makeText(SelectNumbersActivity.this, "ere" + list.length, Toast.LENGTH_SHORT).show();
+                if (list.length>1){
+                    MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),checkBox.isChecked());
+                }else {
+                    checkBox.toggle();
+                    Toast.makeText(SelectNumbersActivity.this, "Choose one number at least!", Toast.LENGTH_SHORT).show();
+                }
 
             }
         }
