@@ -8,5 +8,5 @@
     <string name="warn_before_sending_alert">Warn Before Sending Alert</string>
 
     //Change Version Here on every Release
-    <string name="app_version">1.5.1</string>
+    <string name="app_version">1.5.2</string>
 </resources>

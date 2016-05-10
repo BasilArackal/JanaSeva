@@ -19,11 +19,6 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //ActionBar actionBar = getSupportActionBar();
-        //assert actionBar!=null;
-        //actionBar.setDisplayHomeAsUpEnabled(true);
         radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
         callAndSms=(RadioButton)findViewById(R.id.callAndSmsRB);
         callonly=(RadioButton)findViewById(R.id.callOnlyRB);
@@ -46,7 +41,7 @@ public class Settings extends AppCompatActivity {
             if (selectedRB != null) {
                 selectedRB.setChecked(true);
             }
-        }else callAndSms.setChecked(true);
+        }else callonly.setChecked(true);
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
