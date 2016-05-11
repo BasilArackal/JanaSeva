@@ -2,6 +2,7 @@ package com.lmntrx.shishubavan;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 /***
  * Created by livin on 28/4/16.
@@ -16,6 +17,7 @@ public class UserPreferences {
     private static final String SHOW_SPLASH = "SHOW_SPLASH";
     private static final String CHILD_LOCK_ENABLED = "CHILD_LOCK_ENABLED";
     private static final String SAVED_PIN = "SAVED_PIN";
+    private static final String FIRST_OPEN_AFTER_UPDATE_1_5_3 = "FIRST_OPEN_AFTER_UPDATE_1_5_3";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
 
@@ -105,6 +107,27 @@ public class UserPreferences {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SAVED_PIN,newPin);
         editor.apply();
+    }
+
+    public static void clearAllPrefs(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_PIN,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().apply();
+        sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.clear().apply();
+    }
+
+    public static boolean isThisFirstOpenAfterUpdate1_5_3(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("Main_Prefs",Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(FIRST_OPEN_AFTER_UPDATE_1_5_3,true)){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(FIRST_OPEN_AFTER_UPDATE_1_5_3,false);
+            editor.apply();
+            return true;
+        }else {
+            return false;
+        }
     }
 
 

@@ -1,11 +1,14 @@
 package com.lmntrx.shishubavan;
 
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -78,9 +81,32 @@ public class Settings extends AppCompatActivity {
         assert childLockCB != null;
         if (childLockCB.isChecked()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Enter a PIN Number");
+            builder.setTitle("Enter a new PIN Number");
             final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            }
+            input.setMaxLines(1);
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length()>4)
+                        input.setText(s.subSequence(0,4));
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+            if (UserPreferences.getChildLockPin(this)!=null)
+                input.setText(UserPreferences.getChildLockPin(this));
             builder.setView(input);
             builder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
                 @Override
@@ -94,6 +120,7 @@ public class Settings extends AppCompatActivity {
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    childLockCB.toggle();
                     dialog.cancel();
                 }
             });
@@ -103,6 +130,27 @@ public class Settings extends AppCompatActivity {
             builder.setTitle("PIN");
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            }
+            input.setMaxLines(1);
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (s.length()>4)
+                        input.setText(s.subSequence(0,4));
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
             builder.setView(input);
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
@@ -111,12 +159,16 @@ public class Settings extends AppCompatActivity {
                     if (newPin.equals(UserPreferences.getChildLockPin(Settings.this))){
                         UserPreferences.setChildLock(Settings.this, childLockCB.isChecked());
                         Snackbar.make(childLockCB,"Disabled Child Lock",Snackbar.LENGTH_SHORT).show();
+                    }else {
+                        Snackbar.make(childLockCB,"Wrong PIN",Snackbar.LENGTH_SHORT).show();
+                        childLockCB.toggle();
                     }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    childLockCB.toggle();
                     dialog.cancel();
                 }
             });

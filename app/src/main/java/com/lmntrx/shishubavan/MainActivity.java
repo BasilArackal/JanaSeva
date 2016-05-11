@@ -38,8 +38,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (UserPreferences.isThisFirstOpenAfterUpdate1_5_3(this))
+            UserPreferences.clearAllPrefs(this);
+
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
-            UserPreferences.writeUserChoice(R.id.callAndSmsRB,this);
+            UserPreferences.writeUserChoice(R.id.callOnlyRB,this);
         }
 
         if (UserPreferences.getCurrentDBVersion(this)!=this.getResources().getInteger(R.integer.DATABASE_VERSION)){
@@ -50,7 +53,8 @@ public class MainActivity extends Activity {
 
         //Getting User Location
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location == null) {
                 location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
