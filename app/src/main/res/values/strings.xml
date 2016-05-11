@@ -8,7 +8,7 @@
     <string name="warn_before_sending_alert">Warn Before Sending Alert</string>
 
     //Change Version Here on every Release
-    <string name="app_version">1.5.2</string>
+    <string name="app_version">Version 2.0</string>
     <string name="title_activity_pin">Enter Pin</string>
     <string name="enter_your_four_digit_pin">Enter Your Four Digit Pin</string>
     <string name="enable_child_lock">Enable Child Lock</string>
