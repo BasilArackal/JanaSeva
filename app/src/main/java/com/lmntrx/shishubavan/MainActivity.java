@@ -31,7 +31,14 @@ public class MainActivity extends Activity {
 
     public static Boolean pinVerified = false;
 
-    View cardJanaseva, cardStrayDogs, cardPolice, cardAmbulance, cardFireForce, cardSexualAssault, cardCildAbuse;
+    View cardJanaseva,
+            cardStrayDogs,
+            cardPolice,
+            cardAmbulance,
+            cardFireForce,
+            cardSexualAssault,
+            cardCildAbuse,
+            cardCustomNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,7 @@ public class MainActivity extends Activity {
         cardPolice = findViewById(R.id.card_police);
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
+        cardCustomNumber = findViewById(R.id.card_custom);
 
         //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());

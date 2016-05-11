@@ -25,7 +25,14 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.lmntrx.shishubavan.DatabaseModels.PoliceTable,             com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable,             com.lmntrx.shishubavan.DatabaseModels.ChildAbuseTable,             com.lmntrx.shishubavan.DatabaseModels.FireForceTable,             com.lmntrx.shishubavan.DatabaseModels.JanasevaTable,             com.lmntrx.shishubavan.DatabaseModels.SexualAssaultTable, com.lmntrgit x.shishubavan.DatabaseModels.StrayDogsTable" />
+            android:value="com.lmntrx.shishubavan.DatabaseModels.PoliceTable,
+            com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable,
+            com.lmntrx.shishubavan.DatabaseModels.ChildAbuseTable,
+            com.lmntrx.shishubavan.DatabaseModels.FireForceTable,
+            com.lmntrx.shishubavan.DatabaseModels.JanasevaTable,
+            com.lmntrx.shishubavan.DatabaseModels.SexualAssaultTable,
+            com.lmntrx.shishubavan.DatabaseModels.StrayDogsTable,
+            com.lmntrx.shishubavan.DatabaseModels.CustomNumberTable" />
 
         <activity
             android:name=".MainActivity"
