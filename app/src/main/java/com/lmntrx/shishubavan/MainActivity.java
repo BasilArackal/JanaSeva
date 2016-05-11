@@ -4,9 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
@@ -36,6 +39,8 @@ public class MainActivity extends Activity {
             cardSexualAssault,
             cardChildAbuse,
             cardCustomNumber;
+
+    TextView customCallTXT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,7 @@ public class MainActivity extends Activity {
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
         cardCustomNumber = findViewById(R.id.card_custom);
+        customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 
         //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());
@@ -267,7 +273,7 @@ public class MainActivity extends Activity {
     }
 
     public void makeCustomCall(View view) {
-        Boss.customCall(this);
+        Boss.customCall(this,this,location);
     }
 
     private class onLongPress implements View.OnLongClickListener {
@@ -279,6 +285,27 @@ public class MainActivity extends Activity {
             MainActivity.this.startActivity(intent);
             return false;
         }
+    }
+
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        switch (reqCode) {
+            case (Boss.PICK_CONTACT_ID) :
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri contactData = data.getData();
+                    Cursor c =  managedQuery(contactData, null, null, null, null);
+                    startManagingCursor(c);
+                    if (c.moveToFirst()) {
+                        String name = c.getString(c.getColumnIndexOrThrow(Contacts.People.NAME));
+                        String number = c.getString(c.getColumnIndexOrThrow(Contacts.People.NUMBER));
+                        UserPreferences.saveCustomNumber(MainActivity.this,name+":"+number);
+                        customCallTXT.setText(name+"\n"+number);
+                    }
+                }
+                break;
+        }
+
     }
 
 }

@@ -18,6 +18,7 @@ import android.util.Log;
  */
 public class Boss {
 
+    public static final int PICK_CONTACT_ID = 12012;
     static String LogTag = "Janaseva->" + Boss.class.getSimpleName();
 
 
@@ -255,10 +256,60 @@ public class Boss {
         }
     }
 
-    public static void customCall(Context context) {
+    public static void customCall(Context context, Activity activity, Location location) {
         String number = UserPreferences.getCustomNumber(context);
-        if (number!=null){
+        String messageBody;
+        SmsManager smsMgr = SmsManager.getDefault();
 
+        if (number!=null){
+            if (UserPreferences.readUserChoice(context) == R.id.callAndSmsRB) {
+                //Calling
+                Log.i("Status", "call made");
+                Uri phNumber = Uri.parse("tel:" + number);
+                Intent callIntent = new Intent(Intent.ACTION_CALL, phNumber);
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    activity.startActivity(callIntent);
+                } else {
+                    Log.e(LogTag, "No Permission");
+                    ActivityCompat.requestPermissions(activity,
+                            new String[]{Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST_CALL_PHONE);
+                }
+
+                //Sending SMS
+                if (location!=null)
+                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                else
+                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.";
+
+                smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+            }else if (UserPreferences.readUserChoice(context) == R.id.callOnlyRB){
+                Log.i("Status", "call made");
+                Uri phNumber = Uri.parse("tel:" + number);
+                Intent callIntent = new Intent(Intent.ACTION_CALL, phNumber);
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    activity.startActivity(callIntent);
+                } else {
+                    Log.e(LogTag, "No Permission");
+                    ActivityCompat.requestPermissions(activity,
+                            new String[]{Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST_CALL_PHONE);
+                }
+            }else if (UserPreferences.readUserChoice(context) == R.id.smsOnlyRB){
+                if (location!=null)
+                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                else
+                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.";
+
+                smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+            }
+        }else{
+            try {
+                Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts/people"));
+                activity.startActivityForResult(intent, PICK_CONTACT_ID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
