@@ -7,18 +7,27 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.gsm.SmsManager;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /***
  * Created by livin on 28-Apr-16.
  */
 public class Boss {
 
-    public static final int PICK_CONTACT_ID = 12012;
     static String LogTag = "Janaseva->" + Boss.class.getSimpleName();
 
 
@@ -32,6 +41,8 @@ public class Boss {
     public static final int PERMISSIONS_REQUEST_CALL_PHONE = 51;
     public static final int PERMISSIONS_REQUEST_LOCATION_ACCESS = 52;
     public static final int PERMISSIONS_REQUEST_SEND_SMS = 53;
+
+    private static String chosenCustomNumber;
 
 
     public static void call_phone(String phoneNo[], Context ctx, Activity activity) {
@@ -85,17 +96,9 @@ public class Boss {
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), location, Boss.TYPE_FIRETRUCK, activity);
                     break;
-
-                default:
-                    callCustom(id);
-                    break;
             }
         }
 
-    }
-
-    private static void callCustom(int id) {
-        //TODO:Later
     }
 
     public static void warnUser(final int id, final Activity activity, final Location location) {
@@ -134,10 +137,6 @@ public class Boss {
                             case R.id.card_shishubavan:
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), location, Boss.TYPE_FIRETRUCK, activity);
-                                break;
-
-                            default:
-                                callCustom(id);
                                 break;
                         }
                     }
@@ -256,12 +255,12 @@ public class Boss {
         }
     }
 
-    public static void customCall(Context context, Activity activity, Location location) {
-        String number = UserPreferences.getCustomNumber(context);
+    public static void customCall(final Context context, Activity activity, Location location) {
+        final String number = UserPreferences.getCustomNumber(context);
         String messageBody;
         SmsManager smsMgr = SmsManager.getDefault();
 
-        if (number!=null){
+        if (!number.equals("0")){
             if (UserPreferences.readUserChoice(context) == R.id.callAndSmsRB) {
                 //Calling
                 Log.i("Status", "call made");
@@ -304,12 +303,37 @@ public class Boss {
                 Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
             }
         }else{
-            try {
-                Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts/people"));
-                activity.startActivityForResult(intent, PICK_CONTACT_ID);
-            } catch (Exception e) {
-                e.printStackTrace();
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+            builder.setTitle("Enter a number");
+            final EditText input = new EditText(context);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             }
+            input.setMaxLines(1);
+            input.setHint("Phone Number");
+            builder.setView(input);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    chosenCustomNumber = input.getText().toString();
+                    if (!chosenCustomNumber.isEmpty() && !chosenCustomNumber.equals("") && chosenCustomNumber.length()>=10){
+                        UserPreferences.saveCustomNumber(context,chosenCustomNumber);
+                        MainActivity.customCallTXT.setText(chosenCustomNumber);
+                    }else {
+                        Toast.makeText(context,"Please enter a valid number",Toast.LENGTH_SHORT).show();
+                        input.setText("");
+                    }
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+
         }
 
     }

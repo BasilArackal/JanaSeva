@@ -2,25 +2,35 @@ package com.lmntrx.shishubavan;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -40,7 +50,9 @@ public class MainActivity extends Activity {
             cardChildAbuse,
             cardCustomNumber;
 
-    TextView customCallTXT;
+    public static TextView customCallTXT;
+
+    String chosenCustomNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +99,9 @@ public class MainActivity extends Activity {
         cardCustomNumber = findViewById(R.id.card_custom);
         customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 
+        if (!UserPreferences.getCustomNumber(this).equals("0"))
+            customCallTXT.setText(UserPreferences.getCustomNumber(this));
+
         //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());
         cardSexualAssault.setOnLongClickListener(new onLongPress());
@@ -95,6 +110,44 @@ public class MainActivity extends Activity {
         cardFireForce.setOnLongClickListener(new onLongPress());
         cardChildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
+        cardCustomNumber.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
+                builder.setTitle("Enter a number");
+                final EditText input = new EditText(MainActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                }
+                input.setMaxLines(1);
+                input.setHint("Phone Number");
+                if (!UserPreferences.getCustomNumber(MainActivity.this).equals("0"))
+                    input.setText(UserPreferences.getCustomNumber(MainActivity.this));
+                builder.setView(input);
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        chosenCustomNumber = input.getText().toString();
+                        if (!chosenCustomNumber.isEmpty() && !chosenCustomNumber.equals("") && chosenCustomNumber.length()>=10){
+                            UserPreferences.saveCustomNumber(MainActivity.this,chosenCustomNumber);
+                            MainActivity.customCallTXT.setText(chosenCustomNumber);
+                        }else {
+                            Toast.makeText(MainActivity.this,"Please enter a valid number",Toast.LENGTH_SHORT).show();
+                            input.setText("");
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -286,26 +339,4 @@ public class MainActivity extends Activity {
             return false;
         }
     }
-
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-
-        switch (reqCode) {
-            case (Boss.PICK_CONTACT_ID) :
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri contactData = data.getData();
-                    Cursor c =  managedQuery(contactData, null, null, null, null);
-                    startManagingCursor(c);
-                    if (c.moveToFirst()) {
-                        String name = c.getString(c.getColumnIndexOrThrow(Contacts.People.NAME));
-                        String number = c.getString(c.getColumnIndexOrThrow(Contacts.People.NUMBER));
-                        UserPreferences.saveCustomNumber(MainActivity.this,name+":"+number);
-                        customCallTXT.setText(name+"\n"+number);
-                    }
-                }
-                break;
-        }
-
-    }
-
 }

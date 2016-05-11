@@ -100,7 +100,7 @@ public class UserPreferences {
 
     public static String getCustomNumber(Context ctx){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString(CUSTOM_NUMBER,null);
+        return sharedPreferences.getString(CUSTOM_NUMBER,"0");
     }
     public static void saveCustomNumber(Context ctx, String number ){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
