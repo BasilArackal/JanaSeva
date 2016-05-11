@@ -183,6 +183,7 @@ public class MainActivity extends Activity {
         int dp16 = dpToPx(16,view);
         int dp10 = dpToPx(10,view);
         int dp7 = dpToPx(7,view);
+        int dp4 = dpToPx(4,view);
 
         // Parameters for Card image
         RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(dp100,dp100);
@@ -233,7 +234,7 @@ public class MainActivity extends Activity {
         cardParams.setMargins(dp16,dp16,dp16,0);
         newCard.setLayoutParams(cardParams);
         newCard.setCardElevation(dp10);
-        newCard.setRadius(dp7);
+        newCard.setRadius(dp4);
         newCard.setPadding(dp16,dp16,0,0);
         newCard.addView(cardDetails);
 
