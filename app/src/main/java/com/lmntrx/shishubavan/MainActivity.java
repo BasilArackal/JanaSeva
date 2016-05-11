@@ -261,6 +261,10 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+    public void makeCustomCall(View view) {
+        Boss.customCall(this);
+    }
+
     private class onLongPress implements View.OnLongClickListener {
 
         @Override
