@@ -67,13 +67,15 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/police_subtext"
                 android:layout_toRightOf="@+id/police_image"
                 android:layout_below="@+id/police_text"
                 />
+
+
 
         </RelativeLayout>
 
@@ -125,7 +127,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ambulance_subtext"
@@ -180,7 +182,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/firetruck_subtext"
@@ -235,7 +237,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/childAbuse_subtext"
@@ -291,7 +293,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/animalAbuse_subtext"
@@ -346,7 +348,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/sexualAbuse_subtext"
@@ -401,7 +403,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/_subtext"
