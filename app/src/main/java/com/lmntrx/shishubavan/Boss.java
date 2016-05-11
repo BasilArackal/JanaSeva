@@ -254,4 +254,8 @@ public class Boss {
             }
         }
     }
+
+    public static void customCall(Context context) {
+
+    }
 }

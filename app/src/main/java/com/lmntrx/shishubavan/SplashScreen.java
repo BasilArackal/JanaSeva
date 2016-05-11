@@ -15,10 +15,13 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("My pref",MODE_PRIVATE);
+        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("My prefs",MODE_PRIVATE);
         final SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putBoolean("visited",false);
-        if(!sharedPreferences.getBoolean("visited",false)) {
+        if (getResources().getBoolean(R.bool.SHOW_SPLASH) && UserPreferences.shouldShowSplash(this))
+            UserPreferences.setShouldShowSplash(this,true);
+        if(!sharedPreferences.getBoolean("visited",false) || (UserPreferences.shouldShowSplash(this))) {
+            UserPreferences.setShouldShowSplash(this,false);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

@@ -29,6 +29,8 @@ public class MainActivity extends Activity {
 
     View v = null;
 
+    public static Boolean pinVerified = false;
+
     View cardJanaseva, cardStrayDogs, cardPolice, cardAmbulance, cardFireForce, cardSexualAssault, cardCildAbuse;
 
     @Override
@@ -36,8 +38,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (UserPreferences.isThisFirstOpenAfterUpdate1_5_3(this))
+            UserPreferences.clearAllPrefs(this);
+
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
-            UserPreferences.writeUserChoice(R.id.callAndSmsRB,this);
+            UserPreferences.writeUserChoice(R.id.callOnlyRB,this);
         }
 
         if (UserPreferences.getCurrentDBVersion(this)!=this.getResources().getInteger(R.integer.DATABASE_VERSION)){
@@ -48,7 +53,8 @@ public class MainActivity extends Activity {
 
         //Getting User Location
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location == null) {
                 location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -78,6 +84,17 @@ public class MainActivity extends Activity {
         cardFireForce.setOnLongClickListener(new onLongPress());
         cardCildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
+    }
+
+    @Override
+    protected void onResume() {
+        if (UserPreferences.isChildLockEnabled(MainActivity.this) && !pinVerified){
+            startActivity(new Intent(MainActivity.this,Pin.class));
+            pinVerified = true;
+            MainActivity.this.finish();
+        }
+
+        super.onResume();
     }
 
     @Override
@@ -242,6 +259,10 @@ public class MainActivity extends Activity {
     {
         Intent i=new Intent(getApplicationContext(),About.class);
         startActivity(i);
+    }
+
+    public void makeCustomCall(View view) {
+        Boss.customCall(this);
     }
 
     private class onLongPress implements View.OnLongClickListener {

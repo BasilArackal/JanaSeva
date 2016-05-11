@@ -31,7 +31,7 @@ public class NumbersListAdaptor extends ArrayAdapter<NumbersListModel> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.numbers_list_item, parent, false);
         }
-
+            list = MotherOfDatabases.getAllPlaces(TYPE);
             NumbersListModel item = list.get(position);
             String placeName = item.getPlace();
             String number = item.getNumber();
