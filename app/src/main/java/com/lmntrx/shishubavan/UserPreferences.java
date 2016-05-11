@@ -17,6 +17,7 @@ public class UserPreferences {
     private static final String SHOW_SPLASH = "SHOW_SPLASH";
     private static final String CHILD_LOCK_ENABLED = "CHILD_LOCK_ENABLED";
     private static final String SAVED_PIN = "SAVED_PIN";
+    private static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
     private static final String FIRST_OPEN_AFTER_UPDATE_1_5_3 = "FIRST_OPEN_AFTER_UPDATE_1_5_3";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
@@ -94,6 +95,17 @@ public class UserPreferences {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_PIN,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(CHILD_LOCK_ENABLED,enabled);
+        editor.apply();
+    }
+
+    public static String getCustomNumber(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(CUSTOM_NUMBER,null);
+    }
+    public static void saveCustomNumber(Context ctx, String number ){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CUSTOM_NUMBER,number);
         editor.apply();
     }
 

@@ -19,9 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
-import com.lmntrx.shishubavan.DatabaseModels.PoliceTable;
-
 public class MainActivity extends Activity {
 
     Location location;
@@ -37,7 +34,7 @@ public class MainActivity extends Activity {
             cardAmbulance,
             cardFireForce,
             cardSexualAssault,
-            cardCildAbuse,
+            cardChildAbuse,
             cardCustomNumber;
 
     @Override
@@ -76,7 +73,7 @@ public class MainActivity extends Activity {
 
         //Initializing card variables
         cardAmbulance = findViewById(R.id.card_ambulance);
-        cardCildAbuse = findViewById(R.id.card_childAbuse);
+        cardChildAbuse = findViewById(R.id.card_childAbuse);
         cardFireForce = findViewById(R.id.card_firetruck);
         cardJanaseva = findViewById(R.id.card_shishubavan);
         cardPolice = findViewById(R.id.card_police);
@@ -90,7 +87,7 @@ public class MainActivity extends Activity {
         cardPolice.setOnLongClickListener(new onLongPress());
         cardAmbulance.setOnLongClickListener(new onLongPress());
         cardFireForce.setOnLongClickListener(new onLongPress());
-        cardCildAbuse.setOnLongClickListener(new onLongPress());
+        cardChildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
     }
 
@@ -148,12 +145,12 @@ public class MainActivity extends Activity {
 
 
 
-
+/*
     public void addButton(final View view) {
 
 
 
-        /*  // Grid View Items
+        *//*  // Grid View Items
         //params.setMargins(left, top, right, bottom);
         GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
         CardView newCard = new CardView(this);
@@ -171,7 +168,7 @@ public class MainActivity extends Activity {
 
         gridLayout.addView(newCard);
 
-        */
+        *//*
 
         // Declarations
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.LinearLayoutForAllCards);
@@ -250,7 +247,7 @@ public class MainActivity extends Activity {
     public int dpToPx(int dp,View view) {
         DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
+    }*/
 
     public void makeCall(View view) {
         v=view;

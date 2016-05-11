@@ -256,6 +256,10 @@ public class Boss {
     }
 
     public static void customCall(Context context) {
+        String number = UserPreferences.getCustomNumber(context);
+        if (number!=null){
+
+        }
 
     }
 }
