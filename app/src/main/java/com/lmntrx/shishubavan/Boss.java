@@ -319,7 +319,7 @@ public class Boss {
                     chosenCustomNumber = input.getText().toString();
                     if (!chosenCustomNumber.isEmpty() && !chosenCustomNumber.equals("") && chosenCustomNumber.length()>=10){
                         UserPreferences.saveCustomNumber(context,chosenCustomNumber);
-                        MainActivity.customCallTXT.setText(chosenCustomNumber);
+                        MainActivity.customCallTXT.setText(String.format("Call: %s\nPress and hold to edit number.", chosenCustomNumber));
                     }else {
                         Toast.makeText(context,"Please enter a valid number",Toast.LENGTH_SHORT).show();
                         input.setText("");

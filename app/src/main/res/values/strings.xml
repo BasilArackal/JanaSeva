@@ -17,4 +17,6 @@
     <string name="long_press_each_card_to_edit_call_center_locations">Long press each card to edit call center locations</string>
     <string name="add_warning">Add Warning</string>
     <string name="call_and_sms_settings">Call And SMS Settings</string>
+
+    <string name="card_subtext">One Click To Call Center! Press and hold to edit numbers.</string>
 </resources>

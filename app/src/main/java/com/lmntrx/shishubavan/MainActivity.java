@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
         customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 
         if (!UserPreferences.getCustomNumber(this).equals("0"))
-            customCallTXT.setText(UserPreferences.getCustomNumber(this));
+            customCallTXT.setText(String.format("Call: %s\nPress and hold to edit number.", UserPreferences.getCustomNumber(this)));
 
         //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
                         chosenCustomNumber = input.getText().toString();
                         if (!chosenCustomNumber.isEmpty() && !chosenCustomNumber.equals("") && chosenCustomNumber.length()>=10){
                             UserPreferences.saveCustomNumber(MainActivity.this,chosenCustomNumber);
-                            MainActivity.customCallTXT.setText(chosenCustomNumber);
+                            customCallTXT.setText(String.format("Call: %s\nPress and hold to edit number.", chosenCustomNumber));
                         }else {
                             Toast.makeText(MainActivity.this,"Please enter a valid number",Toast.LENGTH_SHORT).show();
                             input.setText("");
@@ -242,6 +242,7 @@ public class MainActivity extends Activity {
         int dp16 = dpToPx(16,view);
         int dp10 = dpToPx(10,view);
         int dp7 = dpToPx(7,view);
+        int dp4 = dpToPx(4,view);
 
         // Parameters for Card image
         RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(dp100,dp100);
@@ -292,7 +293,7 @@ public class MainActivity extends Activity {
         cardParams.setMargins(dp16,dp16,dp16,0);
         newCard.setLayoutParams(cardParams);
         newCard.setCardElevation(dp10);
-        newCard.setRadius(dp7);
+        newCard.setRadius(dp4);
         newCard.setPadding(dp16,dp16,0,0);
         newCard.addView(cardDetails);
 
@@ -326,7 +327,24 @@ public class MainActivity extends Activity {
     }
 
     public void makeCustomCall(View view) {
-        Boss.customCall(this,this,location);
+        if (UserPreferences.isWarningOn(this)){
+            new android.app.AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Warning")
+                    .setMessage("Your action sends your number and location to authorities. Prank calls are punishable!\nDo you still want to make an alert?\nNB: This warning can be turned off in settings")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Boss.customCall(MainActivity.this,MainActivity.this,location);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }else
+            Boss.customCall(this,this,location);
     }
 
     private class onLongPress implements View.OnLongClickListener {
