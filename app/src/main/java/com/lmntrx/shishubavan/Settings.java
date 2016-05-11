@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import android.widget.RadioGroup;
 public class Settings extends AppCompatActivity {
 
     RadioGroup radioGroup;
-    RadioButton callAndSms, callonly, smsOnly;
+    RadioButton callAndSms, callOnly, smsOnly;
     CheckBox warningOnStatus;
     String newPin;
     CheckBox childLockCB;
@@ -30,7 +31,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
         callAndSms=(RadioButton)findViewById(R.id.callAndSmsRB);
-        callonly=(RadioButton)findViewById(R.id.callOnlyRB);
+        callOnly =(RadioButton)findViewById(R.id.callOnlyRB);
         smsOnly=(RadioButton)findViewById(R.id.smsOnlyRB);
         warningOnStatus=(CheckBox) findViewById(R.id.warningCB);
         childLockCB = (CheckBox)findViewById(R.id.childLockCB);
@@ -53,7 +54,7 @@ public class Settings extends AppCompatActivity {
             if (selectedRB != null) {
                 selectedRB.setChecked(true);
             }
-        }else callonly.setChecked(true);
+        }else callOnly.setChecked(true);
 
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -65,7 +66,7 @@ public class Settings extends AppCompatActivity {
                         UserPreferences.writeUserChoice(R.id.callAndSmsRB,Settings.this);
                         break;
                     case R.id.callOnlyRB:
-                        if (callonly.isChecked())
+                        if (callOnly.isChecked())
                             UserPreferences.writeUserChoice(R.id.callOnlyRB,Settings.this);
                         break;
                     case R.id.smsOnlyRB:
@@ -98,6 +99,7 @@ public class Settings extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     if (s.length()>4)
                         input.setText(s.subSequence(0,4));
+                        input.setSelection(input.getText().length());
                 }
 
                 @Override
@@ -142,8 +144,11 @@ public class Settings extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (s.length()>4)
+                    if (s.length()>4){
                         input.setText(s.subSequence(0,4));
+                        input.setSelection(input.getText().length());
+                        input.startAnimation(AnimationUtils.loadAnimation(Settings.this,R.anim.shake));
+                    }
                 }
 
                 @Override
