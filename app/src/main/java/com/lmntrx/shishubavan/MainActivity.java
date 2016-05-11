@@ -29,6 +29,8 @@ public class MainActivity extends Activity {
 
     View v = null;
 
+    public static Boolean pinVerified = false;
+
     View cardJanaseva, cardStrayDogs, cardPolice, cardAmbulance, cardFireForce, cardSexualAssault, cardCildAbuse;
 
     @Override
@@ -78,6 +80,17 @@ public class MainActivity extends Activity {
         cardFireForce.setOnLongClickListener(new onLongPress());
         cardCildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
+    }
+
+    @Override
+    protected void onResume() {
+        if (UserPreferences.isChildLockEnabled(MainActivity.this) && !pinVerified){
+            startActivity(new Intent(MainActivity.this,Pin.class));
+            pinVerified = true;
+            MainActivity.this.finish();
+        }
+
+        super.onResume();
     }
 
     @Override

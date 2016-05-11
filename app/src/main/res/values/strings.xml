@@ -9,4 +9,12 @@
 
     //Change Version Here on every Release
     <string name="app_version">1.5.2</string>
+    <string name="title_activity_pin">Enter Pin</string>
+    <string name="enter_your_four_digit_pin">Enter Your Four Digit Pin</string>
+    <string name="enable_child_lock">Enable Child Lock</string>
+    <string name="child_lock">Child Lock</string>
+    <string name="call_center_settings">Call Center Settings</string>
+    <string name="long_press_each_card_to_edit_call_center_locations">Long press each card to edit call center locations</string>
+    <string name="add_warning">Add Warning</string>
+    <string name="call_and_sms_settings">Call And SMS Settings</string>
 </resources>

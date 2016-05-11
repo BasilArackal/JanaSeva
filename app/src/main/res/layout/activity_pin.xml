@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/splash"
+    tools:context="com.lmntrx.shishubavan.Pin">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:ems="10"
+        android:id="@+id/pinEntry"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="144dp"
+        tools:ignore="UnusedAttribute"
+        android:textColor="@color/bright_foreground_material_dark"
+        android:numeric="decimal"
+        android:maxLines="1"
+        android:maxLength="4"
+        android:minLines="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/enter_your_four_digit_pin"
+        android:id="@+id/textView2"
+        android:layout_marginTop="123dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:labelFor="@id/pinEntry"
+        android:textColor="@color/bright_foreground_material_dark"
+        tools:ignore="PrivateResource" />
+</RelativeLayout>
