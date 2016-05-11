@@ -456,7 +456,7 @@
                 />
 
             <TextView
-                android:text="Add your number."
+                android:text="Add a custom number for emergency call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/custom_card_subtext"
