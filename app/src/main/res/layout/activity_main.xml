@@ -439,14 +439,14 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/custom_card_image"
-                android:src="@drawable/iconnew_janaseva"
+                android:src="@drawable/iconnew_custom"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
 
             <TextView
-                android:text="Sisubhavan\nശിശുഭവൻ  "
+                android:text="Custom Call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/custom_card_text"
@@ -456,7 +456,7 @@
                 />
 
             <TextView
-                android:text="One Click To Call Center!"
+                android:text="Add your number."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/custom_card_subtext"
