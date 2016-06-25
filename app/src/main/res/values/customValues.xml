@@ -8,6 +8,9 @@
     <integer name="ca_array_size">11</integer>
     <integer name="js_array_size">4</integer>
     <integer name="st_array_size">4</integer>
-    <integer name="DATABASE_VERSION">2</integer>
+    <integer name="ex_array_size">16</integer>
+    <integer name="cu_array_size">4</integer>
+    <integer name="bb_array_size">7</integer>
+    <integer name="DATABASE_VERSION">3</integer>
     <bool name="SHOW_SPLASH">true</bool>
 </resources>

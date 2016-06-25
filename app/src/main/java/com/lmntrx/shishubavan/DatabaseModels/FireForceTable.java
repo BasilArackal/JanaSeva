@@ -13,8 +13,6 @@ public class FireForceTable extends Model {
     @Column(name = "PlaceName")
     public String placeName;
 
-
-
     @Column(name = "Number")
     public String number;
 

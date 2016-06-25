@@ -48,7 +48,10 @@ public class MainActivity extends Activity {
             cardFireForce,
             cardSexualAssault,
             cardChildAbuse,
-            cardCustomNumber;
+            cardCustomNumber,
+            cardCustoms,
+            cardExcise,
+            cardBloodBanks;
 
     public static TextView customCallTXT;
 
@@ -59,8 +62,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (UserPreferences.isThisFirstOpenAfterUpdate1_5_3(this))
+        if (UserPreferences.isThisFirstOpenAfterUpdate_2_1(this)){
             UserPreferences.clearAllPrefs(this);
+            MotherOfDatabases.deleteOldDB();
+            MotherOfDatabases.populateDB(this);
+            UserPreferences.updateDBVersion(this,getResources().getInteger(R.integer.DATABASE_VERSION));
+        }
 
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
             UserPreferences.writeUserChoice(R.id.callOnlyRB,this);
@@ -97,6 +104,9 @@ public class MainActivity extends Activity {
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
         cardCustomNumber = findViewById(R.id.card_custom);
+        cardCustoms = findViewById(R.id.card_customs);
+        cardExcise = findViewById(R.id.card_drugs);
+        cardBloodBanks = findViewById(R.id.card_blood_bank);
         customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 
         if (!UserPreferences.getCustomNumber(this).equals("0"))
@@ -110,6 +120,9 @@ public class MainActivity extends Activity {
         cardFireForce.setOnLongClickListener(new onLongPress());
         cardChildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
+        cardBloodBanks.setOnLongClickListener(new onLongPress());
+        cardCustoms.setOnLongClickListener(new onLongPress());
+        cardExcise.setOnLongClickListener(new onLongPress());
         cardCustomNumber.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

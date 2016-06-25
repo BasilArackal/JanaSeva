@@ -4,15 +4,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.Model;
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
-import com.activeandroid.query.Update;
 import com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable;
+import com.lmntrx.shishubavan.DatabaseModels.BloodBanksTable;
 import com.lmntrx.shishubavan.DatabaseModels.ChildAbuseTable;
+import com.lmntrx.shishubavan.DatabaseModels.CustomsTable;
+import com.lmntrx.shishubavan.DatabaseModels.ExciseTable;
 import com.lmntrx.shishubavan.DatabaseModels.FireForceTable;
 import com.lmntrx.shishubavan.DatabaseModels.JanasevaTable;
 import com.lmntrx.shishubavan.DatabaseModels.PoliceTable;
@@ -74,6 +74,18 @@ public class MotherOfDatabases {
                 phoneNo = new String[ctx.getResources().getInteger(R.integer.js_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
                 break;
+            case Boss.TYPE_CUSTOMS:
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.customs)));
+                break;
+            case Boss.TYPE_EXCISE:
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.ex_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.excise)));
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.bb_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.bloodbanks)));
+                break;
         }
             String line;
             try {
@@ -132,6 +144,18 @@ public class MotherOfDatabases {
             case Boss.TYPE_SHISHUBAVAN:
                 places = new String[ctx.getResources().getInteger(R.integer.js_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
+                break;
+            case Boss.TYPE_CUSTOMS:
+                places = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.customs)));
+                break;
+            case Boss.TYPE_EXCISE:
+                places= new String[ctx.getResources().getInteger(R.integer.ex_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.excise)));
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                places = new String[ctx.getResources().getInteger(R.integer.bb_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.bloodbanks)));
                 break;
         }
         String line;
@@ -281,6 +305,58 @@ public class MotherOfDatabases {
         finally {
             ActiveAndroid.endTransaction();
         }
+        /*//CUSTOMS
+        nos=getPhoneNumbersOf(Boss.TYPE_CUSTOMS,ctx);
+        places=placeNamesOf(Boss.TYPE_CUSTOMS,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                CustomsTable item = new CustomsTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }*/
+        //EXCISE
+        nos=getPhoneNumbersOf(Boss.TYPE_EXCISE,ctx);
+        places=placeNamesOf(Boss.TYPE_EXCISE,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                ExciseTable item = new ExciseTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //BLOOD_BANKS
+        nos=getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS,ctx);
+        places=placeNamesOf(Boss.TYPE_BLOOD_BANKS,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                BloodBanksTable item = new BloodBanksTable(places[i],nos[i],enabled);
+                Log.d("TEST",places[i]);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
     }
 
     private static List getEnabledControlRooms(String TYPE){
@@ -335,6 +411,27 @@ public class MotherOfDatabases {
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
+            case Boss.TYPE_CUSTOMS:
+                list = new Select()
+                        .from(CustomsTable.class)
+                        .where("Enabled = ?", true)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_EXCISE:
+                list = new Select()
+                        .from(ExciseTable.class)
+                        .where("Enabled = ?", true)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                list = new Select()
+                        .from(BloodBanksTable.class)
+                        .where("Enabled = ?", true)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
         }
 
         return list;
@@ -382,6 +479,24 @@ public class MotherOfDatabases {
             case Boss.TYPE_SHISHUBAVAN:
                 list = new Select()
                         .from(JanasevaTable.class)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_CUSTOMS:
+                list = new Select()
+                        .from(CustomsTable.class)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_EXCISE:
+                list = new Select()
+                        .from(ExciseTable.class)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                list = new Select()
+                        .from(BloodBanksTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
@@ -445,6 +560,30 @@ public class MotherOfDatabases {
             case Boss.TYPE_FIRETRUCK:
                 for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.number;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_CUSTOMS:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.number;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_EXCISE:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    ExciseTable policeTable = (ExciseTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.number;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
                     else j--;
@@ -514,6 +653,30 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
+            case Boss.TYPE_CUSTOMS:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.placeName;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_EXCISE:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    ExciseTable policeTable = (ExciseTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.placeName;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.placeName;
+                    else j--;
+                }
+                break;
         }
         return nos;
     }
@@ -578,6 +741,30 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
+            case Boss.TYPE_CUSTOMS:
+                for (int i = 0, j = 0; i < list.size() ; i++, j++) {
+                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    if (list.get(i)!=null)
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_EXCISE:
+                for (int i = 0, j = 0; i < list.size() ; i++, j++) {
+                    ExciseTable policeTable = (ExciseTable) list.get(i);
+                    if (list.get(i)!=null)
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                for (int i = 0, j = 0; i < list.size() ; i++, j++) {
+                    BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
+                    if (list.get(i)!=null)
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
+                    else j--;
+                }
+                break;
         }
         return arrayList;
     }
@@ -627,6 +814,25 @@ public class MotherOfDatabases {
                 FireForceTable f = FireForceTable.load(FireForceTable.class,select.executeSingle().getId());
                 f.enabled = enabled;
                 f.save();
+                break;
+
+            case Boss.TYPE_CUSTOMS:
+                select = new Select().from(CustomsTable.class).where("Number = ?", no);
+                CustomsTable cu = CustomsTable.load(CustomsTable.class,select.executeSingle().getId());
+                cu.enabled = enabled;
+                cu.save();
+                break;
+            case Boss.TYPE_EXCISE:
+                select = new Select().from(ExciseTable.class).where("Number = ?", no);
+                ExciseTable ex = ExciseTable.load(ExciseTable.class,select.executeSingle().getId());
+                ex.enabled = enabled;
+                ex.save();
+                break;
+            case Boss.TYPE_BLOOD_BANKS:
+                select = new Select().from(BloodBanksTable.class).where("Number = ?", no);
+                BloodBanksTable b = BloodBanksTable.load(BloodBanksTable.class,select.executeSingle().getId());
+                b.enabled = enabled;
+                b.save();
                 break;
         }
     }

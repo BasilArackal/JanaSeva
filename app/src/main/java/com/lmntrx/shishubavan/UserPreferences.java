@@ -11,14 +11,14 @@ import android.widget.Toast;
 public class UserPreferences {
 
     private static final String USER_CHOICE = "USER_CHOICE";
-    private static final String FIRST_OPEN = "FIRST_OPEN";
+    private static final String FIRST_OPEN = "FIRST_OPEN_AFTER_UPDATE";
     private static final String IS_WARNING_ON = "IS_WARNING_ON";
     private static final String DATABASE_VERSION = "DATABASE_VERSION";
     private static final String SHOW_SPLASH = "SHOW_SPLASH";
     private static final String CHILD_LOCK_ENABLED = "CHILD_LOCK_ENABLED";
     private static final String SAVED_PIN = "SAVED_PIN";
     private static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
-    private static final String FIRST_OPEN_AFTER_UPDATE_1_5_3 = "FIRST_OPEN_AFTER_UPDATE_1_5_3";
+    private static final String FIRST_OPEN_AFTER_UPDATE_2_1 = "FIRST_OPEN_AFTER_UPDATE_2_1";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
 
@@ -130,11 +130,11 @@ public class UserPreferences {
         editor.clear().apply();
     }
 
-    public static boolean isThisFirstOpenAfterUpdate1_5_3(Context ctx){
+    public static boolean isThisFirstOpenAfterUpdate_2_1(Context ctx){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("Main_Prefs",Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(FIRST_OPEN_AFTER_UPDATE_1_5_3,true)){
+        if (sharedPreferences.getBoolean(FIRST_OPEN_AFTER_UPDATE_2_1,true)){
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(FIRST_OPEN_AFTER_UPDATE_1_5_3,false);
+            editor.putBoolean(FIRST_OPEN_AFTER_UPDATE_2_1,false);
             editor.apply();
             return true;
         }else {

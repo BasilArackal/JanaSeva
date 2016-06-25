@@ -51,6 +51,19 @@ public class SelectNumbersActivity extends AppCompatActivity {
                 TYPE = Boss.TYPE_SHISHUBAVAN;
                 actionBar.setTitle("Janaseva Sisubhavan");
                 break;
+
+            case R.id.card_customs:
+                TYPE = Boss.TYPE_SHISHUBAVAN;
+                actionBar.setTitle("Customs Control Rooms");
+                break;
+            case R.id.card_drugs:
+                TYPE = Boss.TYPE_EXCISE;
+                actionBar.setTitle("Excise");
+                break;
+            case R.id.card_blood_bank:
+                TYPE = Boss.TYPE_BLOOD_BANKS;
+                actionBar.setTitle("Blood Banks");
+                break;
         }
         if (TYPE!=null)
             arrayList = MotherOfDatabases.getAllPlaces(TYPE);
