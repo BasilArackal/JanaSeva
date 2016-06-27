@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="police">100</string>
-    <string name="excise">9447178000</string>
-    <string name="highway_police">9846100100</string>
-    <string name="women_helpline">1091</string>
-    <string name="ambulance">108</string>
-    <string name="fire_force">101</string>
-    <string name="child_helpline">1098</string>
-    <string name="blood_bank">1910</string>
-    <string name="railway_alert">9846200100</string>
-    <string name="vigilance">8592900900</string>
-    <string name="shishubavan">96333661101</string>
+    <string name="police_default_number">100</string>
+    <string name="excise_default_number">9447178000</string>
+    <string name="highway_police_default_number">9846100100</string>
+    <string name="women_helpline_default_number">1091</string>
+    <string name="ambulance_default_number">108</string>
+    <string name="fire_force_default_number">101</string>
+    <string name="child_helpline_default_number">1098</string>
+    <string name="blood_bank_default_number">1910</string>
+    <string name="railway_alert_default_number">9846200100</string>
+    <string name="vigilance_default_number">8592900900</string>
+    <string name="shishubavan_default_number">96333661101</string>
     
     
 </resources>

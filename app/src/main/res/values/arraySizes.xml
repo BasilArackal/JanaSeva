@@ -9,10 +9,10 @@
     <integer name="js_array_size">5</integer>
     <integer name="st_array_size">5</integer>
     <integer name="ex_array_size">16</integer>
-    <integer name="cu_array_size">4</integer>
+    <integer name="vi_array_size">6</integer>
     <integer name="bb_array_size">7</integer>
-    <integer name="hp_array_size">1</integer>
-    <integer name="ra_array_size">3</integer>
+    <integer name="hp_array_size">42</integer>
+    <integer name="ra_array_size">0</integer>
     <integer name="DATABASE_VERSION">4</integer>
     <bool name="SHOW_SPLASH">true</bool>
 </resources>

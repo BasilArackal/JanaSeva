@@ -7,7 +7,7 @@ import com.activeandroid.annotation.Table;
 /***
  * Created by livin on 24/6/16.
  */
-@Table(name = "BloodBanks")
+@Table(name = "BloodBanksTable")
 public class BloodBanksTable extends Model {
     @Column(name = "PlaceName")
     public String placeName;

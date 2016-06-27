@@ -77,7 +77,7 @@ public class MotherOfDatabases {
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
                 break;
             case Boss.TYPE_VIGILANCE:
-                phoneNo = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.vi_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.vigilance)));
                 break;
             case Boss.TYPE_EXCISE:
@@ -100,7 +100,7 @@ public class MotherOfDatabases {
             String line;
             try {
                 assert reader != null;
-                while ((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null && phoneNo.length>0){
                     phoneNo[i] = line.substring(0,line.indexOf(";"));
                     i++;
                 }
@@ -156,7 +156,7 @@ public class MotherOfDatabases {
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
                 break;
             case Boss.TYPE_VIGILANCE:
-                places = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
+                places = new String[ctx.getResources().getInteger(R.integer.vi_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.vigilance)));
                 break;
             case Boss.TYPE_EXCISE:
@@ -772,6 +772,22 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
+            case Boss.TYPE_HIGHWAY:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    HighwayPoliceTable policeTable = (HighwayPoliceTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.placeName;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_RAILWAY:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    RailwayPoliceTable policeTable = (RailwayPoliceTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.placeName;
+                    else j--;
+                }
+                break;
         }
         return nos;
     }
@@ -944,6 +960,18 @@ public class MotherOfDatabases {
                 BloodBanksTable b = BloodBanksTable.load(BloodBanksTable.class,select.executeSingle().getId());
                 b.enabled = enabled;
                 b.save();
+                break;
+            case Boss.TYPE_HIGHWAY:
+                select = new Select().from(HighwayPoliceTable.class).where("Number = ?", no);
+                HighwayPoliceTable hp = HighwayPoliceTable.load(HighwayPoliceTable.class,select.executeSingle().getId());
+                hp.enabled = enabled;
+                hp.save();
+                break;
+            case Boss.TYPE_RAILWAY:
+                select = new Select().from(RailwayPoliceTable.class).where("Number = ?", no);
+                RailwayPoliceTable rp = RailwayPoliceTable.load(RailwayPoliceTable.class,select.executeSingle().getId());
+                rp.enabled = enabled;
+                rp.save();
                 break;
         }
     }
