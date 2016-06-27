@@ -35,7 +35,9 @@
             com.lmntrx.shishubavan.DatabaseModels.CustomNumberTable
             com.lmntrx.shishubavan.DatabaseModels.CustomsTable,
             com.lmntrx.shishubavan.DatabaseModels.ExciseTable,
-            com.lmntrx.shishubavan.DatabaseModels.BloodBanksTable" />
+            com.lmntrx.shishubavan.DatabaseModels.BloodBanksTable
+            com.lmntrx.shishubavan.DatabaseModels.HighwayPoliceTable,
+            com.lmntrx.shishubavan.DatabaseModels.RailwayPoliceTable" />
 
         <activity
             android:name=".MainActivity"

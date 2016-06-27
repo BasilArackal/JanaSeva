@@ -11,7 +11,9 @@ import com.activeandroid.query.Select;
 import com.lmntrx.shishubavan.DatabaseModels.AmbulanceTable;
 import com.lmntrx.shishubavan.DatabaseModels.BloodBanksTable;
 import com.lmntrx.shishubavan.DatabaseModels.ChildAbuseTable;
-import com.lmntrx.shishubavan.DatabaseModels.CustomsTable;
+import com.lmntrx.shishubavan.DatabaseModels.HighwayPoliceTable;
+import com.lmntrx.shishubavan.DatabaseModels.RailwayPoliceTable;
+import com.lmntrx.shishubavan.DatabaseModels.VigilanceTable;
 import com.lmntrx.shishubavan.DatabaseModels.ExciseTable;
 import com.lmntrx.shishubavan.DatabaseModels.FireForceTable;
 import com.lmntrx.shishubavan.DatabaseModels.JanasevaTable;
@@ -74,9 +76,9 @@ public class MotherOfDatabases {
                 phoneNo = new String[ctx.getResources().getInteger(R.integer.js_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 phoneNo = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
-                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.customs)));
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.vigilance)));
                 break;
             case Boss.TYPE_EXCISE:
                 phoneNo = new String[ctx.getResources().getInteger(R.integer.ex_array_size)];
@@ -85,6 +87,14 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 phoneNo = new String[ctx.getResources().getInteger(R.integer.bb_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.bloodbanks)));
+                break;
+            case Boss.TYPE_HIGHWAY:
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.hp_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.highway)));
+                break;
+            case Boss.TYPE_RAILWAY:
+                phoneNo = new String[ctx.getResources().getInteger(R.integer.ra_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.railway)));
                 break;
         }
             String line;
@@ -145,9 +155,9 @@ public class MotherOfDatabases {
                 places = new String[ctx.getResources().getInteger(R.integer.js_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.shishubavan)));
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 places = new String[ctx.getResources().getInteger(R.integer.cu_array_size)];
-                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.customs)));
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.vigilance)));
                 break;
             case Boss.TYPE_EXCISE:
                 places= new String[ctx.getResources().getInteger(R.integer.ex_array_size)];
@@ -156,6 +166,14 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 places = new String[ctx.getResources().getInteger(R.integer.bb_array_size)];
                 reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.bloodbanks)));
+                break;
+            case Boss.TYPE_HIGHWAY:
+                places= new String[ctx.getResources().getInteger(R.integer.hp_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.highway)));
+                break;
+            case Boss.TYPE_RAILWAY:
+                places = new String[ctx.getResources().getInteger(R.integer.ra_array_size)];
+                reader = new BufferedReader(new InputStreamReader(ctx.getResources().openRawResource(R.raw.railway)));
                 break;
         }
         String line;
@@ -305,23 +323,23 @@ public class MotherOfDatabases {
         finally {
             ActiveAndroid.endTransaction();
         }
-        /*//CUSTOMS
-        nos=getPhoneNumbersOf(Boss.TYPE_CUSTOMS,ctx);
-        places=placeNamesOf(Boss.TYPE_CUSTOMS,ctx);
+        //VIGILANCE
+        nos=getPhoneNumbersOf(Boss.TYPE_VIGILANCE,ctx);
+        places=placeNamesOf(Boss.TYPE_VIGILANCE,ctx);
         enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
                 if (i>4)
                     enabled = false;
-                CustomsTable item = new CustomsTable(places[i],nos[i],enabled);
+                VigilanceTable item = new VigilanceTable(places[i],nos[i],enabled);
                 item.save();
             }
             ActiveAndroid.setTransactionSuccessful();
         }
         finally {
             ActiveAndroid.endTransaction();
-        }*/
+        }
         //EXCISE
         nos=getPhoneNumbersOf(Boss.TYPE_EXCISE,ctx);
         places=placeNamesOf(Boss.TYPE_EXCISE,ctx);
@@ -349,6 +367,41 @@ public class MotherOfDatabases {
                 if (i>4)
                     enabled = false;
                 BloodBanksTable item = new BloodBanksTable(places[i],nos[i],enabled);
+                Log.d("TEST",places[i]);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //HIGHWAY
+        nos=getPhoneNumbersOf(Boss.TYPE_HIGHWAY,ctx);
+        places=placeNamesOf(Boss.TYPE_HIGHWAY,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                HighwayPoliceTable item = new HighwayPoliceTable(places[i],nos[i],enabled);
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        }
+        finally {
+            ActiveAndroid.endTransaction();
+        }
+        //RAILWAY
+        nos=getPhoneNumbersOf(Boss.TYPE_RAILWAY,ctx);
+        places=placeNamesOf(Boss.TYPE_RAILWAY,ctx);
+        enabled = true;
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < nos.length; i++) {
+                if (i>4)
+                    enabled = false;
+                RailwayPoliceTable item = new RailwayPoliceTable(places[i],nos[i],enabled);
                 Log.d("TEST",places[i]);
                 item.save();
             }
@@ -411,9 +464,9 @@ public class MotherOfDatabases {
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 list = new Select()
-                        .from(CustomsTable.class)
+                        .from(VigilanceTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
@@ -428,6 +481,20 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 list = new Select()
                         .from(BloodBanksTable.class)
+                        .where("Enabled = ?", true)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_HIGHWAY:
+                list = new Select()
+                        .from(HighwayPoliceTable.class)
+                        .where("Enabled = ?", true)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_RAILWAY:
+                list = new Select()
+                        .from(RailwayPoliceTable.class)
                         .where("Enabled = ?", true)
                         .orderBy("PlaceName ASC")
                         .execute();
@@ -482,9 +549,9 @@ public class MotherOfDatabases {
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 list = new Select()
-                        .from(CustomsTable.class)
+                        .from(VigilanceTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
@@ -497,6 +564,18 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 list = new Select()
                         .from(BloodBanksTable.class)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_HIGHWAY:
+                list = new Select()
+                        .from(HighwayPoliceTable.class)
+                        .orderBy("PlaceName ASC")
+                        .execute();
+                break;
+            case Boss.TYPE_RAILWAY:
+                list = new Select()
+                        .from(RailwayPoliceTable.class)
                         .orderBy("PlaceName ASC")
                         .execute();
                 break;
@@ -565,9 +644,9 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 for (int i = 0,j=0; i < list.size() ; i++,j++) {
-                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    VigilanceTable policeTable = (VigilanceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
                     else j--;
@@ -584,6 +663,22 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 for (int i = 0,j=0; i < list.size() ; i++,j++) {
                     BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.number;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_HIGHWAY:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    HighwayPoliceTable policeTable = (HighwayPoliceTable) list.get(i);
+                    if (list.get(i)!=null)
+                        nos[j] = policeTable.number;
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_RAILWAY:
+                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                    RailwayPoliceTable policeTable = (RailwayPoliceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
                     else j--;
@@ -653,9 +748,9 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 for (int i = 0,j=0; i < list.size() ; i++,j++) {
-                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    VigilanceTable policeTable = (VigilanceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.placeName;
                     else j--;
@@ -741,9 +836,9 @@ public class MotherOfDatabases {
                     else j--;
                 }
                 break;
-            case Boss.TYPE_CUSTOMS:
+            case Boss.TYPE_VIGILANCE:
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
-                    CustomsTable policeTable = (CustomsTable) list.get(i);
+                    VigilanceTable policeTable = (VigilanceTable) list.get(i);
                     if (list.get(i)!=null)
                         arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
@@ -760,6 +855,22 @@ public class MotherOfDatabases {
             case Boss.TYPE_BLOOD_BANKS:
                 for (int i = 0, j = 0; i < list.size() ; i++, j++) {
                     BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
+                    if (list.get(i)!=null)
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_HIGHWAY:
+                for (int i = 0, j = 0; i < list.size() ; i++, j++) {
+                    HighwayPoliceTable policeTable = (HighwayPoliceTable) list.get(i);
+                    if (list.get(i)!=null)
+                        arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
+                    else j--;
+                }
+                break;
+            case Boss.TYPE_RAILWAY:
+                for (int i = 0, j = 0; i < list.size() ; i++, j++) {
+                    RailwayPoliceTable policeTable = (RailwayPoliceTable) list.get(i);
                     if (list.get(i)!=null)
                         arrayList.add(j,new NumbersListModel(policeTable.placeName,policeTable.number,policeTable.enabled));
                     else j--;
@@ -816,9 +927,9 @@ public class MotherOfDatabases {
                 f.save();
                 break;
 
-            case Boss.TYPE_CUSTOMS:
-                select = new Select().from(CustomsTable.class).where("Number = ?", no);
-                CustomsTable cu = CustomsTable.load(CustomsTable.class,select.executeSingle().getId());
+            case Boss.TYPE_VIGILANCE:
+                select = new Select().from(VigilanceTable.class).where("Number = ?", no);
+                VigilanceTable cu = VigilanceTable.load(VigilanceTable.class,select.executeSingle().getId());
                 cu.enabled = enabled;
                 cu.save();
                 break;

@@ -52,11 +52,11 @@ public class SelectNumbersActivity extends AppCompatActivity {
                 actionBar.setTitle("Janaseva Sisubhavan");
                 break;
 
-            case R.id.card_customs:
+            case R.id.card_vigilance:
                 TYPE = Boss.TYPE_SHISHUBAVAN;
                 actionBar.setTitle("Customs Control Rooms");
                 break;
-            case R.id.card_drugs:
+            case R.id.card_excise:
                 TYPE = Boss.TYPE_EXCISE;
                 actionBar.setTitle("Excise");
                 break;

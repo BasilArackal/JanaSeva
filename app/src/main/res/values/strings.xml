@@ -7,6 +7,37 @@
     <string name="send_sms_only">Send SMS only</string>
     <string name="warn_before_sending_alert">Warn Before Sending Alert</string>
 
+    // Malayalam Strings
+    <string name="police_mal">പോലീസ്  </string>
+    <string name="excise_mal">വ്യാജമദ്യം, മയക്കുമരുന്ന്  </string>
+    <string name="highway_police_mal">ഹൈവേ പോലീസ്  </string>
+    <string name="vigilance_mal">വിജിലെൻസ്  </string>
+    <string name="women_helpline_mal">വനിത ഹെൽപ് ലൈൻ </string>
+    <string name="ambulance_mal">ആംബുലൻസ്  </string>
+    <string name="fire_force_mal">ഫയർ ഫോർസ്സ്</string>
+    <string name="railway_police_mal">റെയിൽവേ പോലീസ്  </string>
+    <string name="child_abuse_mal">ബാലപീഡനം </string>
+    <string name="stray_dog_attack_mal">തെരുവ്നായ ശല്യം </string>
+    <string name="help_a_child_mal">ശിശുഭവൻ </string>
+    <string name="blood_bank_mal">രക്തദാനം </string>
+    <string name="emergency_mal">അത്യാവശ്യം </string>
+
+    // English Strings
+    <string name="police_eng">Police</string>
+    <string name="excise_eng">Exicse/Drugs</string>
+    <string name="highway_police_eng">Highway Police</string>
+    <string name="vigilance_eng">Vigilance</string>
+    <string name="women_helpline_eng">Women Helpline</string>
+    <string name="ambulance_eng">Ambulance</string>
+    <string name="fire_force_eng">Fire Force</string>
+    <string name="railway_police_eng">Railway Police</string>
+    <string name="child_abuse_eng">Child Abuse</string>
+    <string name="stray_dog_attack_eng">Stray Dog Attacks</string>
+    <string name="help_a_child_eng">Help A Child</string>
+    <string name="blood_bank_eng">Blood Bank</string>
+    <string name="emergency_eng">Emergency Call</string>
+
+
     //Change Version Here on every Release
     <string name="app_version">Version 2.0</string>
     <string name="title_activity_pin">Enter Pin</string>

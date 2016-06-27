@@ -7,19 +7,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.gsm.SmsManager;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,8 +34,10 @@ public class Boss {
     public final static String TYPE_SEXUAL_ASSAULT = "TYPE_SEXUAL_ASSAULT";
     public static final String TYPE_SHISHUBAVAN = "TYPE_SHISHUBAVAN";
     public final static String TYPE_EXCISE = "TYPE_EXCISE";
-    public static final String TYPE_CUSTOMS = "TYPE_CUSTOMS";
+    public static final String TYPE_VIGILANCE = "TYPE_VIGILANCE";
     public static final String TYPE_BLOOD_BANKS = "TYPE_BLOOD_BANKS";
+    public static final String TYPE_HIGHWAY = "TYPE_HIGHWAY";
+    public static final String TYPE_RAILWAY = "TYPE_RAILWAY";
     public static final int PERMISSIONS_REQUEST_CALL_PHONE = 51;
     public static final int PERMISSIONS_REQUEST_LOCATION_ACCESS = 52;
     public static final int PERMISSIONS_REQUEST_SEND_SMS = 53;
@@ -99,17 +96,25 @@ public class Boss {
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), location, Boss.TYPE_SHISHUBAVAN, activity);
                     break;
-                case R.id.card_customs:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CUSTOMS), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CUSTOMS), location, Boss.TYPE_CUSTOMS, activity);
+                case R.id.card_vigilance:
+                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE), location, Boss.TYPE_VIGILANCE, activity);
                     break;
-                case R.id.card_drugs:
+                case R.id.card_excise:
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), location, Boss.TYPE_EXCISE, activity);
                     break;
                 case R.id.card_blood_bank:
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS), location, Boss.TYPE_BLOOD_BANKS, activity);
+                    break;
+                case R.id.card_highwaypolice:
+                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY), location, Boss.TYPE_HIGHWAY, activity);
+                    break;
+                case R.id.card_railwaypolice:
+                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY), location, Boss.TYPE_RAILWAY, activity);
                     break;
             }
         }
@@ -153,17 +158,25 @@ public class Boss {
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), location, Boss.TYPE_SHISHUBAVAN, activity);
                                 break;
-                            case R.id.card_drugs:
+                            case R.id.card_excise:
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), location, Boss.TYPE_EXCISE, activity);
                                 break;
-                            case R.id.card_customs:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CUSTOMS, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CUSTOMS, Application.getContext()), location, Boss.TYPE_CUSTOMS, activity);
+                            case R.id.card_vigilance:
+                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_VIGILANCE, Application.getContext()), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_VIGILANCE, Application.getContext()), location, Boss.TYPE_VIGILANCE, activity);
                                 break;
                             case R.id.card_blood_bank:
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS, Application.getContext()), location, Boss.TYPE_BLOOD_BANKS, activity);
+                                break;
+                            case R.id.card_highwaypolice:
+                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_HIGHWAY, Application.getContext()), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_HIGHWAY, Application.getContext()), location, Boss.TYPE_HIGHWAY, activity);
+                                break;
+                            case R.id.card_railwaypolice:
+                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_RAILWAY, Application.getContext()), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_RAILWAY, Application.getContext()), location, Boss.TYPE_RAILWAY, activity);
                                 break;
                         }
                     }
@@ -212,11 +225,17 @@ public class Boss {
                             case Boss.TYPE_EXCISE:
                                 messageBody = "Urgent!! \nIllegal Drugs or Alcohol usage reported\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
                                 break;
-                            case Boss.TYPE_CUSTOMS:
-                                messageBody = "Urgent!! \nSmuggling or illegal activity reported\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                            case Boss.TYPE_VIGILANCE:
+                                messageBody = "Urgent!! \nIllegal activity reported\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
                                 break;
                             case Boss.TYPE_BLOOD_BANKS:
                                 messageBody = "Urgent!! \nBlood Urgency\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                                break;
+                            case Boss.TYPE_HIGHWAY:
+                                messageBody = "Urgent!! \nAccident or Emergency reported\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                                break;
+                            case Boss.TYPE_RAILWAY:
+                                messageBody = "Urgent!! \nAccident or Emergency reported\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
                                 break;
                         }
                         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
@@ -272,11 +291,17 @@ public class Boss {
                             case Boss.TYPE_EXCISE:
                                 messageBody = "Urgent!! \nIllegal Drugs or Alcohol usage reported";
                                 break;
-                            case Boss.TYPE_CUSTOMS:
-                                messageBody = "Urgent!! \nSmuggling or illegal activity reported";
+                            case Boss.TYPE_VIGILANCE:
+                                messageBody = "Urgent!! \nIllegal activity reported";
                                 break;
                             case Boss.TYPE_BLOOD_BANKS:
                                 messageBody = "Urgent!! \nBlood Urgency";
+                                break;
+                            case Boss.TYPE_HIGHWAY:
+                                messageBody = "Urgent!! \nAccident or Emergency reported";
+                                break;
+                            case Boss.TYPE_RAILWAY:
+                                messageBody = "Urgent!! \nAccident or Emergency reported";
                                 break;
                         }
                         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {

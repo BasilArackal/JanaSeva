@@ -49,9 +49,11 @@ public class MainActivity extends Activity {
             cardSexualAssault,
             cardChildAbuse,
             cardCustomNumber,
-            cardCustoms,
+            cardVigilance,
             cardExcise,
-            cardBloodBanks;
+            cardBloodBanks,
+            cardHighwayPolice,
+            cardRailwayPolice;
 
     public static TextView customCallTXT;
 
@@ -67,16 +69,11 @@ public class MainActivity extends Activity {
             MotherOfDatabases.deleteOldDB();
             MotherOfDatabases.populateDB(this);
             UserPreferences.updateDBVersion(this,getResources().getInteger(R.integer.DATABASE_VERSION));
+            UserPreferences.writeUserChoice(R.id.callOnlyRB,this);
         }
 
         if (UserPreferences.isThisFirstOpen(MainActivity.this)){
             UserPreferences.writeUserChoice(R.id.callOnlyRB,this);
-        }
-
-        if (UserPreferences.getCurrentDBVersion(this)!=this.getResources().getInteger(R.integer.DATABASE_VERSION)){
-            MotherOfDatabases.deleteOldDB();
-            MotherOfDatabases.populateDB(this);
-            UserPreferences.updateDBVersion(this,getResources().getInteger(R.integer.DATABASE_VERSION));
         }
 
         //Getting User Location
@@ -104,13 +101,15 @@ public class MainActivity extends Activity {
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
         cardCustomNumber = findViewById(R.id.card_custom);
-        cardCustoms = findViewById(R.id.card_customs);
-        cardExcise = findViewById(R.id.card_drugs);
+        cardVigilance = findViewById(R.id.card_vigilance);
+        cardExcise = findViewById(R.id.card_excise);
         cardBloodBanks = findViewById(R.id.card_blood_bank);
+        cardHighwayPolice = findViewById(R.id.card_highwaypolice);
+        cardRailwayPolice = findViewById(R.id.card_railwaypolice);
         customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 
         if (!UserPreferences.getCustomNumber(this).equals("0"))
-            customCallTXT.setText(String.format("Call: %s\nPress and hold to edit number.", UserPreferences.getCustomNumber(this)));
+            customCallTXT.setText(String.format("Call: %s\nPress & hold to edit number.", UserPreferences.getCustomNumber(this)));
 
         //Assigning onLongPress event listeners to each of the cards
         cardStrayDogs.setOnLongClickListener(new onLongPress());
@@ -121,8 +120,10 @@ public class MainActivity extends Activity {
         cardChildAbuse.setOnLongClickListener(new onLongPress());
         cardJanaseva.setOnLongClickListener(new onLongPress());
         cardBloodBanks.setOnLongClickListener(new onLongPress());
-        cardCustoms.setOnLongClickListener(new onLongPress());
+        cardVigilance.setOnLongClickListener(new onLongPress());
         cardExcise.setOnLongClickListener(new onLongPress());
+        cardHighwayPolice.setOnLongClickListener(new onLongPress());
+        cardRailwayPolice.setOnLongClickListener(new onLongPress());
         cardCustomNumber.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -181,8 +182,7 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case Boss.PERMISSIONS_REQUEST_CALL_PHONE: {
                 if (grantResults.length > 0
@@ -220,113 +220,6 @@ public class MainActivity extends Activity {
             // permissions this app might request
         }
     }
-
-
-
-/*
-    public void addButton(final View view) {
-
-
-
-        *//*  // Grid View Items
-        //params.setMargins(left, top, right, bottom);
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
-        CardView newCard = new CardView(this);
-        ImageView dangerButton = new ImageView(this);
-        dangerButton.setImageResource(R.drawable.danger);
-        dangerButton.setLayoutParams(new ActionBar.LayoutParams(200, 200));
-        dangerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeCall(v);
-            }
-        });
-
-        newCard.addView(dangerButton);
-
-        gridLayout.addView(newCard);
-
-        *//*
-
-        // Declarations
-        LinearLayout linearLayout=(LinearLayout) findViewById(R.id.LinearLayoutForAllCards);
-        CardView newCard= new CardView(this);
-        RelativeLayout cardDetails= new RelativeLayout(this);
-        ImageView cardImage = new ImageView(this);
-        TextView cardText = new TextView(this);
-        TextView cardSubText = new TextView(this);
-
-        // Convert DP to Pixels. LayoutParams Accept Pixels
-        int dp100 = dpToPx(100,view);
-        int dp16 = dpToPx(16,view);
-        int dp10 = dpToPx(10,view);
-        int dp7 = dpToPx(7,view);
-        int dp4 = dpToPx(4,view);
-
-        // Parameters for Card image
-        RelativeLayout.LayoutParams imageParams = new RelativeLayout.LayoutParams(dp100,dp100);
-
-        // Parameters for Main Text
-        RelativeLayout.LayoutParams textParams1 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        // Parameters for Sub Text
-        RelativeLayout.LayoutParams textParams2 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        // Parameters for Entire Card
-        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-
-        // Properties for Card Image
-        imageParams.setMargins(0,0,dp16,0);
-        cardImage.setLayoutParams(imageParams);
-        cardImage.setImageResource(R.drawable.danger);
-        cardImage.setId(R.id.id1);
-
-        // Properties for Main Text
-        textParams1.addRule(RelativeLayout.RIGHT_OF,R.id.id1);
-        cardText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);      // Convert Pixels To SP
-        cardText.setLayoutParams(textParams1);
-        cardText.setText("New Card");
-        cardText.setId(R.id.id2);
-
-        // Properties for Sub Text
-        textParams2.addRule(RelativeLayout.RIGHT_OF,R.id.id1);
-        textParams2.addRule(RelativeLayout.BELOW,R.id.id2);
-        cardSubText.setLayoutParams(textParams2);
-        cardSubText.setText("Update Details");
-        cardSubText.setId(R.id.id3);
-
-        // Properties For Inner Relative Layout. Add Stuffs to Relative Layout here
-        cardDetails.setPadding(dp16,dp16,dp16,dp16);
-        cardDetails.addView(cardImage);
-        cardDetails.addView(cardText);
-        cardDetails.addView(cardSubText);
-
-        // Properties For Card Layout.
-        cardParams.setMargins(dp16,dp16,dp16,0);
-        newCard.setLayoutParams(cardParams);
-        newCard.setCardElevation(dp10);
-        newCard.setRadius(dp4);
-        newCard.setPadding(dp16,dp16,0,0);
-        newCard.addView(cardDetails);
-
-        // Properties For Outer Linear Layout. Add the created card here.
-        linearLayout.addView(newCard);
-
-        // onClick on new cards not implemented. Use Global ID arrays and assign new ids to each cardView . Limit number of
-        // new cards created by x=10 (say). Initially create 10 new ids on menu/ids.xml. Pass that id to makeCall();
-    }
-
-    public int dpToPx(int dp,View view) {
-        DisplayMetrics displayMetrics = view.getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }*/
 
     public void makeCall(View view) {
         v=view;
