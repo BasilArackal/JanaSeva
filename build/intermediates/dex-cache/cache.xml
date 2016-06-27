@@ -26,7 +26,7 @@
         jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="9f00361d5dcd28a383d9fc7d82c48ee7504ec8f8">
+        sha1="c5d356ce5dbeaca359f711d99ca945f6fdacb53e">
         <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0ba19425139cf364a54eeb0a9619a2c283b5d45f/classes.dex" />
     </item>
     <item
@@ -61,7 +61,7 @@
         jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="f2227545ee726e6e9b169745fd97b3df02c0f988">
+        sha1="c5cadd50b3dba620c9a466e2e7a153466618f90f">
         <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_daa65ff2fd32057ff53b21449692bfe2acaf0861/classes.dex" />
     </item>
     <item
