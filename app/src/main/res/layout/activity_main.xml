@@ -280,7 +280,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/blood_bank_image"
-                android:src="@drawable/iconnew_ambulance"
+                android:src="@drawable/iconnew_blood"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
