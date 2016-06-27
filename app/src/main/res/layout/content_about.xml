@@ -20,7 +20,7 @@
         android:layout_height="200dp"
         android:layout_marginLeft="70dp"
         android:id="@+id/imageView"
-        android:src="@drawable/jmaveli"
+        android:src="@drawable/newmaveli"
         />
 
     <TextView

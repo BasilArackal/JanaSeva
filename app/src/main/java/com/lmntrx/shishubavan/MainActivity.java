@@ -104,8 +104,8 @@ public class MainActivity extends Activity {
         cardSexualAssault = findViewById(R.id.card_sexualAbuse);
         cardStrayDogs = findViewById(R.id.card_animalAbuse);
         cardCustomNumber = findViewById(R.id.card_custom);
-        cardCustoms = findViewById(R.id.card_customs);
-        cardExcise = findViewById(R.id.card_drugs);
+        cardCustoms = findViewById(R.id.card_vigilance);
+        cardExcise = findViewById(R.id.card_excise);
         cardBloodBanks = findViewById(R.id.card_blood_bank);
         customCallTXT = (TextView)findViewById(R.id.custom_card_subtext);
 

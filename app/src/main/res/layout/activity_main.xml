@@ -23,7 +23,7 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.lmntrx.shishubavan.MainActivity">
 
-
+    <!-- POLICE  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_police"
@@ -57,12 +57,22 @@
                 />
 
             <TextView
-                android:text="പോലീസ്\n Police"
+                android:text="@string/police_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/police_mal_text"
+                android:layout_toRightOf="@+id/police_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/police_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/police_text"
                 android:layout_toRightOf="@+id/police_image"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/police_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -82,9 +92,79 @@
     </android.support.v7.widget.CardView>
 
 
+
+    <!-- EXCISE  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_customs"
+        android:id="@+id/card_excise"
+        card_view:cardElevation="10dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/excise_image"
+                android:src="@drawable/iconnew_excise"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="@string/excise_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/excise_mal_text"
+                android:layout_toRightOf="@+id/excise_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/excise_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/excise_text"
+                android:layout_toRightOf="@+id/excise_image"
+                android:layout_below="@+id/excise_mal_text"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:text="@string/card_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drugs_subtext"
+                android:layout_toRightOf="@+id/excise_image"
+                android:layout_below="@+id/excise_text"
+                />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <!-- HIGHWAY POLICE  -->
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_highwaypolice"
         card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -107,20 +187,99 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/customs_image"
-                android:src="@drawable/iconnew_customs"
+                android:id="@+id/highwaypolice_image"
+                android:src="@drawable/iconnew_highway"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
 
             <TextView
-                android:text="വിജിലൻസ് \nVigilence"
+                android:text="@string/highway_police_mal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/customs_text"
-                android:layout_toRightOf="@+id/customs_image"
+                android:id="@+id/highwaypolice_mal_text"
+                android:layout_toRightOf="@+id/highwaypolice_image"
                 android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/highway_police_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highwaypolice_text"
+                android:layout_toRightOf="@+id/highwaypolice_image"
+                android:layout_below="@+id/highwaypolice_mal_text"
+                android:textSize="20sp"
+                />
+            <TextView
+                android:text="@string/card_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/highwaypolice_subtext"
+                android:layout_toRightOf="@+id/highwaypolice_image"
+                android:layout_below="@+id/highwaypolice_text"
+                />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <!-- VIGILANCE  -->
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_vigilance"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/vigilance_image"
+                android:src="@drawable/iconnew_vigilance"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="@string/vigilance_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vigialnce_mal_text"
+                android:layout_toRightOf="@+id/vigilance_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/vigilance_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vigilance_text"
+                android:layout_toRightOf="@+id/vigilance_image"
+                android:layout_below="@+id/vigialnce_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -129,8 +288,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/customs_subtext"
-                android:layout_toRightOf="@+id/customs_image"
-                android:layout_below="@+id/customs_text"
+                android:layout_toRightOf="@+id/vigilance_image"
+                android:layout_below="@+id/vigilance_text"
                 />
 
 
@@ -139,10 +298,10 @@
 
     </android.support.v7.widget.CardView>
 
-
+    <!-- Women Helpline  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_drugs"
+        android:id="@+id/card_sexualAbuse"
         card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -165,20 +324,30 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/drugs_image"
-                android:src="@drawable/iconnew_excise"
+                android:id="@+id/sexualAbuse_image"
+                android:src="@drawable/iconnew_sex"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
 
             <TextView
-                android:text="Excise\nപോലീസ് "
+                android:text="@string/women_helpline_mal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/drugs_text"
-                android:layout_toRightOf="@+id/drugs_image"
+                android:id="@+id/sexualabuse_mal_text"
+                android:layout_toRightOf="@+id/sexualAbuse_image"
                 android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/women_helpline_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sexualAbuse_text"
+                android:layout_toRightOf="@+id/sexualAbuse_image"
+                android:layout_below="@+id/sexualabuse_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -186,129 +355,17 @@
                 android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/drugs_subtext"
-                android:layout_toRightOf="@+id/drugs_image"
-                android:layout_below="@+id/drugs_text"
-                />
-
-
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_shishubavan"
-        card_view:cardElevation="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="#fff"
-        card_view:cardCornerRadius="4dp"
-        android:onClick="makeCall">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            >
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/shishubavan_image"
-                android:src="@drawable/iconnew_janaseva"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
-                />
-
-            <TextView
-                android:text="Sisubhavan\nശിശുഭവൻ  "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/shishubavan_text"
-                android:layout_toRightOf="@+id/shishubavan_image"
-                android:layout_alignParentTop="true"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:text="@string/card_subtext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/_subtext"
-                android:layout_toRightOf="@+id/shishubavan_image"
-                android:layout_below="@+id/shishubavan_text"
+                android:id="@+id/sexualAbuse_subtext"
+                android:layout_toRightOf="@+id/sexualAbuse_image"
+                android:layout_below="@+id/sexualAbuse_text"
                 />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_blood_bank"
-        card_view:cardElevation="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="#fff"
-        card_view:cardCornerRadius="4dp"
-        android:onClick="makeCall"
-        >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            >
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/blood_bank_image"
-                android:src="@drawable/iconnew_blood"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
-                />
-
-            <TextView
-                android:text="Blood Banks\nരക്തദാനം"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/blood_bank_text"
-                android:layout_toRightOf="@+id/blood_bank_image"
-                android:layout_alignParentTop="true"
-                android:textSize="20sp"
-                />
-
-            <TextView
-                android:text="@string/card_subtext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/blood_bank_subtext"
-                android:layout_toRightOf="@+id/blood_bank_image"
-                android:layout_below="@+id/blood_bank_text"
-                />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
+    <!-- AMBULANCE  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_ambulance"
@@ -343,12 +400,22 @@
                 />
 
             <TextView
-                android:text="Ambulance\nആംബുലൻസ് "
+                android:text="@string/ambulance_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ambulance_mal_text"
+                android:layout_toRightOf="@+id/ambulance_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/ambulance_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/ambulance_text"
                 android:layout_toRightOf="@+id/ambulance_image"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/ambulance_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -365,6 +432,8 @@
 
     </android.support.v7.widget.CardView>
 
+
+    <!-- FIRETRUCK  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_firetruck"
@@ -398,12 +467,22 @@
                 />
 
             <TextView
-                android:text="Firetruck\nഫയർ ട്രക്"
+                android:text="@string/fire_force_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/firetruck_mal_text"
+                android:layout_toRightOf="@+id/firetruck_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_below="@+id/firetruck_mal_text"
+                android:text="@string/fire_force_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/firetruck_text"
                 android:layout_toRightOf="@+id/firetruck_image"
-                android:layout_alignParentTop="true"
                 android:textSize="20sp"
                 />
 
@@ -420,6 +499,76 @@
 
     </android.support.v7.widget.CardView>
 
+
+    <!-- RAILWAY POLICE  -->
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_railwaypolice"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        android:onClick="makeCall">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/railwaypolice_image"
+                android:src="@drawable/iconnew_railway"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="@string/railway_police_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/railwaypolice_mal_text"
+                android:layout_toRightOf="@+id/railwaypolice_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/railway_police_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/railwaypolice_text"
+                android:layout_toRightOf="@+id/railwaypolice_image"
+                android:layout_below="@+id/railwaypolice_mal_text"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/card_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/railwaypolice_subtext"
+                android:layout_toRightOf="@+id/railwaypolice_image"
+                android:layout_below="@+id/railwaypolice_text"
+                />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!-- CHILDABUSE  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_childAbuse"
@@ -453,12 +602,22 @@
                 />
 
             <TextView
-                android:text="Child Abuse\nബാല പീഡനം "
+                android:text="@string/child_abuse_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/childAbuse_mal_text"
+                android:layout_toRightOf="@+id/childAbuse_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/child_abuse_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/childAbuse_text"
                 android:layout_toRightOf="@+id/childAbuse_image"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/childAbuse_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -475,7 +634,7 @@
 
     </android.support.v7.widget.CardView>
 
-
+    <!-- ANIMALABUSE  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_animalAbuse"
@@ -509,12 +668,22 @@
                 />
 
             <TextView
-                android:text="Stray dogs\nതെരുവ്  നായ "
+                android:text="@string/stray_dog_attack_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/animalAbuse_mal_text"
+                android:layout_toRightOf="@+id/animalAbuse_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/stray_dog_attack_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/animalAbuse_text"
                 android:layout_toRightOf="@+id/animalAbuse_image"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/animalAbuse_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -531,9 +700,10 @@
 
     </android.support.v7.widget.CardView>
 
+    <!-- Sisubhavan  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/card_sexualAbuse"
+        android:id="@+id/card_shishubavan"
         card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -556,20 +726,30 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/sexualAbuse_image"
-                android:src="@drawable/iconnew_sex"
+                android:id="@+id/shishubavan_image"
+                android:src="@drawable/iconnew_janaseva"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
 
             <TextView
-                android:text="Sexual Abuse\nലൈംഗിക ചൂഷണം"
+                android:text="@string/help_a_child_mal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sexualAbuse_text"
-                android:layout_toRightOf="@+id/sexualAbuse_image"
+                android:id="@+id/shishubavan_mal_text"
+                android:layout_toRightOf="@+id/shishubavan_image"
                 android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/help_a_child_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shishubavan_text"
+                android:layout_toRightOf="@+id/shishubavan_image"
+                android:layout_below="@+id/shishubavan_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -577,15 +757,87 @@
                 android:text="@string/card_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sexualAbuse_subtext"
-                android:layout_toRightOf="@+id/sexualAbuse_image"
-                android:layout_below="@+id/sexualAbuse_text"
+                android:id="@+id/_subtext"
+                android:layout_toRightOf="@+id/shishubavan_image"
+                android:layout_below="@+id/shishubavan_text"
                 />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
+
+
+    <!-- BLOODBANK  -->
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_blood_bank"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        android:onClick="makeCall"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/blood_bank_image"
+                android:src="@drawable/iconnew_blood"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:text="@string/blood_bank_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bloodbank_mal_text"
+                android:layout_toRightOf="@+id/blood_bank_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/blood_bank_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blood_bank_text"
+                android:layout_toRightOf="@+id/blood_bank_image"
+                android:layout_below="@+id/bloodbank_mal_text"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/card_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blood_bank_subtext"
+                android:layout_toRightOf="@+id/blood_bank_image"
+                android:layout_below="@+id/blood_bank_text"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <!-- Emergency Call  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_custom"
@@ -619,12 +871,22 @@
                 />
 
             <TextView
-                android:text="Custom Call"
+                android:text="@string/emergency_mal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/custom_mal_text"
+                android:layout_toRightOf="@+id/custom_card_image"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:text="@string/emergency_eng"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/custom_card_text"
                 android:layout_toRightOf="@+id/custom_card_image"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/custom_mal_text"
                 android:textSize="20sp"
                 />
 
@@ -641,6 +903,9 @@
 
     </android.support.v7.widget.CardView>
 
+
+
+    <!-- SETTINGS  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_settings"
@@ -697,6 +962,9 @@
 
     </android.support.v7.widget.CardView>
 
+
+
+    <!-- ABOUT  -->
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/card_about"
@@ -731,7 +999,7 @@
                 />
 
             <TextView
-                android:text="About"
+                android:text="About Us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/aboutText"
@@ -752,6 +1020,39 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

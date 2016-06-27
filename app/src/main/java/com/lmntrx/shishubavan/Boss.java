@@ -99,11 +99,11 @@ public class Boss {
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), location, Boss.TYPE_SHISHUBAVAN, activity);
                     break;
-                case R.id.card_customs:
+                case R.id.card_vigilance:
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CUSTOMS), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CUSTOMS), location, Boss.TYPE_CUSTOMS, activity);
                     break;
-                case R.id.card_drugs:
+                case R.id.card_excise:
                     call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), Application.getContext(), activity);
                     sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), location, Boss.TYPE_EXCISE, activity);
                     break;
@@ -153,11 +153,11 @@ public class Boss {
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), location, Boss.TYPE_SHISHUBAVAN, activity);
                                 break;
-                            case R.id.card_drugs:
+                            case R.id.card_excise:
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), location, Boss.TYPE_EXCISE, activity);
                                 break;
-                            case R.id.card_customs:
+                            case R.id.card_vigilance:
                                 call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CUSTOMS, Application.getContext()), Application.getContext(), activity);
                                 sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CUSTOMS, Application.getContext()), location, Boss.TYPE_CUSTOMS, activity);
                                 break;
