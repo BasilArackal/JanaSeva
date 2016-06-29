@@ -22,7 +22,7 @@
             android:value="JanasevaDB5.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="4" />
+            android:value="@integer/DATABASE_VERSION" />
 
         <activity
             android:name=".MainActivity"

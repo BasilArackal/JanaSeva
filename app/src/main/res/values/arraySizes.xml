@@ -3,16 +3,16 @@
 
     <integer name="police_array_size">18</integer>
     <integer name="ambulance_array_size">27</integer>
-    <integer name="ff_array_size">187</integer>
-    <integer name="sx_array_size">16</integer>
+    <integer name="ff_array_size">180</integer>
+    <integer name="sx_array_size">15</integer>
     <integer name="ca_array_size">11</integer>
     <integer name="js_array_size">5</integer>
     <integer name="st_array_size">5</integer>
-    <integer name="ex_array_size">16</integer>
+    <integer name="ex_array_size">15</integer>
     <integer name="vi_array_size">6</integer>
     <integer name="bb_array_size">7</integer>
     <integer name="hp_array_size">42</integer>
     <integer name="ra_array_size">0</integer>
-    <integer name="DATABASE_VERSION">4</integer>
+    <integer name="DATABASE_VERSION">5</integer>
     <bool name="SHOW_SPLASH">true</bool>
 </resources>

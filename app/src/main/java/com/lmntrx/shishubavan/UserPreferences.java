@@ -18,7 +18,7 @@ public class UserPreferences {
     private static final String CHILD_LOCK_ENABLED = "CHILD_LOCK_ENABLED";
     private static final String SAVED_PIN = "SAVED_PIN";
     private static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
-    private static final String FIRST_OPEN_AFTER_UPDATE_2_2 = "FIRST_OPEN_AFTER_UPDATE_2_2";
+    private static final String FIRST_OPEN_AFTER_UPDATE_2_2_1 = "FIRST_OPEN_AFTER_UPDATE_2_2_1";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
 
@@ -130,11 +130,11 @@ public class UserPreferences {
         editor.clear().apply();
     }
 
-    public static boolean isThisFirstOpenAfterUpdate_2_2(Context ctx){
+    public static boolean isThisFirstOpenAfterUpdate_2_2_1(Context ctx){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("Main_Prefs",Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(FIRST_OPEN_AFTER_UPDATE_2_2,true)){
+        if (sharedPreferences.getBoolean(FIRST_OPEN_AFTER_UPDATE_2_2_1,true)){
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(FIRST_OPEN_AFTER_UPDATE_2_2,false);
+            editor.putBoolean(FIRST_OPEN_AFTER_UPDATE_2_2_1,false);
             editor.apply();
             return true;
         }else {
