@@ -13,6 +13,6 @@
     <integer name="bb_array_size">7</integer>
     <integer name="hp_array_size">42</integer>
     <integer name="ra_array_size">0</integer>
-    <integer name="DATABASE_VERSION">5</integer>
+    <integer name="DATABASE_VERSION">7</integer>
     <bool name="SHOW_SPLASH">true</bool>
 </resources>

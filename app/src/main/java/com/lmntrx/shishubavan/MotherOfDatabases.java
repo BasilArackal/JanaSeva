@@ -207,14 +207,13 @@ public class MotherOfDatabases {
         //Polices
         String nos[]=getPhoneNumbersOf(Boss.TYPE_POLICE,ctx);
         String places[]=placeNamesOf(Boss.TYPE_POLICE,ctx);
-        Boolean enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                PoliceTable item = new PoliceTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    PoliceTable item = new PoliceTable(places[i],nos[i], false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -224,14 +223,13 @@ public class MotherOfDatabases {
         //Ambulances
         nos=getPhoneNumbersOf(Boss.TYPE_AMBULANCE,ctx);
         places=placeNamesOf(Boss.TYPE_AMBULANCE,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                AmbulanceTable item = new AmbulanceTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    AmbulanceTable item = new AmbulanceTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -241,14 +239,13 @@ public class MotherOfDatabases {
         //CHILD_ABUSE
         nos=getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE,ctx);
         places=placeNamesOf(Boss.TYPE_CHILD_ABUSE,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                ChildAbuseTable item = new ChildAbuseTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    ChildAbuseTable item = new ChildAbuseTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -258,14 +255,13 @@ public class MotherOfDatabases {
         //Firetruck
         nos=getPhoneNumbersOf(Boss.TYPE_FIRETRUCK,ctx);
         places=placeNamesOf(Boss.TYPE_FIRETRUCK,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                FireForceTable item = new FireForceTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    FireForceTable item = new FireForceTable(places[i],nos[i],true);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -275,14 +271,13 @@ public class MotherOfDatabases {
         //SexualAssault
         nos=getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT,ctx);
         places=placeNamesOf(Boss.TYPE_SEXUAL_ASSAULT,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                SexualAssaultTable item = new SexualAssaultTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    SexualAssaultTable item = new SexualAssaultTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -292,14 +287,13 @@ public class MotherOfDatabases {
         //StrayDogs
         nos=getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS,ctx);
         places=placeNamesOf(Boss.TYPE_STRAY_DOGS,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                StrayDogsTable item = new StrayDogsTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    StrayDogsTable item = new StrayDogsTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -309,14 +303,13 @@ public class MotherOfDatabases {
         //SHISHUBAVAN
         nos=getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN,ctx);
         places=placeNamesOf(Boss.TYPE_SHISHUBAVAN,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                JanasevaTable item = new JanasevaTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    JanasevaTable item = new JanasevaTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -326,14 +319,13 @@ public class MotherOfDatabases {
         //VIGILANCE
         nos=getPhoneNumbersOf(Boss.TYPE_VIGILANCE,ctx);
         places=placeNamesOf(Boss.TYPE_VIGILANCE,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                VigilanceTable item = new VigilanceTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    VigilanceTable item = new VigilanceTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -343,14 +335,13 @@ public class MotherOfDatabases {
         //EXCISE
         nos=getPhoneNumbersOf(Boss.TYPE_EXCISE,ctx);
         places=placeNamesOf(Boss.TYPE_EXCISE,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                ExciseTable item = new ExciseTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    ExciseTable item = new ExciseTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -360,15 +351,13 @@ public class MotherOfDatabases {
         //BLOOD_BANKS
         nos=getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS,ctx);
         places=placeNamesOf(Boss.TYPE_BLOOD_BANKS,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                BloodBanksTable item = new BloodBanksTable(places[i],nos[i],enabled);
-                Log.d("TEST",places[i]);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    BloodBanksTable item = new BloodBanksTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -378,14 +367,13 @@ public class MotherOfDatabases {
         //HIGHWAY
         nos=getPhoneNumbersOf(Boss.TYPE_HIGHWAY,ctx);
         places=placeNamesOf(Boss.TYPE_HIGHWAY,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                HighwayPoliceTable item = new HighwayPoliceTable(places[i],nos[i],enabled);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    HighwayPoliceTable item = new HighwayPoliceTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }
@@ -395,15 +383,13 @@ public class MotherOfDatabases {
         //RAILWAY
         nos=getPhoneNumbersOf(Boss.TYPE_RAILWAY,ctx);
         places=placeNamesOf(Boss.TYPE_RAILWAY,ctx);
-        enabled = true;
         ActiveAndroid.beginTransaction();
         try {
             for (int i = 0; i < nos.length; i++) {
-                if (i>4)
-                    enabled = false;
-                RailwayPoliceTable item = new RailwayPoliceTable(places[i],nos[i],enabled);
-                Log.d("TEST",places[i]);
-                item.save();
+                if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
+                    RailwayPoliceTable item = new RailwayPoliceTable(places[i],nos[i],false);
+                    item.save();
+                }
             }
             ActiveAndroid.setTransactionSuccessful();
         }

@@ -940,7 +940,7 @@
                 />
 
             <TextView
-                android:text="Settings"
+                android:text="Settings(Edit)"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/settingsText"
@@ -950,7 +950,7 @@
                 />
 
             <TextView
-                android:text="Edit settings"
+                android:text="Child Lock, Call, Sms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/settingsSubText"
@@ -1009,7 +1009,7 @@
                 />
 
             <TextView
-                android:text="Get to know our cause"
+                android:text="Details about behind this project."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/aboutSubText"
@@ -1020,41 +1020,6 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
