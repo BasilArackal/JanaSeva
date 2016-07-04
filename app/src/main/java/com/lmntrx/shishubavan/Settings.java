@@ -101,10 +101,7 @@ public class Settings extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     if (s.length()>4){
                         input.setText(s.subSequence(0,4));
-                    }else if (s.length()==4){
-                        isEnough = true;
-                    }else
-                        isEnough = false;
+                    }else isEnough = s.length() == 4;
                     input.setSelection(input.getText().length());
                 }
 
@@ -116,6 +113,7 @@ public class Settings extends AppCompatActivity {
             if (UserPreferences.getChildLockPin(this)!=null)
                 input.setText(UserPreferences.getChildLockPin(this));
             builder.setView(input);
+            builder.setCancelable(false);
             builder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -142,6 +140,7 @@ public class Settings extends AppCompatActivity {
         }else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("PIN");
+            builder.setCancelable(false);
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {

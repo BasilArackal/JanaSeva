@@ -23,6 +23,7 @@ public class SelectNumbersActivity extends AppCompatActivity {
         setContentView(R.layout.content_select_numbers);
         ActionBar actionBar = getSupportActionBar();
         TextView defaultText = (TextView)findViewById(R.id.default_phoneNumber);
+        assert defaultText != null;
         assert actionBar!=null;
         switch (getIntent().getIntExtra("LONG_PRESSED_VIEW_ID",-1)){
             case R.id.card_ambulance:
@@ -96,7 +97,7 @@ public class SelectNumbersActivity extends AppCompatActivity {
 
     public void checkBoxChecked(View view) {
         CheckBox checkBox = (CheckBox)view;
-        String list[] = MotherOfDatabases.getEnabledNumbers(TYPE);
+        String list[] = MotherOfDatabases.getEnabledNumbers(TYPE,getApplicationContext());
         if (list.length<5){
             MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),checkBox.isChecked());
         }else {

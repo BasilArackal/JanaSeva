@@ -1009,7 +1009,7 @@
                 />
 
             <TextView
-                android:text="Details about behind this project."
+                android:text="Details about this project."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/aboutSubText"

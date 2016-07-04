@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 /***
  * Created by livin on 28-Apr-16.
  */
@@ -42,13 +44,11 @@ public class Boss {
     public static final int PERMISSIONS_REQUEST_LOCATION_ACCESS = 52;
     public static final int PERMISSIONS_REQUEST_SEND_SMS = 53;
 
-    private static String chosenCustomNumber;
 
-
-    public static void call_phone(String phoneNo[], Context ctx, Activity activity) {
+    public static void call_phone(String phoneNo, Context ctx, Activity activity) {
         if (UserPreferences.readUserChoice(ctx) == R.id.callAndSmsRB || UserPreferences.readUserChoice(ctx) == R.id.callOnlyRB) {
             Log.i("Status", "call made");
-            Uri number = Uri.parse("tel:" + phoneNo[0]);
+            Uri number = Uri.parse("tel:" + phoneNo);
             Intent callIntent = new Intent(Intent.ACTION_CALL, number);
             if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                 activity.startActivity(callIntent);
@@ -69,52 +69,52 @@ public class Boss {
             switch (id) {
 
                 case R.id.card_ambulance:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_AMBULANCE), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_AMBULANCE), location, Boss.TYPE_AMBULANCE, activity);
+                    call_phone(activity.getString(R.string.ambulance_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_AMBULANCE,activity), location, Boss.TYPE_AMBULANCE, activity);
                     break;
                 case R.id.card_animalAbuse:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_STRAY_DOGS), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_STRAY_DOGS), location, Boss.TYPE_STRAY_DOGS, activity);
+                    call_phone(activity.getString(R.string.shishubavan_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_STRAY_DOGS,activity), location, Boss.TYPE_STRAY_DOGS, activity);
                     break;
                 case R.id.card_childAbuse:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CHILD_ABUSE), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CHILD_ABUSE), location, Boss.TYPE_CHILD_ABUSE, activity);
+                    call_phone(activity.getString(R.string.child_helpline_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CHILD_ABUSE,activity), location, Boss.TYPE_CHILD_ABUSE, activity);
                     break;
                 case R.id.card_police:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_POLICE), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_POLICE), location, Boss.TYPE_POLICE, activity);
+                    call_phone(activity.getString(R.string.police_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_POLICE,activity), location, Boss.TYPE_POLICE, activity);
                     break;
                 case R.id.card_firetruck:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_FIRETRUCK), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_FIRETRUCK), location, Boss.TYPE_FIRETRUCK, activity);
+                    call_phone(activity.getString(R.string.fire_force_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_FIRETRUCK,activity), location, Boss.TYPE_FIRETRUCK, activity);
                     break;
                 case R.id.card_sexualAbuse:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SEXUAL_ASSAULT), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SEXUAL_ASSAULT), location, Boss.TYPE_SEXUAL_ASSAULT, activity);
+                    call_phone(activity.getString(R.string.women_helpline_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SEXUAL_ASSAULT,activity), location, Boss.TYPE_SEXUAL_ASSAULT, activity);
                     break;
                 case R.id.card_shishubavan:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN), location, Boss.TYPE_SHISHUBAVAN, activity);
+                    call_phone(activity.getString(R.string.shishubavan_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN,activity), location, Boss.TYPE_SHISHUBAVAN, activity);
                     break;
                 case R.id.card_vigilance:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE), location, Boss.TYPE_VIGILANCE, activity);
+                    call_phone(activity.getString(R.string.vigilance_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE,activity), location, Boss.TYPE_VIGILANCE, activity);
                     break;
                 case R.id.card_excise:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE), location, Boss.TYPE_EXCISE, activity);
+                    call_phone(activity.getString(R.string.excise_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE,activity), location, Boss.TYPE_EXCISE, activity);
                     break;
                 case R.id.card_blood_bank:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS), location, Boss.TYPE_BLOOD_BANKS, activity);
+                    call_phone(activity.getString(R.string.blood_bank_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS,activity), location, Boss.TYPE_BLOOD_BANKS, activity);
                     break;
                 case R.id.card_highwaypolice:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY), location, Boss.TYPE_HIGHWAY, activity);
+                    call_phone(activity.getString(R.string.highway_police_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY,activity), location, Boss.TYPE_HIGHWAY, activity);
                     break;
                 case R.id.card_railwaypolice:
-                    call_phone(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY), Application.getContext(), activity);
-                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY), location, Boss.TYPE_RAILWAY, activity);
+                    call_phone(activity.getString(R.string.railway_alert_default_number), Application.getContext(), activity);
+                    sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY,activity), location, Boss.TYPE_RAILWAY, activity);
                     break;
             }
         }
@@ -131,52 +131,52 @@ public class Boss {
                         switch (id) {
 
                             case R.id.card_ambulance:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_AMBULANCE, Application.getContext()), location, Boss.TYPE_AMBULANCE, activity);
+                                call_phone(activity.getString(R.string.ambulance_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_AMBULANCE, Application.getContext()), location, Boss.TYPE_AMBULANCE, activity);
                                 break;
                             case R.id.card_animalAbuse:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_STRAY_DOGS, Application.getContext()), location, Boss.TYPE_STRAY_DOGS, activity);
+                                call_phone(activity.getString(R.string.shishubavan_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_STRAY_DOGS, Application.getContext()), location, Boss.TYPE_STRAY_DOGS, activity);
                                 break;
                             case R.id.card_childAbuse:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_CHILD_ABUSE, Application.getContext()), location, Boss.TYPE_CHILD_ABUSE, activity);
+                                call_phone(activity.getString(R.string.child_helpline_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_CHILD_ABUSE, Application.getContext()), location, Boss.TYPE_CHILD_ABUSE, activity);
                                 break;
                             case R.id.card_police:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_POLICE, Application.getContext()), location, Boss.TYPE_POLICE, activity);
+                                call_phone(activity.getString(R.string.police_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_POLICE, Application.getContext()), location, Boss.TYPE_POLICE, activity);
                                 break;
                             case R.id.card_firetruck:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_FIRETRUCK, Application.getContext()), location, Boss.TYPE_FIRETRUCK, activity);
+                                call_phone(activity.getString(R.string.fire_force_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_FIRETRUCK, Application.getContext()), location, Boss.TYPE_FIRETRUCK, activity);
                                 break;
                             case R.id.card_sexualAbuse:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SEXUAL_ASSAULT, Application.getContext()), location, Boss.TYPE_SEXUAL_ASSAULT, activity);
+                                call_phone(activity.getString(R.string.women_helpline_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SEXUAL_ASSAULT, Application.getContext()), location, Boss.TYPE_SEXUAL_ASSAULT, activity);
                                 break;
                             case R.id.card_shishubavan:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_SHISHUBAVAN, Application.getContext()), location, Boss.TYPE_SHISHUBAVAN, activity);
+                                call_phone(activity.getString(R.string.shishubavan_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_SHISHUBAVAN, Application.getContext()), location, Boss.TYPE_SHISHUBAVAN, activity);
                                 break;
                             case R.id.card_excise:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_EXCISE, Application.getContext()), location, Boss.TYPE_EXCISE, activity);
+                                call_phone(activity.getString(R.string.excise_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_EXCISE, Application.getContext()), location, Boss.TYPE_EXCISE, activity);
                                 break;
                             case R.id.card_vigilance:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_VIGILANCE, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_VIGILANCE, Application.getContext()), location, Boss.TYPE_VIGILANCE, activity);
+                                call_phone(activity.getString(R.string.vigilance_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_VIGILANCE, Application.getContext()), location, Boss.TYPE_VIGILANCE, activity);
                                 break;
                             case R.id.card_blood_bank:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_BLOOD_BANKS, Application.getContext()), location, Boss.TYPE_BLOOD_BANKS, activity);
+                                call_phone(activity.getString(R.string.blood_bank_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_BLOOD_BANKS, Application.getContext()), location, Boss.TYPE_BLOOD_BANKS, activity);
                                 break;
                             case R.id.card_highwaypolice:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_HIGHWAY, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_HIGHWAY, Application.getContext()), location, Boss.TYPE_HIGHWAY, activity);
+                                call_phone(activity.getString(R.string.highway_police_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_HIGHWAY, Application.getContext()), location, Boss.TYPE_HIGHWAY, activity);
                                 break;
                             case R.id.card_railwaypolice:
-                                call_phone(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_RAILWAY, Application.getContext()), Application.getContext(), activity);
-                                sendTextMessageIfPossible(MotherOfDatabases.getPhoneNumbersOf(Boss.TYPE_RAILWAY, Application.getContext()), location, Boss.TYPE_RAILWAY, activity);
+                                call_phone(activity.getString(R.string.railway_alert_default_number), Application.getContext(), activity);
+                                sendTextMessageIfPossible(MotherOfDatabases.getEnabledNumbers(Boss.TYPE_RAILWAY, Application.getContext()), location, Boss.TYPE_RAILWAY, activity);
                                 break;
                         }
                     }
@@ -194,7 +194,7 @@ public class Boss {
 
         if (location != null) {
 
-            if (!(UserPreferences.readUserChoice(Application.getContext()) == R.id.smsOnlyRB)) {
+            if (!(UserPreferences.readUserChoice(Application.getContext()) == R.id.callOnlyRB)) {
                 String messageBody = "";
                 SmsManager smsMgr = SmsManager.getDefault();
 
@@ -373,7 +373,7 @@ public class Boss {
                 Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
             }
         }else{
-            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+            /*android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
             builder.setTitle("Enter a number");
             final EditText input = new EditText(context);
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -402,7 +402,8 @@ public class Boss {
                     dialog.cancel();
                 }
             });
-            builder.show();
+            builder.show();*/
+            context.startActivity(new Intent(context,CustomNumbersSettings.class));
 
         }
 

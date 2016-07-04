@@ -570,12 +570,13 @@ public class MotherOfDatabases {
         return list;
     }
 
-    public static String[] getEnabledNumbers(String TYPE){
+    public static String[] getEnabledNumbers(String TYPE,Context context){
         List list = getEnabledControlRooms(TYPE);
-        String nos[] = new String[list.size()];
+        String nos[] = new String[list.size()+1];
         switch (TYPE){
             case Boss.TYPE_AMBULANCE:
-                for (int i = 0, j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.ambulance_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     AmbulanceTable policeTable = (AmbulanceTable) list.get(i);
                     if (list.get(i)!=null)
                     nos[j] = policeTable.number;
@@ -583,7 +584,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_STRAY_DOGS:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.shishubavan_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     StrayDogsTable policeTable = (StrayDogsTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -591,7 +593,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_SHISHUBAVAN:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.shishubavan_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     JanasevaTable policeTable = (JanasevaTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -599,7 +602,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_CHILD_ABUSE:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.child_helpline_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     ChildAbuseTable policeTable = (ChildAbuseTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -607,7 +611,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_SEXUAL_ASSAULT:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.women_helpline_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     SexualAssaultTable policeTable = (SexualAssaultTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -615,7 +620,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_POLICE:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.police_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     PoliceTable policeTable = (PoliceTable)list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -623,7 +629,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_FIRETRUCK:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.fire_force_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     FireForceTable policeTable = (FireForceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -631,7 +638,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_VIGILANCE:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.vigilance_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     VigilanceTable policeTable = (VigilanceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -639,7 +647,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_EXCISE:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.excise_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     ExciseTable policeTable = (ExciseTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -647,7 +656,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_BLOOD_BANKS:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.blood_bank_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     BloodBanksTable policeTable = (BloodBanksTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -655,7 +665,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_HIGHWAY:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.highway_police_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     HighwayPoliceTable policeTable = (HighwayPoliceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
@@ -663,7 +674,8 @@ public class MotherOfDatabases {
                 }
                 break;
             case Boss.TYPE_RAILWAY:
-                for (int i = 0,j=0; i < list.size() ; i++,j++) {
+                nos[0] = context.getString(R.string.railway_alert_default_number);
+                for (int i = 0, j=1; i < list.size() ; i++,j++) {
                     RailwayPoliceTable policeTable = (RailwayPoliceTable) list.get(i);
                     if (list.get(i)!=null)
                         nos[j] = policeTable.number;
