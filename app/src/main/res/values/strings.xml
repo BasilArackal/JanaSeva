@@ -50,4 +50,5 @@
     <string name="call_and_sms_settings">Call And SMS Settings</string>
 
     <string name="card_subtext">One Click to Call. Press &amp; Hold to Edit</string>
+    <string name="no_number_chosen">No Number Chosen Yet</string>
 </resources>

@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 
 public class MainActivity extends Activity {
 
@@ -56,8 +58,6 @@ public class MainActivity extends Activity {
             cardRailwayPolice;
 
     public static TextView customCallTXT;
-
-    String chosenCustomNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
         cardCustomNumber.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
+                /*android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
                 builder.setTitle("Enter a number");
                 final EditText input = new EditText(MainActivity.this);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -158,10 +158,14 @@ public class MainActivity extends Activity {
                         dialog.cancel();
                     }
                 });
-                builder.show();
+                builder.show();*/
+                startActivity(new Intent(MainActivity.this,CustomNumbersSettings.class));
                 return false;
             }
         });
+
+
+
     }
 
     @Override

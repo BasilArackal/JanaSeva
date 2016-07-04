@@ -17,10 +17,11 @@ public class UserPreferences {
     private static final String SHOW_SPLASH = "SHOW_SPLASH";
     private static final String CHILD_LOCK_ENABLED = "CHILD_LOCK_ENABLED";
     private static final String SAVED_PIN = "SAVED_PIN";
-    private static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
+    public static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
     private static final String FIRST_OPEN_AFTER_UPDATE_2_3 = "FIRST_OPEN_AFTER_UPDATE_2_3";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
+    private static final String CUSTOM_NUMBER_NAME = "CUSTOM_NUMBER_NAME";
 
 
     public static Boolean isThisFirstOpen(Context ctx){
@@ -143,5 +144,14 @@ public class UserPreferences {
     }
 
 
-
+    public static void saveCustomNumberName(Context ctx, String displayName) {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CUSTOM_NUMBER_NAME,displayName);
+        editor.apply();
+    }
+    public static String getCustomNumberName(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(CUSTOM_NUMBER_NAME,"0");
+    }
 }
