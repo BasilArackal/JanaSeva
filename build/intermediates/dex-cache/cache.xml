@@ -1,2 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.3.0_94f2e6f77e917b93a9cc3f9472cda32bfa19ed80/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/design/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.3.0_7f112ef3c5c2bb284a5306429295a53c45086889/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.github.medyo/android-about-page/1.0.4/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="87cd6a0c5ec4b3f8fc85a8882d21137cc59fb8e8">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.medyo-android-about-page-1.0.4_8c488648f35434f77fb47a5c07bad51c982fa611/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9e5a0892e120ae475b156c5990409b4eaf13b5e9">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0ba19425139cf364a54eeb0a9619a2c283b5d45f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.3.0_a568851393b04b5cc127fab48e7aa932482746fd/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.3.0_2fa64d71e22d61658d4ebda7ed604a30587677a8/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/.gradle/caches/modules-2/files-2.1/com.michaelpardo/activeandroid/3.1.0-SNAPSHOT/4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08/activeandroid-3.1.0-SNAPSHOT.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/activeandroid-3.1.0-SNAPSHOT_fa822c54cf289241a86043b2974de0648cfe4c35/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.3.0_dd1856582ab7155804f25a12934a9addfc1f642e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4aa7cbd76b6734a4daa96773de942c42decbc41a">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_daa65ff2fd32057ff53b21449692bfe2acaf0861/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.3.0_868119b871e6595d94222637f9c17e885bc1a2e5/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.3.0_96249b11434346e4a036cf4a4740453b74a29813/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-23.3.0_0fdc1178025b64466293a7ef1de12b20c3c4a056/classes.dex" />
+    </item>
+    <item
+        jar="/Users/ACJLionsRoar/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/ACJLionsRoar/AndroidStudioProjects/JanaSeva/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.3.0_445f7e12fedf2b8ba03b07c5f7ed5ef8319d51aa/classes.dex" />
+    </item>
+
+</items>
