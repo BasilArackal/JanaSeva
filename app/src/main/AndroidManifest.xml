@@ -60,7 +60,7 @@
         <activity
             android:name=".Pin"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".CustomNumbersSettings"></activity>
+        <activity android:name=".CustomNumbersSettings"/>
     </application>
 
 </manifest>

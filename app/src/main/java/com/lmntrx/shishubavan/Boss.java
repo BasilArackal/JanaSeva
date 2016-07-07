@@ -327,7 +327,7 @@ public class Boss {
 
     public static void customCall(final Context context, Activity activity, Location location) {
         final String number = UserPreferences.getCustomNumber(context);
-        String messageBody;
+        String messageBody = UserPreferences.getCustomMessage(context);
         SmsManager smsMgr = SmsManager.getDefault();
 
         if (!number.equals("0")){
@@ -346,12 +346,16 @@ public class Boss {
 
                 //Sending SMS
                 if (location!=null)
-                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
-                else
-                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.";
+                    messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
 
-                smsMgr.sendTextMessage(number, null, messageBody, null, null);
-                Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                    smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                    Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+                } else {
+                    Log.e(LogTag, "No Permission");
+                    ActivityCompat.requestPermissions(activity,
+                            new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_REQUEST_SEND_SMS);
+                }
             }else if (UserPreferences.readUserChoice(context) == R.id.callOnlyRB){
                 Log.i("Status", "call made");
                 Uri phNumber = Uri.parse("tel:" + number);
@@ -364,13 +368,19 @@ public class Boss {
                             new String[]{Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST_CALL_PHONE);
                 }
             }else if (UserPreferences.readUserChoice(context) == R.id.smsOnlyRB){
-                if (location!=null)
-                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
-                else
-                    messageBody = "Urgent!! \nHelp Me Please. I am in danger.";
 
-                smsMgr.sendTextMessage(number, null, messageBody, null, null);
-                Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+                //Sending SMS
+                if (location!=null)
+                    messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
+
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                    smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                    Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+                } else {
+                    Log.e(LogTag, "No Permission");
+                    ActivityCompat.requestPermissions(activity,
+                            new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_REQUEST_SEND_SMS);
+                }
             }
         }else{
             /*android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);

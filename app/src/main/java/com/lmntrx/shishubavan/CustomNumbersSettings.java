@@ -1,6 +1,7 @@
 package com.lmntrx.shishubavan;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,9 @@ public class CustomNumbersSettings extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 2;
     private static final int PICK_CALL_CONTACT = 1;
+    public static final String KEY_CUSTOM_MESSAGE = "CUSTOM_MESSAGE";
+    public static final String DEFAULT_MESSAGE = "Urgent!! \n" +
+            "Help Me Please. I am in danger.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,9 @@ public class CustomNumbersSettings extends AppCompatActivity {
         assert chosenNumberTextView != null;
         String chosenNumber = UserPreferences.getCustomNumber(this);
         String displayName = UserPreferences.getCustomNumberName(this);
+        TextView messageTxt = (TextView)findViewById(R.id.customMessageTextView);
+        assert messageTxt != null;
+        messageTxt.setText(UserPreferences.getCustomMessage(this));
         if (chosenNumber.equals("0")){
                 chosenNumberTextView.setText(R.string.no_number_chosen);
         }else
@@ -94,7 +102,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
                     AlertDialog alert = builder.create();
                     if(allNumbers.size() > 1) {
                         alert.show();
-                    } else {
+                    } else if (phoneNumber.length()>0){
                         String selectedNumber = phoneNumber;
                         selectedNumber = selectedNumber.replace("-", "");
                         textView.setText(String.format("%s\n%s", displayName, selectedNumber));
@@ -103,9 +111,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
                         MainActivity.customCallTXT.setText(String.format("Call: %s\nPress & hold to edit number.", selectedNumber));
                     }
 
-                    if (phoneNumber.length() == 0) {
-                        Log.d(CustomNumbersSettings.class.getSimpleName(),"No numbers were chosen");
-                    }
+
                 }
                 break;
         }
@@ -137,5 +143,14 @@ public class CustomNumbersSettings extends AppCompatActivity {
                     new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
         }
 
+    }
+
+    public void saveCustomMessage(View view) {
+        TextView customMessageTextView = (TextView) findViewById(R.id.customMessageTextView);
+        assert customMessageTextView != null;
+        UserPreferences.saveCustomMessage(this,customMessageTextView.getText().toString());
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

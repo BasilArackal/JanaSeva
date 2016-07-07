@@ -154,4 +154,18 @@ public class UserPreferences {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(CUSTOM_NUMBER_NAME,"0");
     }
+
+    public static String getCustomMessage(Context ctx) {
+
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(CustomNumbersSettings.KEY_CUSTOM_MESSAGE,CustomNumbersSettings.DEFAULT_MESSAGE);
+
+    }
+
+    public static void saveCustomMessage(Context ctx, String message){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(CustomNumbersSettings.KEY_CUSTOM_MESSAGE, message);
+        editor.apply();
+    }
 }
