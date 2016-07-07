@@ -15,7 +15,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,13 +36,21 @@ public class CustomNumbersSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_numbers_settings);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         TextView chosenNumberTextView = (TextView) findViewById(R.id.chosenCallNumberDisplay);
         assert chosenNumberTextView != null;
         String chosenNumber = UserPreferences.getCustomNumber(this);
         String displayName = UserPreferences.getCustomNumberName(this);
-        TextView messageTxt = (TextView)findViewById(R.id.customMessageTextView);
+        EditText messageTxt = (EditText) findViewById(R.id.customMessageEditText);
         assert messageTxt != null;
         messageTxt.setText(UserPreferences.getCustomMessage(this));
+        messageTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) v;
+                editText.setCursorVisible(true);
+            }
+        });
         if (chosenNumber.equals("0")){
                 chosenNumberTextView.setText(R.string.no_number_chosen);
         }else
@@ -146,11 +156,13 @@ public class CustomNumbersSettings extends AppCompatActivity {
     }
 
     public void saveCustomMessage(View view) {
-        TextView customMessageTextView = (TextView) findViewById(R.id.customMessageTextView);
+        EditText customMessageTextView = (EditText) findViewById(R.id.customMessageEditText);
         assert customMessageTextView != null;
         UserPreferences.saveCustomMessage(this,customMessageTextView.getText().toString());
         InputMethodManager inputManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        customMessageTextView.setCursorVisible(false);
+        Toast.makeText(CustomNumbersSettings.this, "Saved your message!", Toast.LENGTH_SHORT).show();
     }
 }

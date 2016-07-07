@@ -1,57 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.lmntrx.shishubavan.CustomNumbersSettings">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/chosenCallNumberDisplay"
-        android:layout_alignParentTop="true"
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/chooseFromIntentCard"
+        card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
-
-    <Button
-        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose Contact"
-        android:onClick="chooseCallContact"
-        android:id="@+id/button"
-        android:layout_below="@+id/chosenCallNumberDisplay"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        >
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/emergency_txtview1"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose a number from your contacts"
+                />
+
+
+            <TextView
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColor="#000"
+                android:layout_below="@id/emergency_txtview1"
+                android:id="@+id/chosenCallNumberDisplay"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:hint="No Contacts Chosen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_below="@+id/chosenCallNumberDisplay"
+                android:id="@+id/emergency_button1"
+                android:textColor="#ffffff"
+                android:background="@color/colorPrimary"
+                android:textSize="20sp"
+                android:text="Choose From Contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="chooseCallContact"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/chooseFromIntentCard"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/typeNumberCard"
+        card_view:cardElevation="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/customMessageTextView"
-        android:layout_above="@+id/saveBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/button" />
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        >
 
-    <Button
-        android:layout_width="wrap_content"
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/emergency_txtview3"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Or type a number:"
+                />
+
+
+            <EditText
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textColor="#000"
+                android:layout_below="@id/emergency_txtview3"
+                android:id="@+id/typedNumberEdtTxt"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:hint="Enter a number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_below="@+id/typedNumberEdtTxt"
+                android:id="@+id/emergency_button2"
+                android:textColor="#ffffff"
+                android:background="@color/colorPrimary"
+                android:textSize="20sp"
+                android:text="Choose Entered Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="chooseCallContact"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/typeNumberCard"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/saveLocationCard"
+        card_view:cardElevation="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/saveBtn"
-        android:onClick="saveCustomMessage"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/customMessageTextView"
-        android:layout_alignEnd="@+id/customMessageTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardCornerRadius="4dp"
+        >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/emergency_txtview4"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Message"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/customMessageEditText" />
+
+            <CheckBox
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="20sp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Location"
+                android:id="@+id/saveLocCheckbox" />
+
+
+            <Button
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/emergency_button3"
+                android:textColor="#ffffff"
+                android:background="@color/colorPrimary"
+                android:textSize="20sp"
+                android:text="SAVE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="saveCustomMessage"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </RelativeLayout>
+
+
+</ScrollView>
