@@ -15,9 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +31,11 @@ public class CustomNumbersSettings extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 2;
     private static final int PICK_CALL_CONTACT = 1;
+    private static final int PICK_SMS_CONTACT = 3;
     public static final String KEY_CUSTOM_MESSAGE = "CUSTOM_MESSAGE";
     public static final String DEFAULT_MESSAGE = "Urgent!! \n" +
             "Help Me Please. I am in danger.";
+    private static final int PERMISSIONS_REQUEST_READ_SMS_CONTACTS = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
                 chosenNumberTextView.setText(chosenNumber);
             else
                 chosenNumberTextView.setText(String.format("%s\n%s", displayName, chosenNumber));
+        refreshList();
     }
 
     @Override
@@ -124,6 +130,73 @@ public class CustomNumbersSettings extends AppCompatActivity {
 
                 }
                 break;
+            case PICK_SMS_CONTACT:
+                cursor = null;
+                phoneNumber = "";
+                displayName = "";
+                allNumbers = new ArrayList<>();
+                try {
+                    Uri result = data.getData();
+                    String id = result.getLastPathSegment();
+                    cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=?", new String[] { id }, null);
+                    assert cursor != null;
+                    phoneIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA);
+                    nameIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                    if (cursor.moveToFirst()) {
+                        displayName = cursor.getString(nameIdx);
+                        while (!cursor.isAfterLast()) {
+                            phoneNumber = cursor.getString(phoneIdx);
+                            allNumbers.add(phoneNumber);
+                            cursor.moveToNext();
+                        }
+                    } else {
+                        Log.d(CustomNumbersSettings.class.getSimpleName(),"No numbers were chosen");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
+
+                    final CharSequence[] items = allNumbers.toArray(new String[allNumbers.size()]);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CustomNumbersSettings.this);
+                    builder.setTitle("Choose a number");
+                    final String finalDisplayName = displayName;
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int item) {
+                            String selectedNumber = items[item].toString();
+                            selectedNumber = selectedNumber.replace("-", "");
+                            UserPreferences.saveCustomSmsNumber(CustomNumbersSettings.this,selectedNumber+":"+finalDisplayName);
+                            refreshList();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    if(allNumbers.size() > 1) {
+                        alert.show();
+                    } else if (phoneNumber.length()>0){
+                        String selectedNumber = phoneNumber;
+                        selectedNumber = selectedNumber.replace("-", "");
+                        UserPreferences.saveCustomSmsNumber(CustomNumbersSettings.this,selectedNumber + ":" + finalDisplayName);
+                        refreshList();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void refreshList() {
+        ListView listView = (ListView) findViewById(R.id.sms_numbers_listView);
+        assert listView != null;
+        String numbersAndNames[] = UserPreferences.getCustomSmsNumbers(this);
+        if (numbersAndNames!=null){
+            ArrayList<CustomSMSNumber> list= new ArrayList<>();
+            for (String numberAndName : numbersAndNames){
+                CustomSMSNumber customSMSNumber = new CustomSMSNumber(numberAndName.substring(0,numberAndName.indexOf(":")),numberAndName.substring(numberAndName.indexOf(":")+1));
+                list.add(customSMSNumber);
+            }
+            CustomSMSNumbersListAdaptor customSMSNumbersListAdaptor = new CustomSMSNumbersListAdaptor(this,list);
+            listView.setAdapter(customSMSNumbersListAdaptor);
         }
     }
 
@@ -139,11 +212,18 @@ public class CustomNumbersSettings extends AppCompatActivity {
                     Toast.makeText(CustomNumbersSettings.this, "Please grant permission to read your contacts!", Toast.LENGTH_LONG).show();
                 }
                 break;
+            case PERMISSIONS_REQUEST_READ_SMS_CONTACTS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                    startActivityForResult(intent, PICK_SMS_CONTACT);
+                }else {
+                    Toast.makeText(CustomNumbersSettings.this, "Please grant permission to read your contacts!", Toast.LENGTH_LONG).show();
+                }
+                break;
         }
     }
 
     public void chooseCallContact(View view) {
-
         if (ActivityCompat.checkSelfPermission(CustomNumbersSettings.this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             startActivityForResult(intent, PICK_CALL_CONTACT);
@@ -152,7 +232,6 @@ public class CustomNumbersSettings extends AppCompatActivity {
             ActivityCompat.requestPermissions(CustomNumbersSettings.this,
                     new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
         }
-
     }
 
     public void saveCustomMessage(View view) {
@@ -164,5 +243,16 @@ public class CustomNumbersSettings extends AppCompatActivity {
         inputManager.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         customMessageTextView.setCursorVisible(false);
         Toast.makeText(CustomNumbersSettings.this, "Saved your message!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void chooseSmsContact(View view) {
+        if (ActivityCompat.checkSelfPermission(CustomNumbersSettings.this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, PICK_SMS_CONTACT);
+        } else {
+            Log.e(CustomNumbersSettings.class.getSimpleName(), "No Permission to read contacts");
+            ActivityCompat.requestPermissions(CustomNumbersSettings.this,
+                    new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_SMS_CONTACTS);
+        }
     }
 }

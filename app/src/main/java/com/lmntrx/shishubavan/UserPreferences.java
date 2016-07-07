@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /***
  * Created by livin on 28/4/16.
  */
@@ -20,8 +23,10 @@ public class UserPreferences {
     public static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
     private static final String FIRST_OPEN_AFTER_UPDATE_2_3 = "FIRST_OPEN_AFTER_UPDATE_2_3";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
+    private static final String PREFERENCES_CUSTOM_NUMBER = "CustomNumberPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
     private static final String CUSTOM_NUMBER_NAME = "CUSTOM_NUMBER_NAME";
+    private static final String KEY_SMS_NUMBERS = "SMS_NUMBERS";
 
 
     public static Boolean isThisFirstOpen(Context ctx){
@@ -168,4 +173,28 @@ public class UserPreferences {
         editor.putString(CustomNumbersSettings.KEY_CUSTOM_MESSAGE, message);
         editor.apply();
     }
+
+    public static String[] getCustomSmsNumbers(Context ctx){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_CUSTOM_NUMBER,Context.MODE_PRIVATE);
+        String numbers[] = null;
+        Set<String> numbersSet = sharedPreferences.getStringSet(KEY_SMS_NUMBERS,null);
+        if (numbersSet != null){
+            numbers = new String[numbersSet.size()];
+            numbersSet.toArray(numbers);
+        }
+        return numbers;
+    }
+
+    public static void saveCustomSmsNumber(Context ctx, String numberAndName){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_CUSTOM_NUMBER,Context.MODE_PRIVATE);
+        Set<String> numbersSet = sharedPreferences.getStringSet(KEY_SMS_NUMBERS,null);
+        if (numbersSet != null){
+            numbersSet.add(numberAndName);
+        }else {
+            numbersSet = new HashSet<>();
+            numbersSet.add(numberAndName);
+        }
+        sharedPreferences.edit().putStringSet(KEY_SMS_NUMBERS,numbersSet).apply();
+    }
+
 }
