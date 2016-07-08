@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Set;
 
 /***
  * Created by livin on 28-Apr-16.
@@ -328,6 +329,7 @@ public class Boss {
     public static void customCall(final Context context, Activity activity, Location location) {
         final String number = UserPreferences.getCustomNumber(context);
         String messageBody = UserPreferences.getCustomMessage(context);
+        String smsNumbers[] = UserPreferences.getCustomSmsNumbers(context);
         SmsManager smsMgr = SmsManager.getDefault();
 
         if (!number.equals("0")){
@@ -349,7 +351,8 @@ public class Boss {
                     messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
 
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                    smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                    for (String smsNumber : smsNumbers)
+                        smsMgr.sendTextMessage(smsNumber, null, messageBody, null, null);
                     Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
                 } else {
                     Log.e(LogTag, "No Permission");
@@ -374,7 +377,8 @@ public class Boss {
                     messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
 
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                    smsMgr.sendTextMessage(number, null, messageBody, null, null);
+                    for (String smsNumber : smsNumbers)
+                        smsMgr.sendTextMessage(smsNumber, null, messageBody, null, null);
                     Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
                 } else {
                     Log.e(LogTag, "No Permission");
