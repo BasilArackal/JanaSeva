@@ -329,7 +329,7 @@ public class Boss {
     public static void customCall(final Context context, Activity activity, Location location) {
         final String number = UserPreferences.getCustomNumber(context);
         String messageBody = UserPreferences.getCustomMessage(context);
-        String smsNumbers[] = UserPreferences.getCustomSmsNumbers(context);
+        String smsNumbers[] = MotherOfDatabases.getCustomSmsNumbers(context);
         SmsManager smsMgr = SmsManager.getDefault();
 
         if (!number.equals("0")){
@@ -347,13 +347,14 @@ public class Boss {
                 }
 
                 //Sending SMS
-                if (location!=null)
+                if (location!=null && UserPreferences.getCustomNumberLocationState(context))
                     messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
 
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                    for (String smsNumber : smsNumbers)
+                    for (String smsNumber : smsNumbers){
                         smsMgr.sendTextMessage(smsNumber, null, messageBody, null, null);
-                    Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
+                        Log.d(Boss.LogTag,smsNumber);
+                    }
                 } else {
                     Log.e(LogTag, "No Permission");
                     ActivityCompat.requestPermissions(activity,
@@ -373,12 +374,14 @@ public class Boss {
             }else if (UserPreferences.readUserChoice(context) == R.id.smsOnlyRB){
 
                 //Sending SMS
-                if (location!=null)
+                if (location!=null && UserPreferences.getCustomNumberLocationState(context))
                     messageBody = messageBody.concat("\nLocation:http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude());
 
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                    for (String smsNumber : smsNumbers)
+                    for (String smsNumber : smsNumbers){
                         smsMgr.sendTextMessage(smsNumber, null, messageBody, null, null);
+                        Log.d(Boss.LogTag,smsNumber);
+                    }
                     Log.i("Janaseva->Boss->sendSMS", "SMS sent to "+number);
                 } else {
                     Log.e(LogTag, "No Permission");

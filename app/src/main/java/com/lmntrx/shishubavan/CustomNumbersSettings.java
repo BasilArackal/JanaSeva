@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -64,6 +65,9 @@ public class CustomNumbersSettings extends AppCompatActivity {
             else
                 chosenNumberTextView.setText(String.format("%s\n%s", displayName, chosenNumber));
         refreshList();
+        CheckBox checkBox = (CheckBox) findViewById(R.id.saveLocCheckbox);
+        assert checkBox != null;
+        checkBox.setChecked(UserPreferences.getCustomNumberLocationState(this));
     }
 
     @Override
@@ -167,7 +171,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int item) {
                             String selectedNumber = items[item].toString();
                             selectedNumber = selectedNumber.replace("-", "");
-                            UserPreferences.saveCustomSmsNumber(CustomNumbersSettings.this,selectedNumber+":"+finalDisplayName);
+                            MotherOfDatabases.addCustomSmsNumber(CustomNumbersSettings.this, finalDisplayName, selectedNumber);
                             refreshList();
                         }
                     });
@@ -177,7 +181,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
                     } else if (phoneNumber.length()>0){
                         String selectedNumber = phoneNumber;
                         selectedNumber = selectedNumber.replace("-", "");
-                        UserPreferences.saveCustomSmsNumber(CustomNumbersSettings.this,selectedNumber + ":" + finalDisplayName);
+                        MotherOfDatabases.addCustomSmsNumber(CustomNumbersSettings.this, finalDisplayName, selectedNumber);
                         refreshList();
                     }
                 }
@@ -188,8 +192,8 @@ public class CustomNumbersSettings extends AppCompatActivity {
     private void refreshList() {
         ListView listView = (ListView) findViewById(R.id.sms_numbers_listView);
         assert listView != null;
-        String numbersAndNames[] = UserPreferences.getCustomSmsNumbers(this);
-        if (numbersAndNames!=null){
+        String numbersAndNames[] = MotherOfDatabases.getCustomSmsNumbers(this);
+        if (numbersAndNames!=null && numbersAndNames.length > 0){
             ArrayList<CustomSMSNumber> list= new ArrayList<>();
             for (String numberAndName : numbersAndNames){
                 CustomSMSNumber customSMSNumber = new CustomSMSNumber(numberAndName.substring(0,numberAndName.indexOf(":")),numberAndName.substring(numberAndName.indexOf(":")+1));
@@ -243,6 +247,9 @@ public class CustomNumbersSettings extends AppCompatActivity {
         inputManager.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         customMessageTextView.setCursorVisible(false);
         Toast.makeText(CustomNumbersSettings.this, "Saved your message!", Toast.LENGTH_SHORT).show();
+        CheckBox checkBox = (CheckBox) findViewById(R.id.saveLocCheckbox);
+        assert checkBox != null;
+        UserPreferences.saveCustomNumberLocationState(this,checkBox.isChecked());
     }
 
     public void chooseSmsContact(View view) {

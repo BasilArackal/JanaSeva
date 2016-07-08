@@ -25,7 +25,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /***
  * Created by livin on 27/4/16.
@@ -994,4 +996,41 @@ public class MotherOfDatabases {
         }
 
     }
+
+    public static String[] getCustomSmsNumbers(Context context){
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("JSDB",Context.MODE_PRIVATE,null);
+        try {
+            Cursor cursor = sqLiteDatabase.rawQuery("Select * from CustomSMSNumbersTable",null);
+            String numbersAndNames[];
+            Set<String> set = new HashSet<>();
+            if (cursor!=null && cursor.getCount()>0){
+                cursor.moveToFirst();
+                do {
+                    set.add(cursor.getString(1) + ":" + cursor.getString(0));
+                }while (cursor.moveToNext());
+            }
+            numbersAndNames = new String[set.size()];
+            set.toArray(numbersAndNames);
+            if (cursor != null)
+                cursor.close();
+            return numbersAndNames;
+        }catch (Exception e){
+            return null;
+        }
+
+    }
+
+    public static void addCustomSmsNumber(Context context, String name, String number){
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("JSDB",Context.MODE_PRIVATE,null);
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CustomSMSNumbersTable(Name varchar, Number INTEGER(15) PRIMARY KEY);");
+        try {
+            number = number.replace("(","");
+            number = number.replace(")","");
+            number = number.replace(" ","");
+            sqLiteDatabase.execSQL("INSERT INTO CustomSMSNumbersTable values('" + name + "'," + number + ");");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

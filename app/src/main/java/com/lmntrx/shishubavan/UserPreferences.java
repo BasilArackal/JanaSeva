@@ -2,6 +2,7 @@ package com.lmntrx.shishubavan;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashSet;
@@ -27,6 +28,8 @@ public class UserPreferences {
     private static final String PREFERENCES_PIN = "PinPrefs";
     private static final String CUSTOM_NUMBER_NAME = "CUSTOM_NUMBER_NAME";
     private static final String KEY_SMS_NUMBERS = "SMS_NUMBERS";
+    private static final String KEY_CUSTOM_NUMBER_LOCATION_STATUS = "CUSTOM_NUMBER_LOCATION_STATUS";
+    static int i = 0;
 
 
     public static Boolean isThisFirstOpen(Context ctx){
@@ -174,27 +177,18 @@ public class UserPreferences {
         editor.apply();
     }
 
-    public static String[] getCustomSmsNumbers(Context ctx){
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_CUSTOM_NUMBER,Context.MODE_PRIVATE);
-        String numbers[] = null;
-        Set<String> numbersSet = sharedPreferences.getStringSet(KEY_SMS_NUMBERS,null);
-        if (numbersSet != null){
-            numbers = new String[numbersSet.size()];
-            numbersSet.toArray(numbers);
-        }
-        return numbers;
+    public static void saveCustomNumberLocationState(Context ctx, Boolean status){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_CUSTOM_NUMBER_LOCATION_STATUS, status);
+        editor.apply();
     }
 
-    public static void saveCustomSmsNumber(Context ctx, String numberAndName){
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_CUSTOM_NUMBER,Context.MODE_PRIVATE);
-        Set<String> numbersSet = sharedPreferences.getStringSet(KEY_SMS_NUMBERS,null);
-        if (numbersSet != null){
-            numbersSet.add(numberAndName);
-        }else {
-            numbersSet = new HashSet<>();
-            numbersSet.add(numberAndName);
-        }
-        sharedPreferences.edit().putStringSet(KEY_SMS_NUMBERS,numbersSet).apply();
+    public static Boolean getCustomNumberLocationState(Context ctx) {
+
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(KEY_CUSTOM_NUMBER_LOCATION_STATUS,true);
+
     }
 
 }
