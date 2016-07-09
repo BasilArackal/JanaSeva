@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -68,6 +69,27 @@ public class CustomNumbersSettings extends AppCompatActivity {
         CheckBox checkBox = (CheckBox) findViewById(R.id.saveLocCheckbox);
         assert checkBox != null;
         checkBox.setChecked(UserPreferences.getCustomNumberLocationState(this));
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 
     @Override
@@ -202,6 +224,7 @@ public class CustomNumbersSettings extends AppCompatActivity {
             CustomSMSNumbersListAdaptor customSMSNumbersListAdaptor = new CustomSMSNumbersListAdaptor(this,list);
             listView.setAdapter(customSMSNumbersListAdaptor);
         }
+        setListViewHeightBasedOnChildren(listView);
     }
 
     @Override

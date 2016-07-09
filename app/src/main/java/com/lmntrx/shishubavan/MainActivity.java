@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (UserPreferences.isThisFirstOpenAfterUpdate_2_3(this)){
+        if (UserPreferences.isThisFirstOpenAfterUpdate_2_4(this)){
             UserPreferences.clearAllPrefs(this);
             MotherOfDatabases.deleteOldDB();
             MotherOfDatabases.populateDB(this);

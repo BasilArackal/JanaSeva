@@ -261,7 +261,7 @@ public class MotherOfDatabases {
         try {
             for (int i = 0; i < nos.length; i++) {
                 if (places[i]!=null && nos[i]!=null && !places[i].equals("null") && !nos[i].equals("null")){
-                    FireForceTable item = new FireForceTable(places[i],nos[i],true);
+                    FireForceTable item = new FireForceTable(places[i],nos[i],false);
                     item.save();
                 }
             }

@@ -107,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:weightSum="5"
             >
 
             <TextView
@@ -120,15 +121,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Numbers to send SMS"
+                android:layout_weight="1"
                 />
 
 
             <ListView
+                android:layout_weight="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sms_numbers_listView"/>
 
+
+
+
+
             <Button
+                android:layout_weight="1"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:id="@+id/emergency_button2"
                 android:textColor="#ffffff"
@@ -141,6 +149,7 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
 
     <android.support.v7.widget.CardView
         android:layout_below="@+id/typeNumberCard"
