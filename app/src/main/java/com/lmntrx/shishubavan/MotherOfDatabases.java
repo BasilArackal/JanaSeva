@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.From;
@@ -1013,8 +1014,10 @@ public class MotherOfDatabases {
             set.toArray(numbersAndNames);
             if (cursor != null)
                 cursor.close();
+            sqLiteDatabase.close();
             return numbersAndNames;
         }catch (Exception e){
+            sqLiteDatabase.close();
             return null;
         }
 
@@ -1029,8 +1032,17 @@ public class MotherOfDatabases {
             number = number.replace(" ","");
             sqLiteDatabase.execSQL("INSERT INTO CustomSMSNumbersTable values('" + name + "'," + number + ");");
         }catch (Exception e){
+            Toast.makeText(context, "Number already exists", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            sqLiteDatabase.close();
         }
+        sqLiteDatabase.close();
+    }
+
+    public static void removeCustomSmsNumber(Context context,String number){
+        SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("JSDB",Context.MODE_PRIVATE,null);
+        sqLiteDatabase.execSQL("DELETE FROM CustomSMSNumbersTable where Number=" + number + ";");
+        sqLiteDatabase.close();
     }
 
 }

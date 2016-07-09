@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -48,7 +49,7 @@
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose a number from your contacts"
+                android:text="@string/choose_a_number_from_your_contacts"
                 />
 
 
@@ -63,7 +64,7 @@
                 android:id="@+id/chosenCallNumberDisplay"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:hint="No Contacts Chosen"
+                android:hint="@string/no_contacts_chosen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -75,7 +76,7 @@
                 android:textColor="#ffffff"
                 android:background="@color/colorPrimary"
                 android:textSize="20sp"
-                android:text="Choose From Contacts"
+                android:text="@string/choose_from_contacts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="chooseCallContact"
@@ -120,7 +121,7 @@
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Numbers to send SMS"
+                android:text="@string/numbers_to_send_sms"
                 android:layout_weight="1"
                 />
 
@@ -129,7 +130,8 @@
                 android:layout_weight="3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/sms_numbers_listView"/>
+                android:id="@+id/sms_numbers_listView"
+                tools:ignore="NestedScrolling" />
 
 
 
@@ -142,7 +144,7 @@
                 android:textColor="#ffffff"
                 android:background="@color/colorPrimary"
                 android:textSize="20sp"
-                android:text="ADD A NUMBER"
+                android:text="@string/add_a_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="chooseSmsContact"/>
@@ -186,7 +188,7 @@
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Message"
+                android:text="@string/edit_message"
                 />
 
 
@@ -194,6 +196,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:ems="10"
                 android:id="@+id/customMessageEditText" />
 
@@ -205,7 +209,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Location"
+                android:text="@string/send_location"
                 android:id="@+id/saveLocCheckbox" />
 
 
@@ -215,7 +219,7 @@
                 android:textColor="#ffffff"
                 android:background="@color/colorPrimary"
                 android:textSize="20sp"
-                android:text="SAVE"
+                android:text="@string/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="saveCustomMessage"

@@ -9,17 +9,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.gsm.SmsManager;
-import android.text.InputType;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.List;
-import java.util.Set;
 
 /***
  * Created by livin on 28-Apr-16.

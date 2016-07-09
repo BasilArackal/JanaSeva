@@ -14,11 +14,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -69,6 +69,38 @@ public class CustomNumbersSettings extends AppCompatActivity {
         CheckBox checkBox = (CheckBox) findViewById(R.id.saveLocCheckbox);
         assert checkBox != null;
         checkBox.setChecked(UserPreferences.getCustomNumberLocationState(this));
+
+        ListView lv = (ListView) findViewById(R.id.sms_numbers_listView);
+        assert lv != null;
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                TextView numberText = (TextView) view.findViewById(R.id.customSmsToNumber);
+                TextView nameText = (TextView) view.findViewById(R.id.customSmsToName);
+                final String number = numberText.getText().toString();
+                String name = nameText.getText().toString();
+                AlertDialog.Builder builder = new AlertDialog.Builder(CustomNumbersSettings.this);
+                builder.setTitle("Delete " + name + "?");
+                builder.setMessage("Do you want to remove " + name + " from the list?");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MotherOfDatabases.removeCustomSmsNumber(CustomNumbersSettings.this,number);
+                        refreshList();
+                    }
+                });
+                builder.show();
+
+                return false;
+            }
+        });
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
@@ -218,9 +250,14 @@ public class CustomNumbersSettings extends AppCompatActivity {
         if (numbersAndNames!=null && numbersAndNames.length > 0){
             ArrayList<CustomSMSNumber> list= new ArrayList<>();
             for (String numberAndName : numbersAndNames){
-                CustomSMSNumber customSMSNumber = new CustomSMSNumber(numberAndName.substring(0,numberAndName.indexOf(":")),numberAndName.substring(numberAndName.indexOf(":")+1));
+                CustomSMSNumber customSMSNumber = new CustomSMSNumber(numberAndName.substring(numberAndName.indexOf(":")+1),numberAndName.substring(0,numberAndName.indexOf(":")));
                 list.add(customSMSNumber);
             }
+            CustomSMSNumbersListAdaptor customSMSNumbersListAdaptor = new CustomSMSNumbersListAdaptor(this,list);
+            listView.setAdapter(customSMSNumbersListAdaptor);
+        }else if (numbersAndNames!=null && numbersAndNames.length == 0){
+            ArrayList<CustomSMSNumber> list= new ArrayList<>();
+            list.add(new CustomSMSNumber("","No numbers chosen"));
             CustomSMSNumbersListAdaptor customSMSNumbersListAdaptor = new CustomSMSNumbersListAdaptor(this,list);
             listView.setAdapter(customSMSNumbersListAdaptor);
         }

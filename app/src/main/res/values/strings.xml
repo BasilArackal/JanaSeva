@@ -51,4 +51,12 @@
 
     <string name="card_subtext">One Click to Call. Press &amp; Hold to Edit</string>
     <string name="no_number_chosen">No Number Chosen Yet</string>
+    <string name="choose_a_number_from_your_contacts">Choose a number from your contacts</string>
+    <string name="no_contacts_chosen">No Contacts Chosen</string>
+    <string name="choose_from_contacts">Choose From Contacts</string>
+    <string name="numbers_to_send_sms">Numbers to send SMS</string>
+    <string name="add_a_number">ADD A NUMBER</string>
+    <string name="edit_message">Edit Message</string>
+    <string name="send_location">Send Location</string>
+    <string name="save">SAVE</string>
 </resources>

@@ -2,11 +2,6 @@ package com.lmntrx.shishubavan;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /***
  * Created by livin on 28/4/16.
@@ -24,12 +19,9 @@ public class UserPreferences {
     public static final String CUSTOM_NUMBER = "CUSTOM_NUMBER";
     private static final String FIRST_OPEN_AFTER_UPDATE_2_4 = "FIRST_OPEN_AFTER_UPDATE_2_4";
     private static final String PREFERENCES_NAME = "ApplicationPrefs";
-    private static final String PREFERENCES_CUSTOM_NUMBER = "CustomNumberPrefs";
     private static final String PREFERENCES_PIN = "PinPrefs";
     private static final String CUSTOM_NUMBER_NAME = "CUSTOM_NUMBER_NAME";
-    private static final String KEY_SMS_NUMBERS = "SMS_NUMBERS";
     private static final String KEY_CUSTOM_NUMBER_LOCATION_STATUS = "CUSTOM_NUMBER_LOCATION_STATUS";
-    static int i = 0;
 
 
     public static Boolean isThisFirstOpen(Context ctx){
@@ -76,11 +68,6 @@ public class UserPreferences {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(DATABASE_VERSION,version);
         editor.apply();
-    }
-
-    public static int getCurrentDBVersion(Context ctx){
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(DATABASE_VERSION,-1);
     }
 
     public static Boolean shouldShowSplash(Context ctx){
