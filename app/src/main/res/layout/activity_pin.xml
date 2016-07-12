@@ -22,7 +22,6 @@
         android:layout_marginBottom="144dp"
         tools:ignore="UnusedAttribute"
         android:textColor="@color/bright_foreground_material_dark"
-        android:numeric="decimal"
         android:maxLines="1"
         android:maxLength="4"
         android:minLines="1" />
