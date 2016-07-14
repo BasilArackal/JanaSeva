@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 
 public class UserPreferences {
 
-    private static final String USER_CHOICE = "USER_CHOICE";
+    private static final String USER_CHOICE = "USER_CHOICE_ACTION_CHOICE";
     private static final String FIRST_OPEN = "FIRST_OPEN_AFTER_UPDATE";
     private static final String IS_WARNING_ON = "IS_WARNING_ON";
     private static final String DATABASE_VERSION = "DATABASE_VERSION";

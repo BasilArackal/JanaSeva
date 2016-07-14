@@ -98,7 +98,7 @@ public class SelectNumbersActivity extends AppCompatActivity {
     public void checkBoxChecked(View view) {
         CheckBox checkBox = (CheckBox)view;
         String list[] = MotherOfDatabases.getEnabledNumbers(TYPE,getApplicationContext());
-        if (list.length<5){
+        if (list.length<=5){
             MotherOfDatabases.UpdateItem(TYPE,checkBox.getText().toString(),checkBox.isChecked());
         }else {
             if (checkBox.isChecked()) {

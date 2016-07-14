@@ -219,7 +219,7 @@ public class MainActivity extends Activity {
     }
 
     public void makeCustomCall(View view) {
-        if (UserPreferences.isWarningOn(this)){
+        if (UserPreferences.isWarningOn(this) && !UserPreferences.getCustomNumber(this).equals("0")){
             new android.app.AlertDialog.Builder(MainActivity.this)
                     .setTitle("Warning")
                     .setMessage("Your action sends your number and location to authorities. Prank calls are punishable!\nDo you still want to make an alert?\nNB: This warning can be turned off in settings")

@@ -8,8 +8,8 @@ android {
         applicationId "com.lmntrx.shishubavan"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 13
-        versionName "2.4"
+        versionCode 14
+        versionName "2.4.5"
     }
     buildTypes {
         release {

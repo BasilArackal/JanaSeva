@@ -382,38 +382,7 @@ public class Boss {
                 }
             }
         }else{
-            /*android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
-            builder.setTitle("Enter a number");
-            final EditText input = new EditText(context);
-            input.setInputType(InputType.TYPE_CLASS_NUMBER);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                input.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            }
-            input.setMaxLines(1);
-            input.setHint("Phone Number");
-            builder.setView(input);
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    chosenCustomNumber = input.getText().toString();
-                    if (!chosenCustomNumber.isEmpty() && !chosenCustomNumber.equals("") && chosenCustomNumber.length()>=10){
-                        UserPreferences.saveCustomNumber(context,chosenCustomNumber);
-                        MainActivity.customCallTXT.setText(String.format("Call: %s\nPress and hold to edit number.", chosenCustomNumber));
-                    }else {
-                        Toast.makeText(context,"Please enter a valid number",Toast.LENGTH_SHORT).show();
-                        input.setText("");
-                    }
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            builder.show();*/
             context.startActivity(new Intent(context,CustomNumbersSettings.class));
-
         }
 
     }
